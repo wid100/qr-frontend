@@ -104,7 +104,7 @@ const Dashboard = () => {
                                     </div>
 
                                     <div className="qr-button">
-                                        <Link href="/create-qr">
+                                        <Link href="/createqr">
                                             <button className="submit-form">
                                                 Create New vCard
                                             </button>

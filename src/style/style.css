@@ -577,3 +577,16 @@ ul.social-aciton li a img {
     margin: auto;
     margin-bottom: 7px;
 }
+ul.sidebar-list li div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+ul.sidebar-list li div:hover {
+    color: #ffb317;
+}
