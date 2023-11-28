@@ -180,19 +180,20 @@ function CreateQR() {
         formData.append('slug', uniqueSlug)
 
         console.log(formData)
-        axios
-            .post('https://qrgen.smartcardgenerator.net/api/qrcreate', formData)
-            .then(res => {
-                if (res.data.status === 200) {
-                    console.log('form submit succefuly')
-                    e.preventDefault()
-                    alert('form submitted')
-                } else {
-                    alert(
-                        'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
-                    )
-                }
-            })
+
+        const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
+
+        axios.post(`${baseuri}/api/qrcreate`, formData).then(res => {
+            if (res.data.status === 200) {
+                console.log('form submit succefuly')
+                e.preventDefault()
+                alert('form submitted')
+            } else {
+                alert(
+                    'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
+                )
+            }
+        })
     }
     const componentRef = useRef()
 
