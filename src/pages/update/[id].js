@@ -7,24 +7,29 @@ import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
-function CreateQR() {
+
+const UpdateQrPage = ({ qrData }) => {
+    const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
+
     const { user } = useAuth({ middleware: 'auth' })
 
-    const [isChecked, setIsChecked] = useState(true)
+    const [isChecked, setIsChecked] = useState(qrData.checkgradient)
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked)
     }
 
     // ==================radio button color change ===============
-    const [selectedColor, setSelectedColor] = useState('#FF0000')
+    const [selectedColor, setSelectedColor] = useState(qrData.maincolor)
 
-    const [buttonColor, setButtoncolor] = useState('#555555')
+    const [buttonColor, setButtoncolor] = useState(qrData.buttoncolor)
 
     const handleColorChange = event => {
         setSelectedColor(event.target.value)
     }
-    const [secondaryColorScheme, setSecondarycolorscheme] = useState('#555555')
+    const [secondaryColorScheme, setSecondarycolorscheme] = useState(
+        qrData.gradientcolor,
+    )
 
     const divStyle = {
         background: isChecked
@@ -35,38 +40,38 @@ function CreateQR() {
 
     const [errors, setErrors] = useState([])
     const [inputField, setInputField] = useState({
-        cardName: '',
-        firstName: '',
-        lastName: '',
-        email1: '',
-        email2: '',
-        phone1: '',
-        phone2: '',
-        mobile1: '',
-        mobile2: '',
-        mobile3: '',
-        mobile4: '',
-        fax: '',
-        fax2: '',
-        address1: '',
-        address2: '',
-        webaddress1: '',
-        webaddress2: '',
-        companyName: '',
-        jobTitle: '',
+        cardName: qrData.cardname,
+        firstName: qrData.firstname,
+        lastName: qrData.lastname,
+        email1: qrData.email1,
+        email2: qrData.email2,
+        phone1: qrData.phone1,
+        phone2: qrData.phone2,
+        mobile1: qrData.mobile1,
+        mobile2: qrData.mobile2,
+        mobile3: qrData.mobile3,
+        mobile4: qrData.mobile4,
+        fax: qrData.fax,
+        fax2: qrData.fax2,
+        address1: qrData.address1,
+        address2: qrData.address2,
+        webaddress1: qrData.webaddress1,
+        webaddress2: qrData.webaddress2,
+        companyName: qrData.companyname,
+        jobTitle: qrData.jobtitle,
         mainColor: selectedColor,
-        gradientColor: secondaryColorScheme,
+        gradientColor: divStyle,
         buttonColor: buttonColor,
         checkgradient: isChecked,
-        summary: '',
+        summary: qrData.summary,
         cardType: 'Home',
 
         // ==================sociel link================
-        facebook: '',
-        twitter: '',
-        instagram: '',
-        youtube: '',
-        github: '',
+        facebook: qrData.facebook,
+        twitter: qrData.twitter,
+        instagram: qrData.instagram,
+        youtube: qrData.youtube,
+        github: qrData.github,
         setErrors,
     })
 
@@ -79,10 +84,9 @@ function CreateQR() {
     }
 
     const [picture, setPicture] = useState({
-        image: null,
-        imageUrl: null,
+        image: `${baseuri}/${qrData.image}` || null,
+        imageUrl: `${baseuri}/${qrData.image}` || null,
     })
-    // Info: Branding Info
 
     const handleImage = e => {
         const selectedImage = e.target.files[0]
@@ -94,8 +98,8 @@ function CreateQR() {
     }
 
     const [welcome, setWelcome] = useState({
-        image: null,
-        imageUrl: null,
+        image: `${baseuri}/${qrData.welcome}` || null,
+        imageUrl: `${baseuri}/${qrData.welcome}` || null,
     })
     const handleWelcome = e => {
         const selectedImage = e.target.files[0]
@@ -107,39 +111,6 @@ function CreateQR() {
     }
 
     // =========================
-
-    const slugify = require('slugify')
-    function generateRandomNumber() {
-        const min = 1000000000
-        const max = 9999999999
-        return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-    // Example usage
-    const id = user?.id
-    const name = inputField.cardName
-    const firstName = inputField.firstName
-    const lastName = inputField.lastName
-
-    const uniqueSlug = generateUniqueSlug(
-        firstName,
-        lastName,
-        id,
-        name,
-        generateRandomNumber,
-    )
-
-    function generateUniqueSlug(id, name, firstName, lastName) {
-        const timestamp = new Date().getTime()
-
-        const combinedString = `${firstName}-${lastName}-${id}-${timestamp}-${name}-`
-
-        const slug = slugify(combinedString, {
-            lower: true,
-            remove: /[*+~.()'"!:@]/g,
-        })
-
-        return slug
-    }
 
     const allInfoSubmit = e => {
         e.preventDefault()
@@ -164,7 +135,7 @@ function CreateQR() {
         formData.append('webaddress2', inputField.webaddress2)
         formData.append('companyname', inputField.companyName)
         formData.append('jobtitle', inputField.jobTitle)
-        formData.append('gradientcolor', inputField.gradientColor)
+        formData.append('gradientcolor', secondaryColorScheme)
         formData.append('buttoncolor', inputField.buttonColor)
         formData.append('checkgradient', inputField.checkgradient)
         formData.append('summary', inputField.summary)
@@ -177,29 +148,29 @@ function CreateQR() {
         formData.append('image', picture.image)
         formData.append('welcomeimage', welcome.image)
         formData.append('user_id', user?.id)
-        formData.append('slug', uniqueSlug)
 
         console.log(formData)
 
-        const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
-
-        axios.post(`${baseuri}/api/qrcreate`, formData).then(res => {
-            if (res.data.status === 200) {
-                console.log('form submit succefuly')
-                e.preventDefault()
-                alert('form submitted')
-            } else {
-                alert(
-                    'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
-                )
-            }
-        })
+        axios
+            .post(`${baseuri}/api/updateqr/${qrData.id}`, formData)
+            .then(res => {
+                if (res.data.status === 200) {
+                    e.preventDefault()
+                    alert('form submitted')
+                    window.location.href = '/dashboard'
+                } else {
+                    alert(
+                        'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
+                    )
+                }
+            })
     }
     const componentRef = useRef()
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     })
+
     return (
         <AppLayout>
             <Head>
@@ -257,10 +228,10 @@ function CreateQR() {
 
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/1.png" />
+                                                            <img src="../img/color/1.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -281,10 +252,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/2.png" />
+                                                            <img src="../img/color/2.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -305,10 +276,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/3.png" />
+                                                            <img src="../img/color/3.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -329,10 +300,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/4.png" />
+                                                            <img src="../img/color/4.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -353,10 +324,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/5.png" />
+                                                            <img src="../img/color/5.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -377,10 +348,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/6.png" />
+                                                            <img src="../img/color/6.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -401,10 +372,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/7.png" />
+                                                            <img src="../img/color/7.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -425,10 +396,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/8.png" />
+                                                            <img src="../img/color/8.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="../img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -1342,7 +1313,7 @@ function CreateQR() {
                                                         <a
                                                             href={`tel:${inputField.phone1}`}>
                                                             <img
-                                                                src="img/icon/call.svg"
+                                                                src="../img/icon/call.svg"
                                                                 alt=""
                                                             />
                                                             <p>Call</p>
@@ -1352,7 +1323,7 @@ function CreateQR() {
                                                         <a
                                                             href={`mailto:${inputField.email1}`}>
                                                             <img
-                                                                src="img/icon/telegram2.svg"
+                                                                src="../img/icon/telegram2.svg"
                                                                 alt=""
                                                             />
                                                             <p>Email</p>
@@ -1362,7 +1333,7 @@ function CreateQR() {
                                                         <a
                                                             href={`location:${inputField.address1}`}>
                                                             <img
-                                                                src="img/icon/location.svg"
+                                                                src="../img/icon/location.svg"
                                                                 alt=""
                                                             />
                                                             <p>Location</p>
@@ -1386,7 +1357,7 @@ function CreateQR() {
                                                         height: '300px',
                                                     }}>
                                                     <QRCode
-                                                        value={`http://localhost:3000/${uniqueSlug}`}
+                                                        value={qrData.slug}
                                                         size={300}
                                                     />
                                                     <img
@@ -1420,7 +1391,7 @@ function CreateQR() {
                                                 <div className="col-md-3">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/phone.svg"
+                                                            src="../img/icon/phone.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -1437,7 +1408,7 @@ function CreateQR() {
                                                 <div className="col-md-3">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/email.svg"
+                                                            src="../img/icon/email.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -1454,7 +1425,7 @@ function CreateQR() {
                                                 <div className="col-md-3">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/toffee.svg"
+                                                            src="../img/icon/toffee.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -1476,7 +1447,7 @@ function CreateQR() {
                                                 <div className="col-md-3">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/web.svg"
+                                                            src="../img/icon/web.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -1498,7 +1469,7 @@ function CreateQR() {
                                                 <div className="col-md-3">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/share.svg"
+                                                            src="../img/icon/share.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -1512,7 +1483,7 @@ function CreateQR() {
                                                                         inputField.facebook
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/fb.svg"
+                                                                        src="../img/icon/fb.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -1523,7 +1494,7 @@ function CreateQR() {
                                                                         inputField.github
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/github.svg"
+                                                                        src="../img/icon/github.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -1534,7 +1505,7 @@ function CreateQR() {
                                                                         inputField.twitter
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/tw.svg"
+                                                                        src="../img/icon/tw.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -1545,7 +1516,7 @@ function CreateQR() {
                                                                         inputField.instagram
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/ins.svg"
+                                                                        src="../img/icon/ins.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -1556,7 +1527,7 @@ function CreateQR() {
                                                                         inputField.youtube
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/youtube.svg"
+                                                                        src="../img/icon/youtube.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -1596,4 +1567,21 @@ function CreateQR() {
     )
 }
 
-export default CreateQR
+export async function getServerSideProps(context) {
+    const { params } = context
+    const { id } = params
+    const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
+    // Fetch existing QR code data based on the ID
+    // const response = await fetch(`/api/editqr/${id}`)
+    const response = await fetch(`${baseuri}/api/editqr/${id}`)
+
+    const qrData = await response.json()
+    console.log(qrData)
+    return {
+        props: {
+            qrData: qrData.qrgen,
+        },
+    }
+}
+
+export default UpdateQrPage
