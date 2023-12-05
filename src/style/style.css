@@ -12,18 +12,23 @@ body {
     font-family: 'Roboto', sans-serif;
     color: #898989;
 }
+
 ul {
     list-style: none;
 }
+
 p {
     margin-bottom: 0;
 }
+
 h3 {
     margin: 0;
 }
+
 :root {
     --main-color: #ffb317;
 }
+
 .custom-btn {
     background: #ffb317;
     text-align: center;
@@ -32,6 +37,7 @@ h3 {
     color: #fff;
     cursor: pointer;
 }
+
 a {
     text-decoration: none;
 }
@@ -39,9 +45,11 @@ a {
 a:hover {
     text-decoration: none;
 }
+
 .container {
     max-width: 1440px !important;
 }
+
 /* ================Login Form ============= */
 .form-box {
     border: 2px solid #b5b5b5;
@@ -58,6 +66,7 @@ a:hover {
     align-items: center;
     justify-content: space-between;
 }
+
 .link-to-signup {
     margin-bottom: 20px;
 }
@@ -142,7 +151,7 @@ button.submit-form {
     cursor: pointer;
 }
 
-.radio-btn > img {
+.radio-btn>img {
     opacity: 0;
 }
 
@@ -166,7 +175,7 @@ button.submit-form {
     letter-spacing: 1px;
 }
 
-.custom-radio input:checked + .radio-btn > img {
+.custom-radio input:checked+.radio-btn>img {
     opacity: 1;
 }
 
@@ -206,6 +215,7 @@ button.submit-form {
     position: relative;
     overflow: hidden;
 }
+
 .file-input {
     position: absolute;
     font-size: 50px;
@@ -231,6 +241,7 @@ button.submit-form {
     justify-content: center;
     overflow: hidden;
 }
+
 .form-group-wrapper {
     border: 1px solid #898989;
     border-radius: 10px;
@@ -261,6 +272,7 @@ button.submit-form {
 .custom-radio {
     text-align: center;
 }
+
 .pic-with-color {
     display: flex;
     align-items: center;
@@ -270,14 +282,17 @@ button.submit-form {
     padding: 5px 10px;
     border-radius: 5px;
 }
+
 .form-control-color {
     padding: 0;
     border: none;
     background: none;
 }
+
 .color-pic-label {
     font-size: 12px;
 }
+
 .upload-image-wrapper {
     margin-top: 20px;
 }
@@ -287,23 +302,28 @@ button.submit-form {
     align-items: center;
     height: 100%;
 }
+
 .parmision-checkbox {
     height: 100%;
     display: flex;
     align-items: end;
     padding-bottom: 12px;
 }
+
 .logo {
     margin: 20px 0;
 }
+
 .information-form {
     padding: 20px;
 }
+
 .socail-icon {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 15px;
 }
+
 .form-check-social {
     display: flex;
     align-items: center;
@@ -330,6 +350,7 @@ button.submit-form {
     color: #fff;
     text-align: center;
 }
+
 ul.social-aciton {
     display: grid;
     align-items: center;
@@ -345,14 +366,17 @@ ul.social-aciton {
 ul.social-aciton li {
     padding: 10px;
 }
+
 ul.social-aciton li:nth-child(2) {
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
 }
+
 ul.social-aciton li a {
     color: #fff;
     font-size: 14px;
 }
+
 h3.name {
     font-size: 24px;
     margin-top: 10px;
@@ -361,9 +385,11 @@ h3.name {
 p.dajignation {
     font-size: 16px;
 }
+
 .show-summery p {
     font-size: 12px !important;
 }
+
 .preview-info-icon {
     display: flex;
     align-items: center;
@@ -385,6 +411,7 @@ p.dajignation {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
 }
+
 .info-show ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -405,6 +432,7 @@ p.dajignation {
 .info-show ul li a {
     width: 100%;
 }
+
 .border-none {
     border-bottom: 0;
 }
@@ -414,6 +442,7 @@ p.dajignation {
     padding: 20px;
     margin-top: 20px;
 }
+
 .submit-back {
     display: flex;
     align-items: center;
@@ -432,6 +461,7 @@ button.submit-details-form {
     padding: 5px;
     border-radius: 54px;
 }
+
 .submit-details-form:focus {
     border: none;
     outline: none;
@@ -462,10 +492,12 @@ ul.sidebar-list li a.active,
 ul.sidebar-list li a:hover {
     color: #ffb317;
 }
+
 ul.sidebar-list li a.active svg path,
 ul.sidebar-list li a:hover svg path {
     fill: #ffb317;
 }
+
 .qr-nav {
     display: flex;
     align-items: center;
@@ -481,6 +513,7 @@ ul.sidebar-list li a:hover svg path {
 .qr-count p span {
     color: #16b6cf;
 }
+
 .compnay-info {
     display: flex;
     gap: 20px;
@@ -544,6 +577,7 @@ a.qr-downlod {
 .scan img {
     width: 100px;
 }
+
 ul.qe-ul li {
     background: #fff;
     padding: 20px;
@@ -559,6 +593,7 @@ ul.qe-ul li {
     z-index: 99;
     position: relative;
 }
+
 .preview-image {
     height: 100px;
     width: 100px;
@@ -576,10 +611,12 @@ a.nav-link {
     padding: 0;
     color: #2a2a2a;
 }
+
 ul.social-aciton li a img {
     margin: auto;
     margin-bottom: 7px;
 }
+
 ul.sidebar-list li div {
     display: flex;
     align-items: center;
@@ -593,6 +630,7 @@ ul.sidebar-list li div {
 ul.sidebar-list li div:hover {
     color: #ffb317;
 }
+
 .home-header {
     display: flex;
     align-items: center;
@@ -604,6 +642,7 @@ ul.sidebar-list li div:hover {
     align-items: center;
     gap: 20px;
 }
+
 .custom-btn a {
     color: #fff;
 }
@@ -616,6 +655,7 @@ ul.sidebar-list li div:hover {
     padding: 200px 0;
     position: relative;
 }
+
 .hero-content {
     text-align: center;
     color: #fff;
@@ -647,4 +687,280 @@ button.hero-btn {
     border-radius: 54px;
     margin-top: 50px;
     color: #ffb317;
+}
+
+
+/* ====================== QR Input section ========================= */
+
+.qr-input-fleid {
+    padding: 100px 0 100px 0;
+}
+
+.qr-input-item-wrapper {
+    border-radius: 5px;
+    border: 1px solid #B5B5B5;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+}
+
+.qr-input-item-wrapper .qr-input-items {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    width: 100%;
+}
+
+.qr-input-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.qr-input-list-items .qr-input-list-item {
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    background: #F4F6F9;
+    border-radius: 4px;
+}
+
+.qr-input-list-items .qr-input-list-item:focus {
+    box-shadow: 1px 1px var(--main-color);
+}
+
+.qr-input-list-items .qr-input-list-item input {
+    border: none;
+    background: none;
+}
+
+.qr-input-list-items .qr-input-list-item input:focus {
+    box-shadow: none;
+}
+
+.qr-input-content h4 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.qr-input-content button {
+    margin-top: 20px;
+}
+
+.scan-tracking-item {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.button-cover {
+    height: 100px;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px -8px #c5d6d6;
+    border-radius: 4px;
+}
+
+.button-cover:before {
+    counter-increment: button-counter;
+    content: counter(button-counter);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #d7e3e3;
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px;
+}
+
+.button-cover,
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 36px;
+    margin: -20px auto 0 auto;
+    overflow: hidden;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+.button.r,
+.button.r .layer {
+    border-radius: 100px;
+}
+
+#button-3 .knobs:before {
+    content: "YES";
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#button-3 .checkbox:active+.knobs:before {
+    width: 46px;
+    border-radius: 100px;
+}
+
+#button-3 .checkbox:checked:active+.knobs:before {
+    margin-left: -26px;
+}
+
+#button-3 .checkbox:checked+.knobs:before {
+    content: "NO";
+    left: 42px;
+    background-color: #f44336;
+}
+
+#button-3 .checkbox:checked~.layer {
+    background-color: #fcebeb;
+}
+
+.qr-code-item {
+    border-radius: 5px;
+    border: 1px solid #B5B5B5;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.qr-code-item .with-logo {
+    position: absolute;
+    right: -10px;
+    top: 10px;
+}
+
+.qr-code-download-btn {
+    padding: 15px 60px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+}
+
+.qr-code-download-btn h4 {
+    font-size: 20px;
+}
+
+.qr-code-download-btn span {
+    font-size: 12px;
+}
+
+/* {============= vCard Plus Roadmap ===========} */
+.vCard-roadmap {
+    padding-bottom: 100px;
+}
+
+.vcard-roadmap-title h4 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--main-color);
+}
+.vcard-roadmap-content{
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.vcard-roadmap-content-items{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+}
+.vcard-roadmap-content-item .roadmap-img img{
+    width: 100%;
+}
+.vcard-roadmap-content-item{
+    position: relative;
+}
+.vcard-roadmap-content-item h3{
+    font-size: 20px;
+     color: #000;
+     font-weight: 700;
+     padding-bottom: 15px;
+}
+.vcard-roadmap-content-item:nth-child(2)::after {
+    content: '1';
+    position: absolute;
+    width: 60px;
+    left: -14%;
+    top: -22px;
+    display: flex;
+    height: 60px;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: var(--main-color);
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border-radius: 100%;
+}
+.vcard-roadmap-content-item:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    width: 3px;
+    left: -10%;
+    top: 0;
+    height: 100%;
+    background-color: var(--main-color);
+}
+.vcard-roadmap-content-item2:nth-child(2)::after {
+    content: '2';
+
+}
+.vcard-roadmap-content-item3:nth-child(2)::after {
+    content: '3';
+
+}
+.vcard-roadmap-content-item3:nth-child(2)::before {
+display: none;
 }
