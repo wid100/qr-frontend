@@ -4,10 +4,10 @@ const Information = ({ information }) => {
     if (!information) {
         return null
     }
-    const { gradientcolor } = information
 
-    const parsedGradientColor = JSON.parse(gradientcolor)
-
+    const divStyle = {
+        background: `linear-gradient(133deg, ${information.maincolor} 0%, ${information.gradientcolor} 97.22%)`,
+    }
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
     return (
         <div>
@@ -21,7 +21,7 @@ const Information = ({ information }) => {
                                         <div className="show-preview">
                                             <div
                                                 className="my-preview-top"
-                                                style={parsedGradientColor}>
+                                                style={divStyle}>
                                                 <div className="preview-image">
                                                     <img
                                                         alt=""

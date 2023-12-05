@@ -1,29 +1,54 @@
-import AppLayout from '@/components/Layouts/AppLayout'
-import Head from 'next/head'
-import Link from 'next/link'
+// Your component file
+
 import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
-import { useAuth } from '@/hooks/auth'
 import { useReactToPrint } from 'react-to-print'
 import QRCode from 'qrcode.react'
-import Sidebar from 'components/sidebar'
 
-const Dashboard = () => {
+import axios from 'axios'
+import { useAuth } from '@/hooks/auth'
+import AppLayout from '@/components/Layouts/AppLayout'
+import Head from 'next/head'
+import Sidebar from 'components/sidebar'
+import Link from 'next/link'
+
+const pausecard = () => {
     const { user } = useAuth({ middleware: 'auth' })
 
     const userId = user?.id
-    const [getqr, setQRCode] = useState([])
     const [totalQrCount, setTotalQrCount] = useState(0)
 
+    const [pauseQr, setPauseQr] = useState([])
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
 
+    const fetchPauseQr = async () => {
+        try {
+            const response = await axios.get(
+                `${baseuri}/api/getpauseQr/${userId}`,
+            )
+            setPauseQr(response.data.pauseQr)
+            setTotalQrCount(response.data.pauseQr.length)
+        } catch (error) {
+            console.error('Error fetching Pause QR codes:', error)
+        }
+    }
+    useEffect(() => {
+        fetchPauseQr()
+    }, [userId])
+    // ===================qr code ====================
+    const componentRef = useRef()
+
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    })
+
+    // ===================delete=====================
     const handleDelete = async id => {
         try {
             const response = await axios.delete(`${baseuri}/api/deleteqr/${id}`)
             if (response.data.message) {
                 alert('Qrgen deleted successfully')
 
-                fetchUpdatedData()
+                fetchPauseQr()
             } else {
                 alert('Qrgen deletion failed')
             }
@@ -31,28 +56,6 @@ const Dashboard = () => {
             console.error('Error deleting Qrgen:', error)
         }
     }
-
-    const fetchUpdatedData = async () => {
-        try {
-            const response = await axios.get(`${baseuri}/api/getqr/${userId}`)
-            setQRCode(response.data.getqr)
-            setTotalQrCount(response.data.getqr.length)
-        } catch (error) {
-            console.error('Error fetching updated data:', error)
-        }
-    }
-
-    useEffect(() => {
-        fetchUpdatedData()
-    }, [userId])
-
-    const componentRef = useRef()
-
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    })
-
-    // ====================delete qr function --==========
 
     // ========================pause and resume function ==============?
     const [status, setStatus] = useState('active')
@@ -73,11 +76,13 @@ const Dashboard = () => {
 
         if (response.ok) {
             setStatus(newStatus)
-            alert(`Your QR is ${newStatus}`)
+            fetchPauseQr()
+            alert(`Your QR is ${status}`)
         } else {
             console.error('Failed to toggle status')
         }
     }
+
     return (
         <AppLayout>
             <Head>
@@ -123,7 +128,7 @@ const Dashboard = () => {
 
                             <div className="qr-list">
                                 <ul className="qe-ul">
-                                    {getqr.map(qr => (
+                                    {pauseQr.map(qr => (
                                         <li key={qr.id}>
                                             <div className="row">
                                                 <div className="col-md-6">
@@ -336,4 +341,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default pausecard

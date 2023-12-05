@@ -65,6 +65,7 @@ const UpdateQrPage = ({ qrData }) => {
         checkgradient: isChecked,
         summary: qrData.summary,
         cardType: 'Home',
+        status: 'active',
 
         // ==================sociel link================
         facebook: qrData.facebook,
@@ -147,6 +148,7 @@ const UpdateQrPage = ({ qrData }) => {
         formData.append('github', inputField.github)
         formData.append('image', picture.image)
         formData.append('welcomeimage', welcome.image)
+        formData.append('status', inputField.status)
         formData.append('user_id', user?.id)
 
         console.log(formData)

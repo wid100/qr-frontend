@@ -60,6 +60,7 @@ function CreateQR() {
         checkgradient: isChecked,
         summary: '',
         cardType: 'Home',
+        status: 'active',
 
         // ==================sociel link================
         facebook: '',
@@ -178,6 +179,7 @@ function CreateQR() {
         formData.append('welcomeimage', welcome.image)
         formData.append('user_id', user?.id)
         formData.append('slug', uniqueSlug)
+        formData.append('status', inputField.status)
 
         console.log(formData)
 
@@ -187,7 +189,10 @@ function CreateQR() {
             if (res.data.status === 200) {
                 console.log('form submit succefuly')
                 e.preventDefault()
+
                 alert('form submitted')
+
+                window.location.href = '/dashboard'
             } else {
                 alert(
                     'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
