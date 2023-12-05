@@ -77,7 +77,7 @@ const pausecard = () => {
         if (response.ok) {
             setStatus(newStatus)
             fetchPauseQr()
-            alert(`Your QR is ${status}`)
+            alert(`Your QR is ${newStatus}`)
         } else {
             console.error('Failed to toggle status')
         }
@@ -111,7 +111,7 @@ const pausecard = () => {
                                             />
                                         </svg>
                                         <p>
-                                            Active vCards{' '}
+                                            Pause vCards{' '}
                                             <span>({totalQrCount})</span>
                                         </p>
                                     </div>
