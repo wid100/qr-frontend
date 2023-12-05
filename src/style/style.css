@@ -21,6 +21,9 @@ p {
 h3 {
     margin: 0;
 }
+:root {
+    --main-color: #ffb317;
+}
 .custom-btn {
     background: #ffb317;
     text-align: center;
@@ -588,5 +591,60 @@ ul.sidebar-list li div {
 }
 
 ul.sidebar-list li div:hover {
+    color: #ffb317;
+}
+.home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.custom-btn a {
+    color: #fff;
+}
+
+.hero-section {
+    background-image: url(../../public/img/hero-img.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 200px 0;
+    position: relative;
+}
+.hero-content {
+    text-align: center;
+    color: #fff;
+}
+
+.hero-section:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000000b5;
+    z-index: 0;
+}
+
+.hero-section .container {
+    z-index: 1;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 60px;
+}
+
+button.hero-btn {
+    background: #00000082;
+    padding: 13px 36px;
+    border-radius: 54px;
+    margin-top: 50px;
     color: #ffb317;
 }
