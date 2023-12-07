@@ -1,14 +1,32 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
+import { useReactToPrint } from 'react-to-print'
+import { useState, useRef } from 'react'
 
+import QRCode from 'qrcode.react'
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
+    const componentRef = useRef()
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    })
 
+    const [inputField, setInputField] = useState({
+        smarturl: '',
+    })
+
+    const inputsHandler = e => {
+        e.persist()
+        setInputField({
+            ...inputField,
+            [e.target.name]: e.target.value,
+        })
+    }
     return (
         <>
             <Head>
-                <title>Laravel</title>
+                <title>Smart Card Generator</title>
             </Head>
 
             <header>
@@ -45,7 +63,11 @@ export default function Home() {
             </header>
             {/* ============= Hero Section ================ */}
             <section>
-                <div className="hero-section">
+                <div
+                    className="hero-section"
+                    style={{
+                        backgroundImage: 'url(./img/hero-img.png)',
+                    }}>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-md-8">
@@ -76,56 +98,71 @@ export default function Home() {
                             <div className="qr-input-item-wrapper">
                                 <div className="qr-input-items">
                                     <div className="qr-input-list-items">
-                                        <div className="qr-input-list-item">
-                                            <span>
-                                                <img
-                                                    src="/img/icon/www.svg"
-                                                    alt=""
-                                                />
-                                            </span>
-                                            <input
-                                                type="text"
-                                                placeholder="Smart URL"
-                                            />
-                                        </div>
-                                        <div className="qr-input-list-item">
-                                            <span>
-                                                <img
-                                                    src="/img/icon/www.svg"
-                                                    alt=""
-                                                />
-                                            </span>
-                                            <input
-                                                type="text"
-                                                placeholder="Smart URL"
-                                            />
-                                        </div>
+                                        <Link href={'/'}>
+                                            <div className="qr-input-list-item">
+                                                <span>
+                                                    <img
+                                                        src="/img/icon/www.svg"
+                                                        alt=""
+                                                    />
+                                                </span>
+                                                <p>Smart URL</p>
+                                            </div>
+                                        </Link>
+                                        <Link href={'/'}>
+                                            <div className="qr-input-list-item">
+                                                <span>
+                                                    <img
+                                                        src="/img/2.svg"
+                                                        alt=""
+                                                    />
+                                                </span>
+                                                <p>Smart Resume</p>
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="qr-input-list-items">
-                                        <div className="qr-input-list-item">
-                                            <span>
-                                                <img
-                                                    src="/img/icon/www.svg"
-                                                    alt=""
-                                                />
-                                            </span>
-                                            <input
-                                                type="text"
-                                                placeholder="Smart URL"
-                                            />
-                                        </div>
-                                        <div className="qr-input-list-item">
-                                            <span>
-                                                <img
-                                                    src="/img/icon/www.svg"
-                                                    alt=""
-                                                />
-                                            </span>
-                                            <input
-                                                type="text"
-                                                placeholder="Smart URL"
-                                            />
-                                        </div>
+                                        <Link href={'/'}>
+                                            <div className="qr-input-list-item">
+                                                <span>
+                                                    <img
+                                                        src="/img/1.svg"
+                                                        alt=""
+                                                    />
+                                                </span>
+                                                <p>Smart vCard</p>
+                                            </div>
+                                        </Link>
+                                        <Link href={'/'}>
+                                            <div className="qr-input-list-item">
+                                                <span>
+                                                    <img
+                                                        src="/img/3.svg"
+                                                        alt=""
+                                                    />
+                                                </span>
+                                                <p>Smart Profile Creator</p>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="mb-3">
+                                    <label
+                                        htmlFor="basic-url"
+                                        className="form-label">
+                                        Input Your URL
+                                    </label>
+                                    <div className="input-group">
+                                        <input
+                                            type="text"
+                                            id="smarturl"
+                                            className="form-control"
+                                            name="smarturl"
+                                            placeholder="Input Smart URL"
+                                            onChange={inputsHandler}
+                                            value={inputField.smarturl}
+                                        />
                                     </div>
                                 </div>
                                 <div className="qr-input-content">
@@ -137,39 +174,46 @@ export default function Home() {
                                     <button className="custom-btn">
                                         Signup for Free
                                     </button>
-                                  
                                 </div>
-                                <div className="scan-tracking-item">
-                                        <div className="toggle-button-cover">
-                                            <div
-                                                id="button-3"
-                                                className="button r">
-                                                <input
-                                                    className="checkbox"
-                                                    type="checkbox"
-                                                />
-                                                <div class="knobs"></div>
-                                                <div class="layer"></div>
-                                            </div>
+                                {/* <div className="scan-tracking-item">
+                                    <div className="toggle-button-cover">
+                                        <div id="button-3" className="button r">
+                                            <input
+                                                className="checkbox"
+                                                type="checkbox"
+                                            />
+                                            <div className="knobs"></div>
+                                            <div className="layer"></div>
                                         </div>
-                                        <span>Scan Tracking</span>
                                     </div>
+                                    <span>Scan Tracking</span>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12">
                             <div className="qr-code-item">
-                                <div className="with-logo">
-                                    <img src="/img/icon/with-logo.png" alt="" />
+                                <Link
+                                    href={'/login'}
+                                    to={user ? '/dashboard' : '/login'}>
+                                    <div className="with-logo">
+                                        <img
+                                            src="/img/icon/with-logo.png"
+                                            alt=""
+                                        />
+                                    </div>
+                                </Link>
+                                <div className="qr-code-img" ref={componentRef}>
+                                    <QRCode
+                                        value={inputField.smarturl}
+                                        size={250}
+                                    />
                                 </div>
-                                <div className="qr-code-img">
-                                    <img src="/img/scan2.png" alt="" />
-                                </div>
-                                <button className="qr-code-download-btn custom-btn">
-                                DOWNLOAD
-    
+                                <button
+                                    className="qr-code-download-btn custom-btn"
+                                    onClick={handlePrint}>
+                                    DOWNLOAD
                                 </button>
                             </div>
-                         
                         </div>
                     </div>
                 </div>
