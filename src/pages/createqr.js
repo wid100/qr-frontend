@@ -227,6 +227,7 @@ function CreateQR() {
                                             value={inputField.cardName}
                                             autoFocus
                                             placeholder="Name your vCard"
+                                            required
                                         />
                                         <InputError
                                             messages={errors.cardName}
@@ -571,6 +572,7 @@ function CreateQR() {
                                                                     <input
                                                                         type="file"
                                                                         name="image"
+                                                                        required
                                                                         onChange={
                                                                             handleImage
                                                                         }
@@ -606,6 +608,7 @@ function CreateQR() {
                                                                     type="text"
                                                                     name="firstName"
                                                                     className="form-control"
+                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
@@ -629,6 +632,7 @@ function CreateQR() {
                                                                     id="lastName"
                                                                     type="text"
                                                                     name="lastName"
+                                                                    required
                                                                     className="form-control"
                                                                     onChange={
                                                                         inputsHandler
@@ -665,6 +669,7 @@ function CreateQR() {
                                                                     type="text"
                                                                     name="mobile1"
                                                                     className="form-control"
+                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
@@ -757,6 +762,7 @@ function CreateQR() {
                                                                 <input
                                                                     id="email1"
                                                                     type="email"
+                                                                    required
                                                                     name="email1"
                                                                     className="form-control"
                                                                     onChange={
@@ -783,6 +789,7 @@ function CreateQR() {
                                                                     className="form-control"
                                                                     id="address1"
                                                                     name="address1"
+                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
@@ -832,6 +839,7 @@ function CreateQR() {
                                                                     className="form-control"
                                                                     id="summary"
                                                                     name="summary"
+                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
@@ -905,6 +913,7 @@ function CreateQR() {
                                                                         placeholder="Company name"
                                                                         id="companyName"
                                                                         name="companyName"
+                                                                        required
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
@@ -1090,6 +1099,7 @@ function CreateQR() {
                                                                         placeholder="Enter web address"
                                                                         id="webaddress2"
                                                                         name="webaddress2"
+                                                                        required
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
@@ -1299,6 +1309,7 @@ function CreateQR() {
                                                                     type="file"
                                                                     className="file-input"
                                                                     id="welcome"
+                                                                    required
                                                                     name="welcome"
                                                                     onChange={
                                                                         handleWelcome
@@ -1345,7 +1356,7 @@ function CreateQR() {
                                                 <ul className="social-aciton">
                                                     <li>
                                                         <a
-                                                            href={`tel:${inputField.phone1}`}>
+                                                            href={`tel:${inputField.mobile1}`}>
                                                             <img
                                                                 src="img/icon/call.svg"
                                                                 alt=""
@@ -1391,7 +1402,7 @@ function CreateQR() {
                                                         height: '300px',
                                                     }}>
                                                     <QRCode
-                                                        value={`http://localhost:3000/${uniqueSlug}`}
+                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
                                                         size={300}
                                                     />
                                                     <img
@@ -1433,8 +1444,8 @@ function CreateQR() {
                                                 <div className="col-md-9">
                                                     <div className="info-show">
                                                         <a
-                                                            href={`tel:${inputField.phone1}`}>
-                                                            {inputField.phone1}
+                                                            href={`tel:${inputField.mobile1}`}>
+                                                            {inputField.mobile1}
                                                         </a>
                                                         <p>Mobile</p>
                                                     </div>
@@ -1468,13 +1479,13 @@ function CreateQR() {
                                                     <div className="info-show">
                                                         <a
                                                             href={
-                                                                inputField.webaddress1
+                                                                inputField.webaddress2
                                                             }>
                                                             {
                                                                 inputField.companyName
                                                             }
                                                         </a>
-                                                        <p>Lumina Dev</p>
+                                                        <p>Company Name</p>
                                                     </div>
                                                 </div>
 
@@ -1490,10 +1501,10 @@ function CreateQR() {
                                                     <div className="info-show">
                                                         <a
                                                             href={
-                                                                inputField.webaddress1
+                                                                inputField.webaddress2
                                                             }>
                                                             {
-                                                                inputField.webaddress1
+                                                                inputField.webaddress2
                                                             }
                                                         </a>
                                                         <p>Web address</p>

@@ -50,7 +50,7 @@ export default function Home() {
                                             <Link href={'/login'}>Login</Link>
                                         </li>
                                         <li className="custom-btn">
-                                            <Link href={'/registar'}>
+                                            <Link href={'/register'}>
                                                 Register
                                             </Link>
                                         </li>
@@ -81,9 +81,11 @@ export default function Home() {
                                         supplier Denso, developed them for
                                         marking components.
                                     </p>
-                                    <button className="hero-btn">
-                                        SIGN UP FOR FREE
-                                    </button>
+                                    <Link href={'/register'}>
+                                        <button className="hero-btn">
+                                            SIGN UP FOR FREE
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -171,9 +173,11 @@ export default function Home() {
                                         (Your QR Code will be generated
                                         automatically)
                                     </p>
-                                    <button className="custom-btn">
-                                        Signup for Free
-                                    </button>
+                                    <Link href={'/register'}>
+                                        <button className="custom-btn">
+                                            Signup for Free
+                                        </button>
+                                    </Link>
                                 </div>
                                 {/* <div className="scan-tracking-item">
                                     <div className="toggle-button-cover">

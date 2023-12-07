@@ -180,7 +180,33 @@ const activecard = () => {
                                                                     />
                                                                 </svg>
                                                                 <span>
-                                                                    Oct 2, 2023
+                                                                    {(() => {
+                                                                        const createdAtDate =
+                                                                            typeof qr.created_at ===
+                                                                            'string'
+                                                                                ? new Date(
+                                                                                      qr.created_at,
+                                                                                  )
+                                                                                : qr.created_at
+
+                                                                        const formattedDate =
+                                                                            createdAtDate instanceof
+                                                                            Date
+                                                                                ? createdAtDate.toLocaleDateString(
+                                                                                      'en-US',
+                                                                                      {
+                                                                                          day:
+                                                                                              'numeric',
+                                                                                          month:
+                                                                                              'short',
+                                                                                          year:
+                                                                                              'numeric',
+                                                                                      },
+                                                                                  )
+                                                                                : 'Invalid Date'
+
+                                                                        return formattedDate
+                                                                    })()}
                                                                 </span>
                                                             </p>
                                                         </div>
