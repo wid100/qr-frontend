@@ -221,7 +221,7 @@ function CreateQR() {
     return (
         <AppLayout>
             <Head>
-                <title>Laravel - Dashboard</title>
+                <title>Create Smart Card</title>
             </Head>
 
             <section>
@@ -240,7 +240,7 @@ function CreateQR() {
                                             value={inputField.cardName}
                                             autoFocus
                                             required
-                                            placeholder="Name your vCard"
+                                            placeholder="Name your Smart Card"
                                         />
                                         <InputError
                                             messages={errors.cardName}
@@ -251,13 +251,14 @@ function CreateQR() {
                                     <div className="form-group-wrapper">
                                         <div className="form-group-title">
                                             <p>
-                                                Design and customize your vCard
+                                                Design and customize your Smart
+                                                Card
                                             </p>
                                         </div>
 
                                         <div className="color-plate">
                                             <p>
-                                                Personalize your vCard by
+                                                Personalize your Smart Card by
                                                 selecting colors.
                                             </p>
                                             <div className="color-point">

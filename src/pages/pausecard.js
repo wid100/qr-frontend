@@ -86,7 +86,7 @@ const pausecard = () => {
     return (
         <AppLayout>
             <Head>
-                <title>Laravel - Dashboard</title>
+                <title>Pause Smart Card</title>
             </Head>
 
             <section>
@@ -111,7 +111,7 @@ const pausecard = () => {
                                             />
                                         </svg>
                                         <p>
-                                            Pause vCards{' '}
+                                            Pause Smart Cards{' '}
                                             <span>({totalQrCount})</span>
                                         </p>
                                     </div>
@@ -119,7 +119,7 @@ const pausecard = () => {
                                     <div className="qr-button">
                                         <Link href="/createqr">
                                             <button className="submit-form">
-                                                Create New vCard
+                                                Create New Smart Card
                                             </button>
                                         </Link>
                                     </div>

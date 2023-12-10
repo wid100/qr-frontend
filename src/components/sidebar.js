@@ -7,7 +7,7 @@ function sidebar() {
             <div className="sidebar">
                 <div className="sidebar-wrapper">
                     <div className="sidebar-menu">
-                        <h2>My vCards</h2>
+                        <h2>My Smart Cards</h2>
                         <ul className="sidebar-list">
                             <li>
                                 <Link href="/dashboard">
@@ -23,7 +23,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        <span> All vCards</span>
+                                        <span> All Smart Cards</span>
                                     </div>
                                 </Link>
                             </li>
@@ -43,7 +43,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        Active vCards
+                                        Active Smart Cards
                                     </div>
                                 </Link>
                             </li>
@@ -63,7 +63,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        Paused vCards
+                                        Paused Smart Cards
                                     </div>
                                 </Link>
                             </li>

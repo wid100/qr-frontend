@@ -72,7 +72,7 @@ export default function Home() {
                         <div className="row justify-content-center">
                             <div className="col-md-8">
                                 <div className="hero-content">
-                                    <h1>How can we use vCard Plus</h1>
+                                    <h1>How can we use Smart Card Plus</h1>
                                     <p>
                                         QR Code is a two-dimensional version of
                                         the barcode, typically made up of black
@@ -132,7 +132,7 @@ export default function Home() {
                                                         alt=""
                                                     />
                                                 </span>
-                                                <p>Smart vCard</p>
+                                                <p>Smart Smart Card</p>
                                             </div>
                                         </Link>
                                         <Link href={'/'}>
@@ -223,16 +223,16 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ============= vCard Plus Roadmap =========== */}
-            <section className="vCard-roadmap">
+            {/* ============= Smart Card Plus Roadmap =========== */}
+            <section className="Smart Card-roadmap">
                 <div className="container">
-                    <div className="vCard-roadmap-wrapper">
-                        <div className="vcard-roadmap-title">
-                            <h4>How do I create a free vCard Plus?</h4>
+                    <div className="Smart Card-roadmap-wrapper">
+                        <div className="Smart Card-roadmap-title">
+                            <h4>How do I create a free Smart Card Plus?</h4>
                         </div>
-                        <div className="vcard-roadmap-content">
-                            <div className="vcard-roadmap-content-items">
-                                <div className="vcard-roadmap-content-item">
+                        <div className="Smart Card-roadmap-content">
+                            <div className="Smart Card-roadmap-content-items">
+                                <div className="Smart Card-roadmap-content-item">
                                     <div className="roadmap-img">
                                         <img
                                             src="/img/home/roadmap-1.png"
@@ -240,7 +240,7 @@ export default function Home() {
                                         />
                                     </div>
                                 </div>
-                                <div className="vcard-roadmap-content-item">
+                                <div className="Smart Card-roadmap-content-item">
                                     <h3>Create a free account</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur
@@ -258,8 +258,8 @@ export default function Home() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="vcard-roadmap-content-items vcard-roadmap-content-items-2">
-                                <div className="vcard-roadmap-content-item">
+                            <div className="Smart Card-roadmap-content-items Smart Card-roadmap-content-items-2">
+                                <div className="Smart Card-roadmap-content-item">
                                     <h3>Fill in the details</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur
@@ -276,7 +276,7 @@ export default function Home() {
                                         id est laborum.
                                     </p>
                                 </div>
-                                <div className="vcard-roadmap-content-item vcard-roadmap-content-item2">
+                                <div className="Smart Card-roadmap-content-item Smart Card-roadmap-content-item2">
                                     <div className="roadmap-img">
                                         <img
                                             src="/img/home/roadmap-2.png"
@@ -285,8 +285,8 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="vcard-roadmap-content-items">
-                                <div className="vcard-roadmap-content-item ">
+                            <div className="Smart Card-roadmap-content-items">
+                                <div className="Smart Card-roadmap-content-item ">
                                     <div className="roadmap-img">
                                         <img
                                             src="/img/home/roadmap-3.png"
@@ -294,7 +294,7 @@ export default function Home() {
                                         />
                                     </div>
                                 </div>
-                                <div className="vcard-roadmap-content-item vcard-roadmap-content-item3">
+                                <div className="Smart Card-roadmap-content-item Smart Card-roadmap-content-item3">
                                     <h3>Download the QR Code</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur

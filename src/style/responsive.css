@@ -1,37 +1,37 @@
 @media screen and (max-width: 992px) {
-.qr-input-item-wrapper{
-    margin-bottom: 40px;
-}
-.qr-input-item-wrapper .qr-input-items {
-    gap: 15px;
-    flex-direction: column;
-}
-.qr-input-list-items {
-    gap: 15px;
-}
-.qr-input-fleid {
-    padding: 70px 0 70px 0;
-}
-.vcard-roadmap-content-item:nth-child(2)::after {
-  display: none;
-}
-.vcard-roadmap-content-items {
-    gap: 20px;
-}
-.vcard-roadmap-content-item:nth-child(2)::before {
-display: none;
-}
+    .qr-input-item-wrapper {
+        margin-bottom: 40px;
+    }
+    .qr-input-item-wrapper .qr-input-items {
+        gap: 15px;
+        flex-direction: column;
+    }
+    .qr-input-list-items {
+        gap: 15px;
+    }
+    .qr-input-fleid {
+        padding: 70px 0 70px 0;
+    }
+    .Smart Card-roadmap-content-item:nth-child(2)::after {
+        display: none;
+    }
+    .Smart Card-roadmap-content-items {
+        gap: 20px;
+    }
+    .Smart Card-roadmap-content-item:nth-child(2)::before {
+        display: none;
+    }
 }
 @media screen and (max-width: 768px) {
-   .vcard-roadmap-content-items {
+    .Smart Card-roadmap-content-items {
         grid-template-columns: 1fr;
     }
-    .vcard-roadmap-content {
+    .Smart Card-roadmap-content {
         padding-top: 20px;
     }
-    .vcard-roadmap-content-items-2{
-       display: flex;
-       flex-direction: column-reverse;
+    .Smart Card-roadmap-content-items-2 {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 @media screen and (max-width: 400px) {

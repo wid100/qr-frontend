@@ -85,7 +85,7 @@ const activecard = () => {
     return (
         <AppLayout>
             <Head>
-                <title>Laravel - Dashboard</title>
+                <title>Active Smart Card </title>
             </Head>
 
             <section>
@@ -110,7 +110,7 @@ const activecard = () => {
                                             />
                                         </svg>
                                         <p>
-                                            Active vCards{' '}
+                                            Active Smart Cards{' '}
                                             <span>({totalQrCount})</span>
                                         </p>
                                     </div>
@@ -118,7 +118,7 @@ const activecard = () => {
                                     <div className="qr-button">
                                         <Link href="/createqr">
                                             <button className="submit-form">
-                                                Create New vCard
+                                                Create New Smart Card
                                             </button>
                                         </Link>
                                     </div>

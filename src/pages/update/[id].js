@@ -178,7 +178,7 @@ const UpdateQrPage = ({ qrData }) => {
     return (
         <AppLayout>
             <Head>
-                <title>Laravel - Dashboard</title>
+                <title>Update Your Smart Card</title>
             </Head>
 
             <section>
@@ -197,7 +197,7 @@ const UpdateQrPage = ({ qrData }) => {
                                             value={inputField.cardName}
                                             autoFocus
                                             required
-                                            placeholder="Name your vCard"
+                                            placeholder="Name your Smart Card"
                                         />
                                         <InputError
                                             messages={errors.cardName}
@@ -208,13 +208,14 @@ const UpdateQrPage = ({ qrData }) => {
                                     <div className="form-group-wrapper">
                                         <div className="form-group-title">
                                             <p>
-                                                Design and customize your vCard
+                                                Design and customize your Smart
+                                                Card
                                             </p>
                                         </div>
 
                                         <div className="color-plate">
                                             <p>
-                                                Personalize your vCard by
+                                                Personalize your Smart Card by
                                                 selecting colors.
                                             </p>
                                             <div className="color-point">
@@ -1369,7 +1370,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                         height: '300px',
                                                     }}>
                                                     <QRCode
-                                                        value={qrData.slug}
+                                                        value={`https://smartcardgenerator.net/${qrData.slug}`}
                                                         size={300}
                                                     />
                                                     <img
@@ -1387,9 +1388,14 @@ const UpdateQrPage = ({ qrData }) => {
                                                     />
                                                 </div>
                                             </div>
-                                            <a onClick={handlePrint}>
-                                                Download QR Code
-                                            </a>
+
+                                            <div className="qr-download mt-3">
+                                                <a
+                                                    className="custom-btn"
+                                                    onClick={handlePrint}>
+                                                    Download QR Code
+                                                </a>
+                                            </div>
                                             <div className="row">
                                                 <div className="col-md-3"></div>
                                                 <div className="col-md-9">
