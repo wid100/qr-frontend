@@ -57,7 +57,7 @@ const activecard = () => {
     }
 
     // ========================pause and resume function ==============?
-    const [status, setStatus] = useState('active')
+    const [status, setStatus] = useState('')
 
     const handleToggle = async id => {
         const newStatus = status === 'active' ? 'paused' : 'active'
@@ -311,9 +311,6 @@ const activecard = () => {
                                                                         handleToggle(
                                                                             qr.id,
                                                                         )
-                                                                    }
-                                                                    title={
-                                                                        status
                                                                     }>
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"

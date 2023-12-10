@@ -7,23 +7,17 @@ import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
+
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
 
     const [isChecked, setIsChecked] = useState(true)
-
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked)
-    }
 
     // ==================radio button color change ===============
     const [selectedColor, setSelectedColor] = useState('#FF0000')
 
     const [buttonColor, setButtoncolor] = useState('#555555')
 
-    const handleColorChange = event => {
-        setSelectedColor(event.target.value)
-    }
     const [secondaryColorScheme, setSecondarycolorscheme] = useState('#555555')
 
     const divStyle = {
@@ -70,7 +64,12 @@ function CreateQR() {
         github: '',
         setErrors,
     })
-
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked)
+    }
+    const handleColorChange = event => {
+        setSelectedColor(event.target.value)
+    }
     const inputsHandler = e => {
         e.persist()
         setInputField({
@@ -98,9 +97,25 @@ function CreateQR() {
         image: null,
         imageUrl: null,
     })
+
     const handleWelcome = e => {
         const selectedImage = e.target.files[0]
 
+        const maxSize = 300 * 300 // 1MB (adjust as needed)
+        const allowedExtensions = ['jpg', 'jpeg', 'png'] // Add allowed extensions
+
+        if (selectedImage.size > maxSize) {
+            alert('File size exceeds the maximum allowed size.')
+            return
+        }
+
+        const fileExtension = selectedImage.name.split('.').pop().toLowerCase()
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('Invalid file type. Please upload a valid image file.')
+            return
+        }
+
+        // Update the state with the validated image information
         setWelcome({
             image: selectedImage,
             imageUrl: URL.createObjectURL(selectedImage),
@@ -160,12 +175,12 @@ function CreateQR() {
         formData.append('fax2', inputField.fax2)
         formData.append('address1', inputField.address1)
         formData.append('address2', inputField.address2)
-        formData.append('maincolor', inputField.mainColor)
+        formData.append('maincolor', selectedColor)
         formData.append('webaddress1', inputField.webaddress1)
         formData.append('webaddress2', inputField.webaddress2)
         formData.append('companyname', inputField.companyName)
         formData.append('jobtitle', inputField.jobTitle)
-        formData.append('gradientcolor', inputField.gradientColor)
+        formData.append('gradientcolor', secondaryColorScheme)
         formData.append('buttoncolor', inputField.buttonColor)
         formData.append('checkgradient', inputField.checkgradient)
         formData.append('summary', inputField.summary)
@@ -187,24 +202,22 @@ function CreateQR() {
 
         axios.post(`${baseuri}/api/qrcreate`, formData).then(res => {
             if (res.data.status === 200) {
-                console.log('form submit succefuly')
-                e.preventDefault()
-
-                alert('form submitted')
-
+                alert('Form submit successfully')
                 window.location.href = '/dashboard'
             } else {
                 alert(
-                    'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
+                    'Maybe you have not filled all the required fields. Please check again and fill all the required fields (*).',
                 )
             }
         })
     }
+
     const componentRef = useRef()
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     })
+
     return (
         <AppLayout>
             <Head>
@@ -226,8 +239,8 @@ function CreateQR() {
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
-                                            placeholder="Name your vCard"
                                             required
+                                            placeholder="Name your vCard"
                                         />
                                         <InputError
                                             messages={errors.cardName}
@@ -572,7 +585,6 @@ function CreateQR() {
                                                                     <input
                                                                         type="file"
                                                                         name="image"
-                                                                        required
                                                                         onChange={
                                                                             handleImage
                                                                         }
@@ -608,14 +620,13 @@ function CreateQR() {
                                                                     type="text"
                                                                     name="firstName"
                                                                     className="form-control"
-                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
                                                                     value={
                                                                         inputField.firstName
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="First name"
                                                                 />
                                                                 <InputError
@@ -632,7 +643,6 @@ function CreateQR() {
                                                                     id="lastName"
                                                                     type="text"
                                                                     name="lastName"
-                                                                    required
                                                                     className="form-control"
                                                                     onChange={
                                                                         inputsHandler
@@ -640,7 +650,7 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.lastName
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Last name"
                                                                 />
                                                                 <InputError
@@ -669,14 +679,13 @@ function CreateQR() {
                                                                     type="text"
                                                                     name="mobile1"
                                                                     className="form-control"
-                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
                                                                     value={
                                                                         inputField.mobile1
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Mobile number 01"
                                                                 />
                                                                 <InputError
@@ -700,7 +709,6 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.mobile2
                                                                     }
-                                                                    autoFocus
                                                                     placeholder="Mobile number 02"
                                                                 />
                                                                 <InputError
@@ -762,7 +770,6 @@ function CreateQR() {
                                                                 <input
                                                                     id="email1"
                                                                     type="email"
-                                                                    required
                                                                     name="email1"
                                                                     className="form-control"
                                                                     onChange={
@@ -771,7 +778,7 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.email1
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Email address"
                                                                 />
                                                                 <InputError
@@ -789,13 +796,13 @@ function CreateQR() {
                                                                     className="form-control"
                                                                     id="address1"
                                                                     name="address1"
-                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
                                                                     value={
                                                                         inputField.address1
                                                                     }
+                                                                    required
                                                                     placeholder="Address"
                                                                 />
                                                                 <InputError
@@ -839,10 +846,10 @@ function CreateQR() {
                                                                     className="form-control"
                                                                     id="summary"
                                                                     name="summary"
-                                                                    required
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
+                                                                    required
                                                                     value={
                                                                         inputField.summary
                                                                     }></textarea>
@@ -913,13 +920,13 @@ function CreateQR() {
                                                                         placeholder="Company name"
                                                                         id="companyName"
                                                                         name="companyName"
-                                                                        required
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
                                                                         value={
                                                                             inputField.companyName
                                                                         }
+                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -943,6 +950,7 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.jobTitle
                                                                         }
+                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -965,6 +973,7 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.mobile3
                                                                         }
+                                                                        required
                                                                         placeholder="Mobile number 01"
                                                                     />
                                                                     <InputError
@@ -1059,6 +1068,7 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.email2
                                                                         }
+                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -1082,6 +1092,7 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.address2
                                                                         }
+                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -1099,7 +1110,6 @@ function CreateQR() {
                                                                         placeholder="Enter web address"
                                                                         id="webaddress2"
                                                                         name="webaddress2"
-                                                                        required
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
@@ -1289,7 +1299,8 @@ function CreateQR() {
                                         <div className="color-plate">
                                             <p className="mb-3">
                                                 Display your logo while your
-                                                page is loading:
+                                                page is loading: (Max Image Size
+                                                300*300)
                                             </p>
 
                                             <div className="row d-flex justify-content-center">
@@ -1388,7 +1399,6 @@ function CreateQR() {
                                             </div>
 
                                             <div
-                                                className="margin:auto"
                                                 style={{
                                                     display: 'flex',
                                                     alignItems: 'center',
@@ -1400,7 +1410,8 @@ function CreateQR() {
                                                         position: 'relative',
                                                         width: '300px',
                                                         height: '300px',
-                                                    }}>
+                                                    }}
+                                                    className="qr-image-wrapper">
                                                     <QRCode
                                                         value={`https://smartcardgenerator.net/${uniqueSlug}`}
                                                         size={300}
@@ -1420,9 +1431,14 @@ function CreateQR() {
                                                     />
                                                 </div>
                                             </div>
-                                            <button onClick={handlePrint}>
-                                                Download QR Code
-                                            </button>
+                                            <div className="qr-download mt-3">
+                                                <a
+                                                    className="custom-btn"
+                                                    onClick={handlePrint}>
+                                                    Download QR Code
+                                                </a>
+                                            </div>
+
                                             <div className="row">
                                                 <div className="col-md-3"></div>
                                                 <div className="col-md-9">

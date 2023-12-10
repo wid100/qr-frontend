@@ -15,18 +15,11 @@ const UpdateQrPage = ({ qrData }) => {
 
     const [isChecked, setIsChecked] = useState(qrData.checkgradient)
 
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked)
-    }
-
     // ==================radio button color change ===============
     const [selectedColor, setSelectedColor] = useState(qrData.maincolor)
 
     const [buttonColor, setButtoncolor] = useState(qrData.buttoncolor)
 
-    const handleColorChange = event => {
-        setSelectedColor(event.target.value)
-    }
     const [secondaryColorScheme, setSecondarycolorscheme] = useState(
         qrData.gradientcolor,
     )
@@ -60,7 +53,7 @@ const UpdateQrPage = ({ qrData }) => {
         companyName: qrData.companyname,
         jobTitle: qrData.jobtitle,
         mainColor: selectedColor,
-        gradientColor: divStyle,
+        gradientColor: secondaryColorScheme,
         buttonColor: buttonColor,
         checkgradient: isChecked,
         summary: qrData.summary,
@@ -84,6 +77,13 @@ const UpdateQrPage = ({ qrData }) => {
         })
     }
 
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked)
+    }
+
+    const handleColorChange = event => {
+        setSelectedColor(event.target.value)
+    }
     const [picture, setPicture] = useState({
         image: `${baseuri}/${qrData.image}` || null,
         imageUrl: `${baseuri}/${qrData.image}` || null,
@@ -131,13 +131,13 @@ const UpdateQrPage = ({ qrData }) => {
         formData.append('fax2', inputField.fax2)
         formData.append('address1', inputField.address1)
         formData.append('address2', inputField.address2)
-        formData.append('maincolor', inputField.mainColor)
+        formData.append('maincolor', selectedColor)
+        formData.append('gradientcolor', secondaryColorScheme)
+        formData.append('buttoncolor', inputField.buttonColor)
         formData.append('webaddress1', inputField.webaddress1)
         formData.append('webaddress2', inputField.webaddress2)
         formData.append('companyname', inputField.companyName)
         formData.append('jobtitle', inputField.jobTitle)
-        formData.append('gradientcolor', secondaryColorScheme)
-        formData.append('buttoncolor', inputField.buttonColor)
         formData.append('checkgradient', inputField.checkgradient)
         formData.append('summary', inputField.summary)
         formData.append('cardtype', inputField.cardType)
@@ -157,9 +157,11 @@ const UpdateQrPage = ({ qrData }) => {
             .post(`${baseuri}/api/updateqr/${qrData.id}`, formData)
             .then(res => {
                 if (res.data.status === 200) {
+                    console.log('Form Data: ', formData)
+                    console.log('Form submit succefuly')
                     e.preventDefault()
+
                     alert('form submitted')
-                    window.location.href = '/dashboard'
                 } else {
                     alert(
                         'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
@@ -194,6 +196,7 @@ const UpdateQrPage = ({ qrData }) => {
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
+                                            required
                                             placeholder="Name your vCard"
                                         />
                                         <InputError
@@ -580,7 +583,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.firstName
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="First name"
                                                                 />
                                                                 <InputError
@@ -604,7 +607,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.lastName
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Last name"
                                                                 />
                                                                 <InputError
@@ -639,7 +642,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.mobile1
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Mobile number 01"
                                                                 />
                                                                 <InputError
@@ -733,7 +736,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.email1
                                                                     }
-                                                                    autoFocus
+                                                                    required
                                                                     placeholder="Email address"
                                                                 />
                                                                 <InputError
@@ -757,6 +760,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.address1
                                                                     }
+                                                                    required
                                                                     placeholder="Address"
                                                                 />
                                                                 <InputError
@@ -803,6 +807,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
+                                                                    required
                                                                     value={
                                                                         inputField.summary
                                                                     }></textarea>
@@ -876,6 +881,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
+                                                                        required
                                                                         value={
                                                                             inputField.companyName
                                                                         }
@@ -899,6 +905,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
+                                                                        required
                                                                         value={
                                                                             inputField.jobTitle
                                                                         }
@@ -924,6 +931,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         value={
                                                                             inputField.mobile3
                                                                         }
+                                                                        required
                                                                         placeholder="Mobile number 01"
                                                                     />
                                                                     <InputError
@@ -1015,6 +1023,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
+                                                                        required
                                                                         value={
                                                                             inputField.email2
                                                                         }
@@ -1038,6 +1047,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
+                                                                        required
                                                                         value={
                                                                             inputField.address2
                                                                         }
@@ -1377,9 +1387,9 @@ const UpdateQrPage = ({ qrData }) => {
                                                     />
                                                 </div>
                                             </div>
-                                            <button onClick={handlePrint}>
+                                            <a onClick={handlePrint}>
                                                 Download QR Code
-                                            </button>
+                                            </a>
                                             <div className="row">
                                                 <div className="col-md-3"></div>
                                                 <div className="col-md-9">
@@ -1573,8 +1583,6 @@ export async function getServerSideProps(context) {
     const { params } = context
     const { id } = params
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
-    // Fetch existing QR code data based on the ID
-    // const response = await fetch(`/api/editqr/${id}`)
     const response = await fetch(`${baseuri}/api/editqr/${id}`)
 
     const qrData = await response.json()

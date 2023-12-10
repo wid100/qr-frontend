@@ -404,7 +404,7 @@ p.dajignation {
 }
 
 .info-show p {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .info-show {
@@ -959,4 +959,20 @@ button.hero-btn {
 }
 .vcard-roadmap-content-item3:nth-child(2)::before {
     display: none;
+}
+
+.qr-image-wrapper img {
+    width: 25%;
+}
+
+.qr-prient-dev {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-download {
+    display: flex;
+    justify-content: center;
 }
