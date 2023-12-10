@@ -23,7 +23,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        <span> All Smart Cards</span>
+                                        <span> All Cards</span>
                                     </div>
                                 </Link>
                             </li>
@@ -43,7 +43,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        Active Smart Cards
+                                        Active Cards
                                     </div>
                                 </Link>
                             </li>
@@ -63,7 +63,7 @@ function sidebar() {
                                                 fill="#D9D9D9"
                                             />
                                         </svg>
-                                        Paused Smart Cards
+                                        Paused Cards
                                     </div>
                                 </Link>
                             </li>
