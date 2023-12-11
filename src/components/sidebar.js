@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 function sidebar() {
     return (
-        <div className="col-md-4">
+        <div className="col-lg-4">
             <div className="sidebar">
                 <div className="sidebar-wrapper">
                     <div className="sidebar-menu">

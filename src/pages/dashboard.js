@@ -88,7 +88,7 @@ const Dashboard = () => {
                 <div className="container">
                     <div className="row">
                         <Sidebar />
-                        <div className="col-md-8">
+                        <div className="col-lg-8">
                             <div className="qr-show">
                                 <div className="qr-nav">
                                     <div className="qr-count">

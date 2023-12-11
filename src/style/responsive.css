@@ -1,4 +1,14 @@
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        padding: 20px;
+        height: fit-content;
+    }
+}
+
 @media screen and (max-width: 992px) {
+    .qr-show {
+        margin-top: 30px;
+    }
     .qr-input-item-wrapper {
         margin-bottom: 40px;
     }
@@ -32,6 +42,56 @@
     .Smart Card-roadmap-content-items-2 {
         display: flex;
         flex-direction: column-reverse;
+    }
+    .logo img {
+        width: 120px;
+    }
+    .compnay-info {
+        border-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .qr-nav {
+        display: block;
+    }
+    .compnay-name-info h3 {
+        font-size: 20px;
+    }
+    .compnay-name-info p {
+        font-size: 15px;
+    }
+    .scan p:first-child {
+        font-size: 20px;
+    }
+    .scan {
+        font-size: 15px;
+    }
+    .details a {
+        font-size: 15px;
+    }
+    .compnay-info {
+        border-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .qr-nav {
+        display: block;
+    }
+
+    .qr-show {
+        margin-top: 30px;
+    }
+
+    a.qr-downlod:focus {
+        color: #fff;
+    }
+
+    a.qr-downlod:hover {
+        color: #fff;
+        border: none;
+        outline: none;
     }
 }
 @media screen and (max-width: 400px) {

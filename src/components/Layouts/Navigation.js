@@ -1,9 +1,7 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import Dropdown from '@/components/Dropdown'
 import Link from 'next/link'
-import ResponsiveNavLink, {
-    ResponsiveNavButton,
-} from '@/components/ResponsiveNavLink'
+import { ResponsiveNavButton } from '../ResponsiveNavLink'
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
@@ -101,14 +99,6 @@ const Navigation = ({ user }) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block sm:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard"
-                            active={router.pathname === '/dashboard'}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
                     {/* Responsive Settings Options */}
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="flex items-center px-4">
@@ -142,6 +132,12 @@ const Navigation = ({ user }) => {
                             {/* Authentication */}
                             <ResponsiveNavButton onClick={logout}>
                                 Logout
+                            </ResponsiveNavButton>
+
+                            <ResponsiveNavButton
+                                href="/dashboard"
+                                active={router.pathname === '/dashboard'}>
+                                Dashboard
                             </ResponsiveNavButton>
                         </div>
                     </div>
