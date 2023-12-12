@@ -24,7 +24,9 @@ p {
 h3 {
     margin: 0;
 }
-
+button:focus {
+    outline: none;
+}
 :root {
     --main-color: #ffb317;
 }
@@ -919,40 +921,40 @@ button.hero-btn {
 }
 
 /* {============= Smart Card Plus Roadmap ===========} */
-.Smart Card-roadmap {
+.vCard-roadmap {
     padding-bottom: 100px;
 }
 
-.Smart Card-roadmap-title h4 {
+.vcard-roadmap-title h4 {
     font-size: 40px;
     text-align: center;
     font-weight: 600;
     color: var(--main-color);
 }
-.Smart Card-roadmap-content {
+.vcard-roadmap-content {
     padding-top: 70px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.Smart Card-roadmap-content-items {
+.vcard-roadmap-content-items {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 100px;
 }
-.Smart Card-roadmap-content-item .roadmap-img img {
+.vcard-roadmap-content-item .roadmap-img img {
     width: 100%;
 }
-.Smart Card-roadmap-content-item {
+.vcard-roadmap-content-item {
     position: relative;
 }
-.Smart Card-roadmap-content-item h3 {
+.vcard-roadmap-content-item h3 {
     font-size: 20px;
     color: #000;
     font-weight: 700;
     padding-bottom: 15px;
 }
-.Smart Card-roadmap-content-item:nth-child(2)::after {
+.vcard-roadmap-content-item:nth-child(2)::after {
     content: '1';
     position: absolute;
     width: 60px;
@@ -968,7 +970,7 @@ button.hero-btn {
     color: #000;
     border-radius: 100%;
 }
-.Smart Card-roadmap-content-item:nth-child(2)::before {
+.vcard-roadmap-content-item:nth-child(2)::before {
     content: '';
     position: absolute;
     width: 3px;
@@ -977,16 +979,15 @@ button.hero-btn {
     height: 100%;
     background-color: var(--main-color);
 }
-.Smart Card-roadmap-content-item2:nth-child(2)::after {
+.vcard-roadmap-content-item2:nth-child(2)::after {
     content: '2';
 }
-.Smart Card-roadmap-content-item3:nth-child(2)::after {
+.vcard-roadmap-content-item3:nth-child(2)::after {
     content: '3';
 }
-.Smart Card-roadmap-content-item3:nth-child(2)::before {
+.vcard-roadmap-content-item3:nth-child(2)::before {
     display: none;
 }
-
 .qr-image-wrapper img {
     width: 25%;
 }
@@ -1008,4 +1009,8 @@ button.hero-btn {
 
 .sidebar-menu h2 {
     font-size: 28px;
+}
+
+.table-wrapper {
+    background: #fff;
 }

@@ -7,10 +7,10 @@ import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
-
+import Link from 'next/link'
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
-
+    const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(true)
 
     // ==================radio button color change ===============
@@ -159,6 +159,7 @@ function CreateQR() {
 
     const allInfoSubmit = e => {
         e.preventDefault()
+        setLoading(true)
         const formData = new FormData()
         formData.append('cardname', inputField.cardName)
         formData.append('firstname', inputField.firstName)
@@ -202,9 +203,11 @@ function CreateQR() {
 
         axios.post(`${baseuri}/api/qrcreate`, formData).then(res => {
             if (res.data.status === 200) {
+                setLoading(false)
                 alert('Form submit successfully')
                 window.location.href = '/dashboard'
             } else {
+                setLoading(false)
                 alert(
                     'Maybe you have not filled all the required fields. Please check again and fill all the required fields (*).',
                 )
@@ -1609,14 +1612,22 @@ function CreateQR() {
                                 <div className="row">
                                     <div className="col-md-8">
                                         <div className="submit-back">
-                                            <a href="" className="back">
+                                            <Link
+                                                href={'/deshboard'}
+                                                className="back">
                                                 Back
-                                            </a>
-                                            <button
-                                                className="submit-details-form"
-                                                type="submit">
-                                                Submit
-                                            </button>
+                                            </Link>
+                                            {loading ? (
+                                                <div className="submit-details-form">
+                                                    Loading...
+                                                </div>
+                                            ) : (
+                                                <button
+                                                    className="submit-details-form"
+                                                    type="submit">
+                                                    Submit
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

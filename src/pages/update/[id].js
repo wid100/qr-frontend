@@ -7,9 +7,10 @@ import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
-
+import Link from 'next/link'
 const UpdateQrPage = ({ qrData }) => {
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
+    const [loading, setLoading] = useState(false)
 
     const { user } = useAuth({ middleware: 'auth' })
 
@@ -115,6 +116,7 @@ const UpdateQrPage = ({ qrData }) => {
 
     const allInfoSubmit = e => {
         e.preventDefault()
+        setLoading(true)
         const formData = new FormData()
         formData.append('cardname', inputField.cardName)
         formData.append('firstname', inputField.firstName)
@@ -157,12 +159,13 @@ const UpdateQrPage = ({ qrData }) => {
             .post(`${baseuri}/api/updateqr/${qrData.id}`, formData)
             .then(res => {
                 if (res.data.status === 200) {
-                    console.log('Form Data: ', formData)
+                    setLoading(false)
                     console.log('Form submit succefuly')
                     e.preventDefault()
 
                     alert('form submitted')
                 } else {
+                    setLoading(false)
                     alert(
                         'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
                     )
@@ -1565,14 +1568,20 @@ const UpdateQrPage = ({ qrData }) => {
                                 <div className="row">
                                     <div className="col-md-8">
                                         <div className="submit-back">
-                                            <a href="" className="back">
-                                                Back
-                                            </a>
-                                            <button
-                                                className="submit-details-form"
-                                                type="submit">
-                                                Submit
-                                            </button>
+                                            <Link href={'/deshboard'}>
+                                                <a className="back">Back</a>
+                                            </Link>
+                                            {loading ? (
+                                                <div className="submit-details-form">
+                                                    Loading...
+                                                </div>
+                                            ) : (
+                                                <button
+                                                    className="submit-details-form"
+                                                    type="submit">
+                                                    Submit
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

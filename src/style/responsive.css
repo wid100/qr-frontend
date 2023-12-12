@@ -22,24 +22,24 @@
     .qr-input-fleid {
         padding: 70px 0 70px 0;
     }
-    .Smart Card-roadmap-content-item:nth-child(2)::after {
+    .vcard-roadmap-content-item:nth-child(2)::after {
         display: none;
     }
-    .Smart Card-roadmap-content-items {
+    .vcard-roadmap-content-items {
         gap: 20px;
     }
-    .Smart Card-roadmap-content-item:nth-child(2)::before {
+    .vcard-roadmap-content-item:nth-child(2)::before {
         display: none;
     }
 }
 @media screen and (max-width: 768px) {
-    .Smart Card-roadmap-content-items {
+    .vcard-roadmap-content-items {
         grid-template-columns: 1fr;
     }
-    .Smart Card-roadmap-content {
+    .vcard-roadmap-content {
         padding-top: 20px;
     }
-    .Smart Card-roadmap-content-items-2 {
+    .vcard-roadmap-content-items-2 {
         display: flex;
         flex-direction: column-reverse;
     }
