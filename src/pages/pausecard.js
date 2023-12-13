@@ -127,7 +127,7 @@ const pausecard = () => {
                 <div className="container">
                     <div className="row">
                         <Sidebar />
-                        <div className="col-md-8">
+                        <div className="col-xl-8">
                             <div className="qr-show">
                                 <div className="qr-nav">
                                     <div className="qr-count">

@@ -160,10 +160,10 @@ const UpdateQrPage = ({ qrData }) => {
             .then(res => {
                 if (res.data.status === 200) {
                     setLoading(false)
-                    console.log('Form submit succefuly')
                     e.preventDefault()
 
                     alert('form submitted')
+                    window.location.href = '/dashboard'
                 } else {
                     setLoading(false)
                     alert(
@@ -1399,163 +1399,156 @@ const UpdateQrPage = ({ qrData }) => {
                                                     Download QR Code
                                                 </a>
                                             </div>
-                                            <div className="row">
-                                                <div className="col-md-3"></div>
-                                                <div className="col-md-9">
-                                                    <div className="show-summery info-show">
+                                            <div className="card-list">
+                                                <ul>
+                                                    <li className="card-list-li">
+                                                        <div className="preview-info-icon"></div>
                                                         <p>
                                                             {inputField.summary}
                                                         </p>
-                                                    </div>
-                                                </div>
+                                                    </li>
+                                                    <li className="card-list-li">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="img/icon/phone.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show">
+                                                            <p>Mobile</p>
 
-                                                <div className="col-md-3">
-                                                    <div className="preview-info-icon">
-                                                        <img
-                                                            src="../img/icon/phone.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-9">
-                                                    <div className="info-show">
-                                                        <a
-                                                            href={`tel:${inputField.phone1}`}>
-                                                            {inputField.phone1}
-                                                        </a>
-                                                        <p>Mobile</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-3">
-                                                    <div className="preview-info-icon">
-                                                        <img
-                                                            src="../img/icon/email.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-9">
-                                                    <div className="info-show">
-                                                        <a
-                                                            href={`mailto:${inputField.email1}`}>
-                                                            {inputField.email1}
-                                                        </a>
-                                                        <p>Email</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-3">
-                                                    <div className="preview-info-icon">
-                                                        <img
-                                                            src="../img/icon/toffee.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-9">
-                                                    <div className="info-show">
-                                                        <a
-                                                            href={
-                                                                inputField.webaddress1
-                                                            }>
-                                                            {
-                                                                inputField.companyName
-                                                            }
-                                                        </a>
-                                                        <p>Lumina Dev</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3">
-                                                    <div className="preview-info-icon">
-                                                        <img
-                                                            src="../img/icon/web.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-9">
-                                                    <div className="info-show">
-                                                        <a
-                                                            href={
-                                                                inputField.webaddress1
-                                                            }>
-                                                            {
-                                                                inputField.webaddress1
-                                                            }
-                                                        </a>
-                                                        <p>Web address</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3">
-                                                    <div className="preview-info-icon">
-                                                        <img
-                                                            src="../img/icon/share.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-9">
-                                                    <div className="info-show border-none">
-                                                        <ul>
-                                                            <li>
-                                                                <a
-                                                                    href={
-                                                                        inputField.facebook
-                                                                    }>
-                                                                    <img
-                                                                        src="../img/icon/fb.svg"
-                                                                        alt=""
-                                                                    />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href={
-                                                                        inputField.github
-                                                                    }>
-                                                                    <img
-                                                                        src="../img/icon/github.svg"
-                                                                        alt=""
-                                                                    />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href={
-                                                                        inputField.twitter
-                                                                    }>
-                                                                    <img
-                                                                        src="../img/icon/tw.svg"
-                                                                        alt=""
-                                                                    />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href={
-                                                                        inputField.instagram
-                                                                    }>
-                                                                    <img
-                                                                        src="../img/icon/ins.svg"
-                                                                        alt=""
-                                                                    />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a
-                                                                    href={
-                                                                        inputField.youtube
-                                                                    }>
-                                                                    <img
-                                                                        src="../img/icon/youtube.svg"
-                                                                        alt=""
-                                                                    />
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                            <a
+                                                                href={`tel:${inputField.mobile1}`}>
+                                                                {
+                                                                    inputField.mobile1
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li className="card-list-li">
+                                                        {' '}
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="img/icon/email.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show">
+                                                            <p>Email</p>
+                                                            <a
+                                                                href={`mailto:${inputField.email1}`}>
+                                                                {
+                                                                    inputField.email1
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li className="card-list-li">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="img/icon/toffee.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show">
+                                                            <p>Company Name</p>
+                                                            <a
+                                                                href={
+                                                                    inputField.webaddress2
+                                                                }>
+                                                                {
+                                                                    inputField.companyName
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li className="card-list-li">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="img/icon/web.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show">
+                                                            <p>Web address</p>
+                                                            <a
+                                                                href={
+                                                                    inputField.webaddress2
+                                                                }>
+                                                                {
+                                                                    inputField.webaddress2
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li className="card-list-li">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="img/icon/share.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show border-none">
+                                                            <ul>
+                                                                <li>
+                                                                    <a
+                                                                        href={
+                                                                            inputField.facebook
+                                                                        }>
+                                                                        <img
+                                                                            src="img/icon/fb.svg"
+                                                                            alt=""
+                                                                        />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href={
+                                                                            inputField.github
+                                                                        }>
+                                                                        <img
+                                                                            src="img/icon/github.svg"
+                                                                            alt=""
+                                                                        />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href={
+                                                                            inputField.twitter
+                                                                        }>
+                                                                        <img
+                                                                            src="img/icon/tw.svg"
+                                                                            alt=""
+                                                                        />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href={
+                                                                            inputField.instagram
+                                                                        }>
+                                                                        <img
+                                                                            src="img/icon/ins.svg"
+                                                                            alt=""
+                                                                        />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href={
+                                                                            inputField.youtube
+                                                                        }>
+                                                                        <img
+                                                                            src="img/icon/youtube.svg"
+                                                                            alt=""
+                                                                        />
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

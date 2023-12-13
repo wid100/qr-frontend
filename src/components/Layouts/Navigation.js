@@ -53,11 +53,12 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
                             {/* Authentication */}
-                            <DropdownButton
-                                href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
-                                Dashboard
-                            </DropdownButton>
+                            <Link href="/dashboard" passHref>
+                                <DropdownButton
+                                    active={router.pathname === '/dashboard'}>
+                                    Dashboard
+                                </DropdownButton>
+                            </Link>
                             <DropdownButton onClick={logout}>
                                 Logout
                             </DropdownButton>
@@ -134,12 +135,13 @@ const Navigation = ({ user }) => {
                             <ResponsiveNavButton onClick={logout}>
                                 Logout
                             </ResponsiveNavButton>
-
-                            <ResponsiveNavButton
-                                href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
-                                Dashboard
-                            </ResponsiveNavButton>
+                            <Link href="/dashboard" passHref>
+                                <ResponsiveNavButton
+                                    href="/dashboard"
+                                    active={router.pathname === '/dashboard'}>
+                                    Dashboard
+                                </ResponsiveNavButton>
+                            </Link>
                         </div>
                     </div>
                 </div>

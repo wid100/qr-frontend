@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useReactToPrint } from 'react-to-print'
 import { useState, useRef } from 'react'
-
+import Footer from '@/components/Layouts/Footer'
 import QRCode from 'qrcode.react'
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
@@ -34,7 +34,9 @@ export default function Home() {
                     <div className="home-header">
                         <div className="logo">
                             <Link href={'/'}>
-                                <img src="img/logo.png" alt="" />
+                                <a>
+                                    <img src="img/logo.png" alt="" />
+                                </a>
                             </Link>
                         </div>
 
@@ -316,6 +318,8 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            <Footer />
         </>
     )
 }
