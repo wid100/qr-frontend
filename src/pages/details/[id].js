@@ -16,8 +16,11 @@ const QrDetails = ({ qrDetails }) => {
                         <div className="row">
                             <Sidebar />
                             <div className="col-lg-8">
+                                <h2 className="my-3 text-color">
+                                    QR Details page
+                                </h2>
+
                                 <div className="table-wrapper">
-                                    <h2>QR Details page</h2>
                                     <div className="table-responsive">
                                         <table className="table">
                                             <thead>
