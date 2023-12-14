@@ -2,6 +2,7 @@
     .sidebar {
         padding: 20px;
         height: fit-content;
+        min-height: fit-content;
     }
 }
 

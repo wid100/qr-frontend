@@ -13,6 +13,12 @@ const UpdateQrPage = ({ qrData }) => {
     const [loading, setLoading] = useState(false)
 
     const { user } = useAuth({ middleware: 'auth' })
+    const [selectedValue, setSelectedValue] = useState(qrData.cardtype)
+
+    // Function to handle select box changes
+    const handleSelectChange = event => {
+        setSelectedValue(event.target.value)
+    }
 
     const [isChecked, setIsChecked] = useState(qrData.checkgradient)
 
@@ -58,7 +64,8 @@ const UpdateQrPage = ({ qrData }) => {
         buttonColor: buttonColor,
         checkgradient: isChecked,
         summary: qrData.summary,
-        cardType: 'Home',
+        slug: qrData.slug,
+        cardtype: selectedValue,
         status: 'active',
 
         // ==================sociel link================
@@ -85,31 +92,35 @@ const UpdateQrPage = ({ qrData }) => {
     const handleColorChange = event => {
         setSelectedColor(event.target.value)
     }
+
     const [picture, setPicture] = useState({
-        image: `${baseuri}/${qrData.image}` || null,
-        imageUrl: `${baseuri}/${qrData.image}` || null,
+        image: '',
+        imageUrl: qrData.image ? `${baseuri}/${qrData.image}` : null,
+    })
+
+    const [welcome, setWelcome] = useState({
+        image: '',
+        imageUrl: qrData.welcome ? `${baseuri}/${qrData.welcome}` : null,
     })
 
     const handleImage = e => {
         const selectedImage = e.target.files[0]
 
-        setPicture({
+        setPicture(prevState => ({
+            ...prevState,
             image: selectedImage,
             imageUrl: URL.createObjectURL(selectedImage),
-        })
+        }))
     }
 
-    const [welcome, setWelcome] = useState({
-        image: `${baseuri}/${qrData.welcome}` || null,
-        imageUrl: `${baseuri}/${qrData.welcome}` || null,
-    })
     const handleWelcome = e => {
         const selectedImage = e.target.files[0]
 
-        setWelcome({
+        setWelcome(prevState => ({
+            ...prevState,
             image: selectedImage,
             imageUrl: URL.createObjectURL(selectedImage),
-        })
+        }))
     }
 
     // =========================
@@ -118,60 +129,66 @@ const UpdateQrPage = ({ qrData }) => {
         e.preventDefault()
         setLoading(true)
         const formData = new FormData()
-        formData.append('cardname', inputField.cardName)
-        formData.append('firstname', inputField.firstName)
-        formData.append('lastname', inputField.lastName)
-        formData.append('email1', inputField.email1)
-        formData.append('email2', inputField.email2)
-        formData.append('phone1', inputField.phone1)
-        formData.append('phone2', inputField.phone2)
-        formData.append('mobile1', inputField.mobile1)
-        formData.append('mobile2', inputField.mobile2)
-        formData.append('mobile3', inputField.mobile3)
-        formData.append('mobile4', inputField.mobile4)
-        formData.append('fax', inputField.fax)
-        formData.append('fax2', inputField.fax2)
-        formData.append('address1', inputField.address1)
-        formData.append('address2', inputField.address2)
+        formData.append('cardname', inputField.cardName ?? '')
+        formData.append('firstname', inputField.firstName ?? '')
+        formData.append('lastname', inputField.lastName ?? '')
+        formData.append('email1', inputField.email1 ?? '')
+        formData.append('email2', inputField.email2 ?? '')
+        formData.append('phone1', inputField.phone1 ?? '')
+        formData.append('phone2', inputField.phone2 ?? '')
+        formData.append('mobile1', inputField.mobile1 ?? '')
+        formData.append('mobile2', inputField.mobile2 ?? '')
+        formData.append('mobile3', inputField.mobile3 ?? '')
+        formData.append('mobile4', inputField.mobile4 ?? '')
+        formData.append('fax', inputField.fax ?? '')
+        formData.append('fax2', inputField.fax2 ?? '')
+        formData.append('address1', inputField.address1 ?? '')
+        formData.append('address2', inputField.address2 ?? '')
         formData.append('maincolor', selectedColor)
         formData.append('gradientcolor', secondaryColorScheme)
         formData.append('buttoncolor', inputField.buttonColor)
-        formData.append('webaddress1', inputField.webaddress1)
-        formData.append('webaddress2', inputField.webaddress2)
-        formData.append('companyname', inputField.companyName)
-        formData.append('jobtitle', inputField.jobTitle)
-        formData.append('checkgradient', inputField.checkgradient)
-        formData.append('summary', inputField.summary)
-        formData.append('cardtype', inputField.cardType)
-        formData.append('facebook', inputField.facebook)
-        formData.append('twitter', inputField.twitter)
-        formData.append('instagram', inputField.instagram)
-        formData.append('youtube', inputField.youtube)
-        formData.append('github', inputField.github)
+        formData.append('webaddress1', inputField.webaddress1 ?? '')
+        formData.append('webaddress2', inputField.webaddress2 ?? '')
+        formData.append('companyname', inputField.companyName ?? '')
+        formData.append('jobtitle', inputField.jobTitle ?? '')
+        formData.append('checkgradient', inputField.checkgradient ?? '')
+        formData.append('summary', inputField.summary ?? '')
+        formData.append('cardtype', selectedValue)
+        formData.append('facebook', inputField.facebook ?? '')
+        formData.append('twitter', inputField.twitter ?? '')
+        formData.append('instagram', inputField.instagram ?? '')
+        formData.append('youtube', inputField.youtube ?? '')
+        formData.append('github', inputField.github ?? '')
         formData.append('image', picture.image)
         formData.append('welcomeimage', welcome.image)
         formData.append('status', inputField.status)
         formData.append('user_id', user?.id)
 
-        console.log(formData)
-
         axios
             .post(`${baseuri}/api/updateqr/${qrData.id}`, formData)
+
             .then(res => {
                 if (res.data.status === 200) {
                     setLoading(false)
-                    e.preventDefault()
-
-                    alert('form submitted')
+                    alert('Form submit successfully')
                     window.location.href = '/dashboard'
+                } else if (res.data.status === 422 && res.data.errors) {
+                    setLoading(false)
+                    const errorMessages = Object.values(res.data.errors).flat()
+                    alert('Validation Error:\n' + errorMessages.join('\n'))
                 } else {
                     setLoading(false)
-                    alert(
-                        'Maybe You not fill all the required fields. Please check again and fill all the required fields (*).',
-                    )
+                    alert('An error occurred. Please try again.')
                 }
             })
+            .catch(error => {
+                setLoading(false)
+                console.error('An error occurred:', error)
+                alert('An error occurred. Please try again.')
+            })
     }
+
+    // ==============print function================
     const componentRef = useRef()
 
     const handlePrint = useReactToPrint({
@@ -694,6 +711,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.phone1
                                                                     }
+                                                                    required
                                                                     placeholder="Phone"
                                                                 />
                                                                 <InputError
@@ -788,6 +806,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     value={
                                                                         inputField.webaddress1
                                                                     }
+                                                                    required
                                                                     placeholder="Enter web address"
                                                                 />
                                                                 <InputError
@@ -838,23 +857,25 @@ const UpdateQrPage = ({ qrData }) => {
                                                         <select
                                                             className="form-select form-control"
                                                             aria-label="Default select example"
-                                                            name="cardType"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
+                                                            name="cardtype"
                                                             value={
-                                                                inputField.cardType
+                                                                selectedValue
+                                                            }
+                                                            required
+                                                            onChange={
+                                                                handleSelectChange
                                                             }>
-                                                            <option selected>
-                                                                Company
-                                                            </option>
                                                             <option value="Home">
                                                                 Home
                                                             </option>
                                                             <option value="Business">
                                                                 Business
                                                             </option>
+                                                            <option value="Others">
+                                                                Others
+                                                            </option>
                                                         </select>
+
                                                         <InputError
                                                             messages={
                                                                 errors.cardType
@@ -935,7 +956,6 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         value={
                                                                             inputField.mobile3
                                                                         }
-                                                                        required
                                                                         placeholder="Mobile number 01"
                                                                     />
                                                                     <InputError
@@ -1027,7 +1047,6 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
-                                                                        required
                                                                         value={
                                                                             inputField.email2
                                                                         }
@@ -1051,7 +1070,6 @@ const UpdateQrPage = ({ qrData }) => {
                                                                         onChange={
                                                                             inputsHandler
                                                                         }
-                                                                        required
                                                                         value={
                                                                             inputField.address2
                                                                         }
@@ -1410,7 +1428,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/phone.svg"
+                                                                src="../img/icon/phone.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1429,7 +1447,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                         {' '}
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/email.svg"
+                                                                src="../img/icon/email.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1446,7 +1464,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/toffee.svg"
+                                                                src="../img/icon/toffee.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1465,7 +1483,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/web.svg"
+                                                                src="../img/icon/web.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1484,7 +1502,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/share.svg"
+                                                                src="../img/icon/share.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1496,7 +1514,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                             inputField.facebook
                                                                         }>
                                                                         <img
-                                                                            src="img/icon/fb.svg"
+                                                                            src="../img/icon/fb.svg"
                                                                             alt=""
                                                                         />
                                                                     </a>
@@ -1507,7 +1525,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                             inputField.github
                                                                         }>
                                                                         <img
-                                                                            src="img/icon/github.svg"
+                                                                            src="../img/icon/github.svg"
                                                                             alt=""
                                                                         />
                                                                     </a>
@@ -1518,7 +1536,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                             inputField.twitter
                                                                         }>
                                                                         <img
-                                                                            src="img/icon/tw.svg"
+                                                                            src="../img/icon/tw.svg"
                                                                             alt=""
                                                                         />
                                                                     </a>
@@ -1529,7 +1547,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                             inputField.instagram
                                                                         }>
                                                                         <img
-                                                                            src="img/icon/ins.svg"
+                                                                            src="../img/icon/ins.svg"
                                                                             alt=""
                                                                         />
                                                                     </a>
@@ -1540,7 +1558,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                             inputField.youtube
                                                                         }>
                                                                         <img
-                                                                            src="img/icon/youtube.svg"
+                                                                            src="../img/icon/youtube.svg"
                                                                             alt=""
                                                                         />
                                                                     </a>
@@ -1561,7 +1579,7 @@ const UpdateQrPage = ({ qrData }) => {
                                 <div className="row">
                                     <div className="col-md-8">
                                         <div className="submit-back">
-                                            <Link href={'/deshboard'}>
+                                            <Link href={'/dashboard'}>
                                                 <a className="back">Back</a>
                                             </Link>
                                             {loading ? (
@@ -1575,6 +1593,11 @@ const UpdateQrPage = ({ qrData }) => {
                                                     Submit
                                                 </button>
                                             )}
+                                            {/* <button
+                                                className="submit-details-form"
+                                                type="submit">
+                                                Submit
+                                            </button> */}
                                         </div>
                                     </div>
                                 </div>

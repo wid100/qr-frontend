@@ -11,8 +11,17 @@ import Link from 'next/link'
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
-    const [isChecked, setIsChecked] = useState(true)
+    const [isChecked, setIsChecked] = useState(false)
+    const [selectedValue, setSelectedValue] = useState('')
 
+    // Function to handle select box changes
+    const handleSelectChange = event => {
+        setSelectedValue(event.target.value)
+    }
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked)
+    }
     // ==================radio button color change ===============
     const [selectedColor, setSelectedColor] = useState('#FF0000')
 
@@ -53,7 +62,7 @@ function CreateQR() {
         buttonColor: buttonColor,
         checkgradient: isChecked,
         summary: '',
-        cardType: 'Home',
+        cardtype: selectedValue,
         status: 'active',
 
         // ==================sociel link================
@@ -64,9 +73,7 @@ function CreateQR() {
         github: '',
         setErrors,
     })
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked)
-    }
+
     const handleColorChange = event => {
         setSelectedColor(event.target.value)
     }
@@ -183,9 +190,9 @@ function CreateQR() {
         formData.append('jobtitle', inputField.jobTitle)
         formData.append('gradientcolor', secondaryColorScheme)
         formData.append('buttoncolor', inputField.buttonColor)
-        formData.append('checkgradient', inputField.checkgradient)
+        formData.append('checkgradient', isChecked)
         formData.append('summary', inputField.summary)
-        formData.append('cardtype', inputField.cardType)
+        formData.append('cardtype', selectedValue)
         formData.append('facebook', inputField.facebook)
         formData.append('twitter', inputField.twitter)
         formData.append('instagram', inputField.instagram)
@@ -201,18 +208,27 @@ function CreateQR() {
 
         const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
 
-        axios.post(`${baseuri}/api/qrcreate`, formData).then(res => {
-            if (res.data.status === 200) {
+        axios
+            .post(`${baseuri}/api/qrcreate`, formData)
+            .then(res => {
+                if (res.data.status === 200) {
+                    setLoading(false)
+                    alert('Form submit successfully')
+                    window.location.href = '/dashboard'
+                } else if (res.data.status === 422 && res.data.errors) {
+                    setLoading(false)
+                    const errorMessages = Object.values(res.data.errors).flat()
+                    alert('Validation Error:\n' + errorMessages.join('\n'))
+                } else {
+                    setLoading(false)
+                    alert('An error occurred. Please try again.')
+                }
+            })
+            .catch(error => {
                 setLoading(false)
-                alert('Form submit successfully')
-                window.location.href = '/dashboard'
-            } else {
-                setLoading(false)
-                alert(
-                    'Maybe you have not filled all the required fields. Please check again and fill all the required fields (*).',
-                )
-            }
-        })
+                console.error('An error occurred:', error)
+                alert('An error occurred. Please try again.')
+            })
     }
 
     const componentRef = useRef()
@@ -592,6 +608,7 @@ function CreateQR() {
                                                                         onChange={
                                                                             handleImage
                                                                         }
+                                                                        required
                                                                         className="file-input"
                                                                     />
                                                                 </div>
@@ -736,6 +753,7 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.phone1
                                                                     }
+                                                                    required
                                                                     placeholder="Phone"
                                                                 />
                                                                 <InputError
@@ -830,6 +848,7 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.webaddress1
                                                                     }
+                                                                    required
                                                                     placeholder="Enter web address"
                                                                 />
                                                                 <InputError
@@ -880,26 +899,34 @@ function CreateQR() {
                                                         <select
                                                             className="form-select form-control"
                                                             aria-label="Default select example"
-                                                            name="cardType"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
+                                                            name="cardtype"
                                                             value={
-                                                                inputField.cardType
+                                                                selectedValue
+                                                            }
+                                                            required
+                                                            onChange={
+                                                                handleSelectChange
                                                             }>
-                                                            <option selected>
-                                                                Company
+                                                            <option>
+                                                                Please Select
+                                                                Card Type
                                                             </option>
-                                                            <option value="Home">
+                                                            <option
+                                                                value="Home"
+                                                                selected>
                                                                 Home
                                                             </option>
                                                             <option value="Business">
                                                                 Business
                                                             </option>
+                                                            <option value="Others">
+                                                                Others
+                                                            </option>
                                                         </select>
+
                                                         <InputError
                                                             messages={
-                                                                errors.cardType
+                                                                errors.cardtype
                                                             }
                                                             className="mt-2"
                                                         />
@@ -1610,6 +1637,11 @@ function CreateQR() {
                                                 className="back">
                                                 {'< Back'}
                                             </Link>
+                                            {/* <button
+                                                className="submit-details-form"
+                                                type="submit">
+                                                Submit
+                                            </button> */}
                                             {loading ? (
                                                 <div className="submit-details-form">
                                                     Loading...
