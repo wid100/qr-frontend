@@ -25,18 +25,17 @@ function CreateQR() {
             errorMessage = 'This field is required'
         } else {
             switch (fieldName) {
-                // ... (existing cases)
-
-                case 'email1':
-                    errorMessage = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-                        ? ''
-                        : 'Invalid Email'
-                    break
-                case 'phone1':
-                    errorMessage = /^\d{10}$/.test(value)
-                        ? ''
-                        : 'Invalid Phone Number (10 digits required)'
-                    break
+               
+                // case 'email1':
+                //     errorMessage = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+                //         ? ''
+                //         : 'Invalid Email'
+                //     break
+                // case 'phone1':
+                //     errorMessage = /^\d{10}$/.test(value)
+                //         ? ''
+                //         : 'Invalid Phone Number (10 digits required)'
+                //     break
                 case 'image':
                     // Assuming 'value' is a file object
                     errorMessage = value ? '' : 'Image is required'
@@ -1419,9 +1418,9 @@ function CreateQR() {
                                             <p>Preview</p>
                                         </div>
 
-                                        <div className="show-preview">
+                                        <div className="show-preview-right">
                                             <div
-                                                className="my-preview-top"
+                                                className="my-preview-top-header"
                                                 style={divStyle}>
                                                 <div className="preview-image">
                                                     <img
@@ -1437,7 +1436,7 @@ function CreateQR() {
                                                     {inputField.jobTitle}
                                                 </p>
 
-                                                <ul className="social-aciton">
+                                                <ul className="social-aciton-right">
                                                     <li>
                                                         <a
                                                             href={`tel:${inputField.mobile1}`}>
@@ -1458,7 +1457,7 @@ function CreateQR() {
                                                             <p>Email</p>
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {/* <li>
                                                         <a
                                                             href={`location:${inputField.address1}`}>
                                                             <img
@@ -1467,7 +1466,7 @@ function CreateQR() {
                                                             />
                                                             <p>Location</p>
                                                         </a>
-                                                    </li>
+                                                    </li> */}
                                                 </ul>
                                             </div>
 
@@ -1512,7 +1511,7 @@ function CreateQR() {
                                                 </a>
                                             </div>
 
-                                            <div className="card-list">
+                                            <div className="card-list-right">
                                                 <ul>
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon"></div>

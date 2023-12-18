@@ -1324,9 +1324,9 @@ const UpdateQrPage = ({ qrData }) => {
                                             <p>Preview</p>
                                         </div>
 
-                                        <div className="show-preview">
+                                        <div className="show-preview-right">
                                             <div
-                                                className="my-preview-top"
+                                                className="my-preview-top-header"
                                                 style={divStyle}>
                                                 <div className="preview-image">
                                                     <img
@@ -1342,7 +1342,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     {inputField.jobTitle}
                                                 </p>
 
-                                                <ul className="social-aciton">
+                                                <ul className="social-aciton-right">
                                                     <li>
                                                         <a
                                                             href={`tel:${inputField.phone1}`}>
@@ -1363,7 +1363,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                             <p>Email</p>
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {/* <li>
                                                         <a
                                                             href={`location:${inputField.address1}`}>
                                                             <img
@@ -1372,7 +1372,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                             />
                                                             <p>Location</p>
                                                         </a>
-                                                    </li>
+                                                    </li> */}
                                                 </ul>
                                             </div>
 
@@ -1387,13 +1387,13 @@ const UpdateQrPage = ({ qrData }) => {
                                                     ref={componentRef}
                                                     style={{
                                                         position: 'relative',
-                                                        width: '300px',
-                                                        height: '300px',
+                                                        width: '250px',
+                                                        height: '250px',
                                                     }}>
                                                     <div className="qr-image-wrapper">
                                                         <QRCode
                                                             value={`https://smartcardgenerator.net/${qrData.slug}`}
-                                                            size={300}
+                                                            size={250}
                                                         />
                                                         <img
                                                             src={
@@ -1421,7 +1421,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     Download QR Code
                                                 </a>
                                             </div>
-                                            <div className="card-list">
+                                            <div className="card-list-right">
                                                 <ul>
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon"></div>

@@ -52,6 +52,49 @@
         margin-bottom: 20px;
     }
 }
+@media screen and (max-width: 690px) {
+    .my-preview-top {
+        text-align: center;
+    }
+    .card-list.view-body-item {
+        padding: 20px 25px;
+    }
+    .view-card-btn button {
+        display: inline-grid;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        margin: 12px auto 0;
+        box-shadow: 0px 10px 14.1px 0.9px rgba(0, 0, 0, 0.24),
+            0px 4px 19.6px 0.4px rgba(0, 0, 0, 0.16);
+        cursor: pointer;
+        transition: all 0.1s ease-out;
+        position: relative;
+        z-index: 998;
+        overflow: hidden;
+        padding: 10px;
+    }
+    .show-preview {
+        padding-bottom: 120px;
+    }
+
+    .view-card-btn button span {
+        display: none;
+    }
+    .view-btn-item {
+        position: fixed;
+        right: 20px;
+        bottom: 40px;
+    }
+    .view-btn-item .view-card-btn {
+        position: relative;
+        padding: 0;
+        float: none;
+        width: auto;
+    }
+}
 
 @media screen and (max-width: 550px) {
     .qr-nav {
