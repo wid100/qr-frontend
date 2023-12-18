@@ -1390,23 +1390,27 @@ const UpdateQrPage = ({ qrData }) => {
                                                         width: '300px',
                                                         height: '300px',
                                                     }}>
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${qrData.slug}`}
-                                                        size={300}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
-                                                    />
+                                                    <div className="qr-image-wrapper">
+                                                        <QRCode
+                                                            value={`https://smartcardgenerator.net/${qrData.slug}`}
+                                                            size={300}
+                                                        />
+                                                        <img
+                                                            src={
+                                                                welcome.imageUrl
+                                                            }
+                                                            width={100}
+                                                            height={100}
+                                                            style={{
+                                                                position:
+                                                                    'absolute',
+                                                                top: '50%',
+                                                                left: '50%',
+                                                                transform:
+                                                                    'translate(-50%, -50%)',
+                                                            }}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
 

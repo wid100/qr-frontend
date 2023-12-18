@@ -289,31 +289,33 @@ const Dashboard = () => {
                                                                         height:
                                                                             '100px',
                                                                     }}>
-                                                                    <QRCode
-                                                                        value={`https://smartcardgenerator.net/${qr.slug}`}
-                                                                        size={
-                                                                            100
-                                                                        }
-                                                                    />
-                                                                    <img
-                                                                        src={`${baseuri}/${qr.welcome}`}
-                                                                        width={
-                                                                            30
-                                                                        }
-                                                                        height={
-                                                                            30
-                                                                        }
-                                                                        style={{
-                                                                            position:
-                                                                                'absolute',
-                                                                            top:
-                                                                                '50%',
-                                                                            left:
-                                                                                '50%',
-                                                                            transform:
-                                                                                'translate(-50%, -50%)',
-                                                                        }}
-                                                                    />
+                                                                    <div className="qr-image-wrapper">
+                                                                        <QRCode
+                                                                            value={`https://smartcardgenerator.net/${qr.slug}`}
+                                                                            size={
+                                                                                100
+                                                                            }
+                                                                        />
+                                                                        <img
+                                                                            src={`${baseuri}/${qr.welcome}`}
+                                                                            width={
+                                                                                30
+                                                                            }
+                                                                            height={
+                                                                                30
+                                                                            }
+                                                                            style={{
+                                                                                position:
+                                                                                    'absolute',
+                                                                                top:
+                                                                                    '50%',
+                                                                                left:
+                                                                                    '50%',
+                                                                                transform:
+                                                                                    'translate(-50%, -50%)',
+                                                                            }}
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
