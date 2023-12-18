@@ -15,8 +15,8 @@ const Information = ({ information }) => {
                 <section>
                     <div className="view-information">
                         <div className="container p-0">
-                            <div className="row">
-                                <div className="col-md-12 p-0">
+                            <div className="row justify-content-center">
+                                <div className="col-md-6 p-0">
                                     <div className="preview">
                                         <div className="show-preview">
                                             <div
