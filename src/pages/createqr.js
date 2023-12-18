@@ -36,7 +36,6 @@ function CreateQR() {
     }
     // =====================end================
 
-    const [errors, setErrors] = useState([])
     const [inputField, setInputField] = useState({
         cardName: '',
         firstName: '',
@@ -71,7 +70,6 @@ function CreateQR() {
         instagram: '',
         youtube: '',
         github: '',
-        setErrors,
     })
 
     const handleColorChange = event => {
@@ -164,6 +162,11 @@ function CreateQR() {
         return slug
     }
 
+    const [errors, setErrors] = useState({
+        cardName: '',
+        email1: '',
+    })
+
     const allInfoSubmit = e => {
         e.preventDefault()
         setLoading(true)
@@ -217,8 +220,12 @@ function CreateQR() {
                     window.location.href = '/dashboard'
                 } else if (res.data.status === 422 && res.data.errors) {
                     setLoading(false)
-                    const errorMessages = Object.values(res.data.errors).flat()
-                    alert('Validation Error:\n' + errorMessages.join('\n'))
+                    const fieldErrors = res.data.errors
+
+                    // Update state with errors
+                    setErrors(fieldErrors)
+                    // const errorMessages = Object.values(res.data.errors).flat()
+                    // alert('Validation Error:\n' + errorMessages.join('\n'))
                 } else {
                     setLoading(false)
                     alert('An error occurred. Please try again.')
@@ -258,11 +265,10 @@ function CreateQR() {
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
-                                            required
                                             placeholder="Name your Smart Card"
                                         />
                                         <InputError
-                                            messages={errors.cardName}
+                                            messages={errors.cardname}
                                             className="mt-2"
                                         />
                                     </div>
@@ -608,7 +614,6 @@ function CreateQR() {
                                                                         onChange={
                                                                             handleImage
                                                                         }
-                                                                        required
                                                                         className="file-input"
                                                                     />
                                                                 </div>
@@ -616,6 +621,10 @@ function CreateQR() {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <InputError
+                                                    messages={errors.image}
+                                                    className="mt-2"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -647,12 +656,12 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.firstName
                                                                     }
-                                                                    required
                                                                     placeholder="First name"
                                                                 />
+
                                                                 <InputError
                                                                     messages={
-                                                                        errors.firstName
+                                                                        errors.firstname
                                                                     }
                                                                     className="mt-2"
                                                                 />
@@ -671,12 +680,11 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.lastName
                                                                     }
-                                                                    required
                                                                     placeholder="Last name"
                                                                 />
                                                                 <InputError
                                                                     messages={
-                                                                        errors.lastName
+                                                                        errors.lastname
                                                                     }
                                                                     className="mt-2"
                                                                 />
@@ -706,7 +714,6 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.mobile1
                                                                     }
-                                                                    required
                                                                     placeholder="Mobile number 01"
                                                                 />
                                                                 <InputError
@@ -732,12 +739,6 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Mobile number 02"
                                                                 />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.mobile2
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
@@ -753,7 +754,6 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.phone1
                                                                     }
-                                                                    required
                                                                     placeholder="Phone"
                                                                 />
                                                                 <InputError
@@ -779,12 +779,6 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Fax"
                                                                 />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.fax
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-12">
@@ -800,9 +794,9 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.email1
                                                                     }
-                                                                    required
                                                                     placeholder="Email address"
                                                                 />
+
                                                                 <InputError
                                                                     messages={
                                                                         errors.email1
@@ -824,7 +818,6 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.address1
                                                                     }
-                                                                    required
                                                                     placeholder="Address"
                                                                 />
                                                                 <InputError
@@ -848,7 +841,6 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.webaddress1
                                                                     }
-                                                                    required
                                                                     placeholder="Enter web address"
                                                                 />
                                                                 <InputError
@@ -872,7 +864,6 @@ function CreateQR() {
                                                                     onChange={
                                                                         inputsHandler
                                                                     }
-                                                                    required
                                                                     value={
                                                                         inputField.summary
                                                                     }></textarea>
@@ -903,7 +894,6 @@ function CreateQR() {
                                                             value={
                                                                 selectedValue
                                                             }
-                                                            required
                                                             onChange={
                                                                 handleSelectChange
                                                             }>
@@ -957,7 +947,6 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.companyName
                                                                         }
-                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -981,7 +970,6 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.jobTitle
                                                                         }
-                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -1004,7 +992,6 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.mobile3
                                                                         }
-                                                                        required
                                                                         placeholder="Mobile number 01"
                                                                     />
                                                                     <InputError
@@ -1099,7 +1086,6 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.email2
                                                                         }
-                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -1123,7 +1109,6 @@ function CreateQR() {
                                                                         value={
                                                                             inputField.address2
                                                                         }
-                                                                        required
                                                                     />
                                                                     <InputError
                                                                         messages={
@@ -1351,7 +1336,6 @@ function CreateQR() {
                                                                     type="file"
                                                                     className="file-input"
                                                                     id="welcome"
-                                                                    required
                                                                     name="welcome"
                                                                     onChange={
                                                                         handleWelcome
