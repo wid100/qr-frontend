@@ -51,9 +51,9 @@ a:hover {
     text-decoration: none !important;
 }
 
-.container {
+/* .container {
     max-width: 1140px !important;
-}
+} */
 
 /* ================Login Form ============= */
 /* .qr-show {
@@ -406,7 +406,7 @@ h3.name {
 
 p.dajignation {
     font-size: 16px;
-        color: #fff;
+    color: #fff;
 }
 
 .show-summery p {
@@ -1201,4 +1201,12 @@ button.eye-btn {
         background: #fff;
         padding: 20px 45px 40px;
     }
+}
+
+.qr-url {
+    color: #252525;
+    transition: 0.3s;
+}
+.qr-url:hover {
+    color: #ffb317;
 }

@@ -190,12 +190,14 @@ const Dashboard = () => {
                                                                         fill="#B5B5B5"
                                                                     />
                                                                 </svg>
-                                                                <span>
+                                                                <a
+                                                                    href={`${qr.slug}`}
+                                                                    className="qr-url">
                                                                     {`smartcardgenerator.net/${qr.slug.substring(
                                                                         0,
                                                                         5,
                                                                     )}`}
-                                                                </span>
+                                                                </a>
                                                             </p>
 
                                                             <p>
