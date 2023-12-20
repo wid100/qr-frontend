@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-
+// import 'tailwindcss/tailwind.css'
 const Login = () => {
     const router = useRouter()
 

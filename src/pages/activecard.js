@@ -151,7 +151,7 @@ const activecard = () => {
 
                                     <div className="qr-button">
                                         <Link href="/createqr">
-                                            <button className="submit-form">
+                                            <button className="submit-form create-submit-btn">
                                                 Create New Smart Card
                                             </button>
                                         </Link>

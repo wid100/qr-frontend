@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
+import SocialMediaItem from '@/components/SocialMediaItem'
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
@@ -1148,7 +1149,7 @@ function CreateQR() {
                                         </div>
                                     </div>
 
-                                    <div className="form-group-wrapper mt-3">
+                                    {/* <div className="form-group-wrapper mt-3">
                                         <div className="form-group-title">
                                             <p>Social media</p>
                                         </div>
@@ -1305,7 +1306,16 @@ function CreateQR() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
+
+                                    <SocialMediaItem
+                                        inputsHandler={inputsHandler}
+                                        inputField={inputField}
+                                        InputError={InputError}
+                                        errors={errors}
+                                    />
+
+
 
                                     <div className="form-group-wrapper mt-3">
                                         <div className="form-group-title">
@@ -1649,4 +1659,4 @@ function CreateQR() {
     )
 }
 
-export default CreateQR
+export default CreateQR;
