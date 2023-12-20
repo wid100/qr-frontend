@@ -117,6 +117,26 @@ const Information = ({ information }) => {
                                             ) : (
                                                 ''
                                             )}
+                                            {information.address1 ? (
+                                                <li className="card-list-li">
+                                                    <div className="preview-info-icon">
+                                                        <img
+                                                            src="img/icon/toffee.svg"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div className="info-show">
+                                                        <p>Address</p>
+                                                        <p>
+                                                            {
+                                                                information.address1
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            ) : (
+                                                ''
+                                            )}
                                             {information.companyName ? (
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
