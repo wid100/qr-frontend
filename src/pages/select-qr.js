@@ -70,7 +70,7 @@ const SelectQr = () => {
                                                 />
                                             </div>
                                             <div className="select-qr-content">
-                                                <h4>vCard Plus</h4>
+                                                <h4>Smart visiting card</h4>
                                                 <p>
                                                     Share personalized contact
                                                     details

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useReactToPrint } from 'react-to-print'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Footer from '@/components/Layouts/Footer'
 import QRCode from 'qrcode.react'
 export default function Home() {
@@ -23,13 +23,27 @@ export default function Home() {
             [e.target.name]: e.target.value,
         })
     }
+    const [sticky, setSticky] = useState(false)
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setSticky(true)
+            } else {
+                setSticky(false)
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
     return (
         <>
             <Head>
                 <title>Smart Card Generator</title>
             </Head>
 
-            <header>
+            <header className={`${sticky ? 'is-sticky' : ''} menu-nav `}>
                 <div className="container">
                     <div className="home-header">
                         <div className="logo">

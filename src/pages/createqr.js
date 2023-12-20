@@ -8,7 +8,8 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import SocialMediaItem from '@/components/SocialMediaItem'
+import SocialMediaItems from '@/components/SocialMediaItems'
+
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
@@ -245,6 +246,24 @@ function CreateQR() {
         content: () => componentRef.current,
     })
 
+    // Description Caracter
+    const [inputArea, setInputArea] = useState({ summary: '' })
+    const [errorsArea, setErrorsArea] = useState({})
+
+    const inputAreaHandler = e => {
+        const { name, value } = e.target
+        setInputArea(prev => ({
+            ...prev,
+            [name]: value,
+        }))
+
+        // Validate and set errors
+        setErrorsArea(prev => ({
+            ...prev,
+            summary:
+                value.length > 250 ? 'Description exceeds 250 characters.' : '',
+        }))
+    }
     return (
         <AppLayout>
             <Head>
@@ -697,12 +716,12 @@ function CreateQR() {
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Home:</p>
+                                                        <p>Numbers:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="row">
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-12">
                                                             <div className="mb-3">
                                                                 <input
                                                                     id="mobile1"
@@ -715,7 +734,7 @@ function CreateQR() {
                                                                     value={
                                                                         inputField.mobile1
                                                                     }
-                                                                    placeholder="Mobile number 01"
+                                                                    placeholder="Mobile number"
                                                                 />
                                                                 <InputError
                                                                     messages={
@@ -725,23 +744,7 @@ function CreateQR() {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    id="mobile2"
-                                                                    type="text"
-                                                                    name="mobile2"
-                                                                    className="form-control"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.mobile2
-                                                                    }
-                                                                    placeholder="Mobile number 02"
-                                                                />
-                                                            </div>
-                                                        </div>
+
                                                         <div className="col-md-6">
                                                             <div className="mb-3">
                                                                 <input
@@ -782,142 +785,34 @@ function CreateQR() {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    id="email1"
-                                                                    type="email"
-                                                                    name="email1"
-                                                                    className="form-control"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.email1
-                                                                    }
-                                                                    placeholder="Email address"
-                                                                />
-
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.email1
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    id="address1"
-                                                                    name="address1"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.address1
-                                                                    }
-                                                                    placeholder="Address"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.address1
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    id="webaddress1"
-                                                                    name="webaddress1"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.webaddress1
-                                                                    }
-                                                                    placeholder="Enter web address"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.webaddress1
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <textarea
-                                                                    cols="30"
-                                                                    rows="5"
-                                                                    placeholder="summary"
-                                                                    className="form-control"
-                                                                    id="summary"
-                                                                    name="summary"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.summary
-                                                                    }></textarea>
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.summary
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Others:</p>
+                                                        <p>Email</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="mb-3">
-                                                        <select
-                                                            className="form-select form-control"
-                                                            aria-label="Default select example"
-                                                            name="cardtype"
-                                                            value={
-                                                                selectedValue
-                                                            }
+                                                        <input
+                                                            id="email1"
+                                                            type="email"
+                                                            name="email1"
+                                                            className="form-control"
                                                             onChange={
-                                                                handleSelectChange
-                                                            }>
-                                                            <option>
-                                                                Please Select
-                                                                Card Type
-                                                            </option>
-                                                            <option
-                                                                value="Home"
-                                                                selected>
-                                                                Home
-                                                            </option>
-                                                            <option value="Business">
-                                                                Business
-                                                            </option>
-                                                            <option value="Others">
-                                                                Others
-                                                            </option>
-                                                        </select>
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.email1
+                                                            }
+                                                            placeholder="Email address"
+                                                        />
 
                                                         <InputError
                                                             messages={
-                                                                errors.cardtype
+                                                                errors.email1
                                                             }
                                                             className="mt-2"
                                                         />
@@ -980,342 +875,122 @@ function CreateQR() {
                                                                     />
                                                                 </div>
                                                             </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        id="mobile3"
-                                                                        name="mobile3"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.mobile3
-                                                                        }
-                                                                        placeholder="Mobile number 01"
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.mobile3
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Mobile number 02"
-                                                                        id="mobile4"
-                                                                        name="mobile4"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.mobile4
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.mobile4
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Phone"
-                                                                        id="phone2"
-                                                                        name="phone2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.phone2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.phone2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Fax"
-                                                                        id="fax2"
-                                                                        name="fax2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.fax2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.fax2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="email"
-                                                                        className="form-control"
-                                                                        placeholder="Email address"
-                                                                        id="email2"
-                                                                        name="email2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.email2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.email2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Address"
-                                                                        id="address2"
-                                                                        name="address2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.address2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.address2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Enter web address"
-                                                                        id="webaddress2"
-                                                                        name="webaddress2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.webaddress2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.webaddress2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Address:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Enter your address"
+                                                            id="address2"
+                                                            name="address2"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.address2
+                                                            }
+                                                        />
+                                                        <InputError
+                                                            messages={
+                                                                errors.address2
+                                                            }
+                                                            className="mt-2"
+                                                        />
+                                                        <button className="btn add-address-btn d-flex justify-content-end float-right">
+                                                            Add address
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Website:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Enter your web address"
+                                                            id="webaddress2"
+                                                            name="webaddress2"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.webaddress2
+                                                            }
+                                                        />
+                                                        <InputError
+                                                            messages={
+                                                                errors.webaddress2
+                                                            }
+                                                            className="mt-2"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Summary:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <textarea
+                                                            cols="30"
+                                                            rows="5"
+                                                            placeholder="Description in 250 characters."
+                                                            className="form-control"
+                                                            id="summary"
+                                                            name="summary"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.summary
+                                                            }
+                                                            maxLength={250} // Set maximum character length
+                                                        ></textarea>
+                                                        <div className="text-right">
+                                                            <small>
+                                                                {
+                                                                    inputField
+                                                                        .summary
+                                                                        .length
+                                                                }
+                                                                /250 characters
+                                                            </small>
+                                                        </div>
+                                                        {errors.summary && (
+                                                            <div className="text-danger">
+                                                                {errors.summary}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* <div className="form-group-wrapper mt-3">
-                                        <div className="form-group-title">
-                                            <p>Social media</p>
-                                        </div>
-
-                                        <div className="color-plate">
-                                            <p className="mb-3">
-                                                Click on the icon to add social
-                                                media channel:
-                                            </p>
-
-                                            <div className="row">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Facebook:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Facebook"
-                                                            id="facebook"
-                                                            name="facebook"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.facebook
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.facebook
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Twitter:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Twitter"
-                                                            id="twitter"
-                                                            name="twitter"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.twitter
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.twitter
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Instagram:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Instagram"
-                                                            id="instagram"
-                                                            name="instagram"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.instagram
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.instagram
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Youtube:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Youtube"
-                                                            id="youtube"
-                                                            name="youtube"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.youtube
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.youtube
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>GitHub:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="GitHub"
-                                                            id="github"
-                                                            name="github"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.github
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.github
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
-                                    <SocialMediaItem
+                                    <SocialMediaItems
                                         inputsHandler={inputsHandler}
                                         inputField={inputField}
                                         InputError={InputError}
                                         errors={errors}
                                     />
-
-
 
                                     <div className="form-group-wrapper mt-3">
                                         <div className="form-group-title">
@@ -1659,4 +1334,4 @@ function CreateQR() {
     )
 }
 
-export default CreateQR;
+export default CreateQR
