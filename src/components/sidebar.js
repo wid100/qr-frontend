@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 function sidebar() {
     return (
-        <div className="col-xl-4 mb-4">
+
             <div className="sidebar">
                 <div className="sidebar-wrapper">
                     <div className="sidebar-menu">
@@ -71,7 +71,6 @@ function sidebar() {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

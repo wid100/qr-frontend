@@ -8,7 +8,7 @@ import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
-
+// import 'tailwindcss/tailwind.css'
 const Register = () => {
     const { register } = useAuth({
         middleware: 'guest',
