@@ -15,47 +15,6 @@ function CreateQR() {
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
 
-    //validation
-    const [validationErrors, setValidationErrors] = useState({})
-
-    const validateField = (fieldName, value) => {
-        let errorMessage = ''
-
-        // Check if the field is empty
-        if (!value || (typeof value === 'string' && value.trim() === '')) {
-            errorMessage = 'This field is required'
-        } else {
-            switch (fieldName) {
-               
-                // case 'email1':
-                //     errorMessage = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-                //         ? ''
-                //         : 'Invalid Email'
-                //     break
-                // case 'phone1':
-                //     errorMessage = /^\d{10}$/.test(value)
-                //         ? ''
-                //         : 'Invalid Phone Number (10 digits required)'
-                //     break
-                case 'image':
-                    // Assuming 'value' is a file object
-                    errorMessage = value ? '' : 'Image is required'
-                    break
-                // Add more cases for other fields
-
-                default:
-                    break
-            }
-        }
-
-        setValidationErrors(prevErrors => ({
-            ...prevErrors,
-            [fieldName]: errorMessage,
-        }))
-    }
-
-    //validation end
-
     // Function to handle select box changes
     const handleSelectChange = event => {
         setSelectedValue(event.target.value)
@@ -78,7 +37,6 @@ function CreateQR() {
     }
     // =====================end================
 
-    const [errors, setErrors] = useState([])
     const [inputField, setInputField] = useState({
         cardName: '',
         firstName: '',
@@ -113,7 +71,6 @@ function CreateQR() {
         instagram: '',
         youtube: '',
         github: '',
-        setErrors,
     })
 
     const handleColorChange = event => {
@@ -121,15 +78,10 @@ function CreateQR() {
     }
     const inputsHandler = e => {
         e.persist()
-        const { name, value } = e.target
-
-        setInputField(prevInputField => ({
-            ...prevInputField,
-            [name]: value,
-        }))
-
-        // Validate the field in real-time
-        validateField(name, value)
+        setInputField({
+            ...inputField,
+            [e.target.name]: e.target.value,
+        })
     }
 
     const [picture, setPicture] = useState({
@@ -141,14 +93,10 @@ function CreateQR() {
     const handleImage = e => {
         const selectedImage = e.target.files[0]
 
-        setPicture(prevPicture => ({
-            ...prevPicture,
+        setPicture({
             image: selectedImage,
             imageUrl: URL.createObjectURL(selectedImage),
-        }))
-
-        // Validate the field in real-time
-        validateField('image', selectedImage)
+        })
     }
 
     const [welcome, setWelcome] = useState({
@@ -215,11 +163,13 @@ function CreateQR() {
         return slug
     }
 
+    const [errors, setErrors] = useState({
+        cardName: '',
+        email1: '',
+    })
+
     const allInfoSubmit = e => {
         e.preventDefault()
-        if (!validateField()) {
-            return
-        }
         setLoading(true)
         const formData = new FormData()
         formData.append('cardname', inputField.cardName)
@@ -271,8 +221,12 @@ function CreateQR() {
                     window.location.href = '/dashboard'
                 } else if (res.data.status === 422 && res.data.errors) {
                     setLoading(false)
-                    const errorMessages = Object.values(res.data.errors).flat()
-                    alert('Validation Error:\n' + errorMessages.join('\n'))
+                    const fieldErrors = res.data.errors
+
+                    // Update state with errors
+                    setErrors(fieldErrors)
+                    // const errorMessages = Object.values(res.data.errors).flat()
+                    // alert('Validation Error:\n' + errorMessages.join('\n'))
                 } else {
                     setLoading(false)
                     alert('An error occurred. Please try again.')
@@ -314,11 +268,10 @@ function CreateQR() {
                                             autoFocus
                                             placeholder="Name your Smart Card"
                                         />
-                                        {validationErrors.cardName && (
-                                            <div className="validate-text">
-                                                {validationErrors.cardName}
-                                            </div>
-                                        )}
+                                        <InputError
+                                            messages={errors.cardname}
+                                            className="mt-2"
+                                        />
                                     </div>
 
                                     <div className="form-group-wrapper">
@@ -669,6 +622,10 @@ function CreateQR() {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <InputError
+                                                    messages={errors.image}
+                                                    className="mt-2"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -702,13 +659,13 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="First name"
                                                                 />
-                                                                {validationErrors.firstName && (
-                                                                    <div className="validate-text">
-                                                                        {
-                                                                            validationErrors.firstName
-                                                                        }
-                                                                    </div>
-                                                                )}
+
+                                                                <InputError
+                                                                    messages={
+                                                                        errors.firstname
+                                                                    }
+                                                                    className="mt-2"
+                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
@@ -726,13 +683,12 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Last name"
                                                                 />
-                                                                {validationErrors.lastName && (
-                                                                    <div className="validate-text">
-                                                                        {
-                                                                            validationErrors.lastName
-                                                                        }
-                                                                    </div>
-                                                                )}
+                                                                <InputError
+                                                                    messages={
+                                                                        errors.lastname
+                                                                    }
+                                                                    className="mt-2"
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -784,12 +740,6 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Mobile number 02"
                                                                 />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.mobile2
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
@@ -807,13 +757,12 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Phone"
                                                                 />
-                                                                {validationErrors.phone1 && (
-                                                                    <div className="validate-text">
-                                                                        {
-                                                                            validationErrors.phone1
-                                                                        }
-                                                                    </div>
-                                                                )}
+                                                                <InputError
+                                                                    messages={
+                                                                        errors.phone1
+                                                                    }
+                                                                    className="mt-2"
+                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
@@ -830,12 +779,6 @@ function CreateQR() {
                                                                         inputField.fax
                                                                     }
                                                                     placeholder="Fax"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.fax
-                                                                    }
-                                                                    className="mt-2"
                                                                 />
                                                             </div>
                                                         </div>
@@ -854,13 +797,13 @@ function CreateQR() {
                                                                     }
                                                                     placeholder="Email address"
                                                                 />
-                                                                {validationErrors.email1 && (
-                                                                    <div className="validate-text">
-                                                                        {
-                                                                            validationErrors.email1
-                                                                        }
-                                                                    </div>
-                                                                )}
+
+                                                                <InputError
+                                                                    messages={
+                                                                        errors.email1
+                                                                    }
+                                                                    className="mt-2"
+                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-12">
@@ -1500,8 +1443,8 @@ function CreateQR() {
                                                     />
                                                     <img
                                                         src={welcome.imageUrl}
-                                                        width={50}
-                                                        height={50}
+                                                        width={100}
+                                                        height={100}
                                                         style={{
                                                             position:
                                                                 'absolute',
