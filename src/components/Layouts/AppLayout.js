@@ -9,7 +9,7 @@ const AppLayout = ({ children }) => {
     const isDashboardPage =
         router.pathname === '/dashboard' ||
         router.pathname === '/activecard' ||
-        router.pathname === '/pausecard'
+        router.pathname === '/pausecard';
     const [sticky, setSticky] = useState(false)
     useEffect(() => {
         const handleScroll = () => {
@@ -37,7 +37,7 @@ const AppLayout = ({ children }) => {
 
             {/* Page Content */}
             <main>{children}</main>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

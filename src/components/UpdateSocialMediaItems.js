@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const SocialMediaItems = ({
+const UpdateSocialMediaItems = ({
     inputField,
     InputError,
     errors,
@@ -52,7 +52,6 @@ const SocialMediaItems = ({
                             <div className="social-item">
                                 <input
                                     type="text"
-                               
                                     placeholder={`${socialPlatform}`}
                                     id={`${socialPlatform}-${index}`}
                                     name={`${socialPlatform}-${index}`}
@@ -64,10 +63,12 @@ const SocialMediaItems = ({
                                     }
                                 />
                                 <span>
-                                    <InputError
-                                        messages={errors[socialPlatform]}
-                                        className="mt-2"
-                                    />
+                                    {socialPlatform && (
+                                        <InputError
+                                            messages={errors[socialPlatform]}
+                                            className="mt-2"
+                                        />
+                                    )}
                                 </span>
                             </div>
                         </div>
@@ -84,19 +85,11 @@ const SocialMediaItems = ({
     return (
         <>
             <div className="form-group-wrapper mt-3">
-                <div
-                    className="form-group-title"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#social-media"
-                    aria-expanded="false"
-                    aria-controls="social-media">
+                <div className="form-group-title">
                     <p>Social media</p>
-                    <div className="bottom-arrow">
-                        <img src="/img/icons/bottom-arrow.svg" alt="" />
-                    </div>
                 </div>
 
-                <div className="color-plate collapse" id="social-media">
+                <div className="color-plate">
                     <p className="mb-3">
                         Click on the icon to add social media channel:
                     </p>
@@ -135,7 +128,7 @@ const SocialMediaItems = ({
     )
 }
 
-export default SocialMediaItems
+export default UpdateSocialMediaItems
 
 const dataIcon = [
     {
@@ -214,22 +207,22 @@ const dataIcon = [
         img: '/img/icons/pinterest.svg',
     },
     {
-        id: 16,
+        id: 13,
         name: 'Github',
         img: '/img/icons/githup.svg',
     },
     {
-        id: 17,
+        id: 16,
         name: 'WhatsApp',
         img: '/img/icons/whatsapp.svg',
     },
     {
-        id: 18,
+        id: 17,
         name: 'Messenger',
         img: '/img/icons/messenger.svg',
     },
     {
-        id: 19,
+        id: 18,
         name: 'Spotify',
         img: '/img/icons/spotify.svg',
     },

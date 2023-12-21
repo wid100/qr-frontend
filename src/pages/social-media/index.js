@@ -10,7 +10,7 @@ import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import SocialMediaItems from '@/components/SocialMediaItems'
 
-function CreateQR() {
+function SocialMediaPage() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
@@ -294,27 +294,14 @@ function CreateQR() {
                                     </div>
 
                                     <div className="form-group-wrapper">
-                                        <div
-                                            className="form-group-title"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#colorPicker"
-                                            aria-expanded="true"
-                                            aria-controls="colorPicker">
+                                        <div className="form-group-title">
                                             <p>
                                                 Design and customize your Smart
                                                 Card
                                             </p>
-                                            <div className="bottom-arrow">
-                                                <img
-                                                    src="/img/icons/bottom-arrow.svg"
-                                                    alt=""
-                                                />
-                                            </div>
                                         </div>
 
-                                        <div
-                                            className="color-plate collapse show"
-                                            id="colorPicker">
+                                        <div className="color-plate">
                                             <p>
                                                 Personalize your Smart Card by
                                                 selecting colors.
@@ -663,24 +650,11 @@ function CreateQR() {
                                     </div>
 
                                     <div className="form-group-wrapper mt-3">
-                                        <div
-                                            className="form-group-title"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#information"
-                                            aria-expanded="true"
-                                            aria-controls="information">
+                                        <div className="form-group-title">
                                             <p>Your information</p>
-                                            <div className="bottom-arrow">
-                                                <img
-                                                    src="/img/icons/bottom-arrow.svg"
-                                                    alt=""
-                                                />
-                                            </div>
                                         </div>
 
-                                        <div
-                                            className="information-form collapse show"
-                                            id="information">
+                                        <div className="information-form">
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
@@ -1019,24 +993,11 @@ function CreateQR() {
                                     />
 
                                     <div className="form-group-wrapper mt-3">
-                                        <div
-                                            className="form-group-title"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#welScreen"
-                                            aria-expanded="true"
-                                            aria-controls="welScreen">
+                                        <div className="form-group-title">
                                             <p>Welcome screen</p>
-                                            <div className="bottom-arrow">
-                                                <img
-                                                    src="/img/icons/bottom-arrow.svg"
-                                                    alt=""
-                                                />
-                                            </div>
                                         </div>
 
-                                        <div
-                                            className="color-plate collapse show"
-                                            id="welScreen">
+                                        <div className="color-plate">
                                             <p className="mb-3">
                                                 Display your logo while your
                                                 page is loading: (Max Image Size
@@ -1073,59 +1034,6 @@ function CreateQR() {
                                                                 />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group-wrapper mt-3">
-                                        <div
-                                            className="form-group-title"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#shareItem"
-                                            aria-expanded="false"
-                                            aria-controls="shareItem">
-                                            <p>Advance Options</p>
-                                            <div className="bottom-arrow">
-                                                <img
-                                                    src="/img/icons/bottom-arrow.svg"
-                                                    alt=""
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            className="color-plate collapse"
-                                            id="shareItem">
-                                            <div className="row">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Sharing:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="share-check-item">
-                                                        <input type="checkbox" />
-                                                        <span>
-                                                            Add a share button
-                                                            to the page.
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Status:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="share-check-item">
-                                                        <input type="checkbox" />
-                                                        <span>
-                                                            Add a share button
-                                                            to the page.
-                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1388,7 +1296,7 @@ function CreateQR() {
                             </div>
                         </div>
 
-                        <div className="submit-form footer-submit-from">
+                        <div className="submit-form">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-8">
@@ -1426,4 +1334,4 @@ function CreateQR() {
     )
 }
 
-export default CreateQR
+export default SocialMediaPage

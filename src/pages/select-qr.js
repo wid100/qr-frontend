@@ -24,7 +24,7 @@ const SelectQr = () => {
                         <div className="col-lg-8">
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <Link href={'/'}>
+                                    <Link href={'/website'}>
                                         <div className="select-qr-item">
                                             <div className="select-qr-item-icon">
                                                 <img
@@ -42,7 +42,7 @@ const SelectQr = () => {
                                     </Link>
                                 </div>
                                 <div className="col-lg-6">
-                                    <Link href={'/'}>
+                                    <Link href={'/social-media'}>
                                         <div className="select-qr-item">
                                             <div className="select-qr-item-icon">
                                                 <img

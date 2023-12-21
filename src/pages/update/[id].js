@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
+import UpdateSocialMediaItems from '@/components/UpdateSocialMediaItems'
 const UpdateQrPage = ({ qrData }) => {
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
     const [loading, setLoading] = useState(false)
@@ -194,6 +195,25 @@ const UpdateQrPage = ({ qrData }) => {
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     })
+
+    // Description Caracter
+    const [inputArea, setInputArea] = useState({ summary: '' })
+    const [errorsArea, setErrorsArea] = useState({})
+
+    const inputAreaHandler = e => {
+        const { name, value } = e.target
+        setInputArea(prev => ({
+            ...prev,
+            [name]: value,
+        }))
+
+        // Validate and set errors
+        setErrorsArea(prev => ({
+            ...prev,
+            summary:
+                value.length > 250 ? 'Description exceeds 250 characters.' : '',
+        }))
+    }
 
     return (
         <AppLayout>
@@ -645,12 +665,12 @@ const UpdateQrPage = ({ qrData }) => {
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Home:</p>
+                                                        <p>Numbers:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="row">
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-12">
                                                             <div className="mb-3">
                                                                 <input
                                                                     id="mobile1"
@@ -674,30 +694,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    id="mobile2"
-                                                                    type="text"
-                                                                    name="mobile2"
-                                                                    className="form-control"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.mobile2
-                                                                    }
-                                                                    autoFocus
-                                                                    placeholder="Mobile number 02"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.mobile2
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
+
                                                         <div className="col-md-6">
                                                             <div className="mb-3">
                                                                 <input
@@ -745,6 +742,17 @@ const UpdateQrPage = ({ qrData }) => {
                                                                 />
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Email:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="row">
                                                         <div className="col-md-12">
                                                             <div className="mb-3">
                                                                 <input
@@ -769,119 +777,6 @@ const UpdateQrPage = ({ qrData }) => {
                                                                 />
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    id="address1"
-                                                                    name="address1"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.address1
-                                                                    }
-                                                                    required
-                                                                    placeholder="Address"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.address1
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    id="webaddress1"
-                                                                    name="webaddress1"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    value={
-                                                                        inputField.webaddress1
-                                                                    }
-                                                                    required
-                                                                    placeholder="Enter web address"
-                                                                />
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.webaddress1
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-md-12">
-                                                            <div className="mb-3">
-                                                                <textarea
-                                                                    cols="30"
-                                                                    rows="5"
-                                                                    placeholder="summary"
-                                                                    className="form-control"
-                                                                    id="summary"
-                                                                    name="summary"
-                                                                    onChange={
-                                                                        inputsHandler
-                                                                    }
-                                                                    required
-                                                                    value={
-                                                                        inputField.summary
-                                                                    }></textarea>
-                                                                <InputError
-                                                                    messages={
-                                                                        errors.summary
-                                                                    }
-                                                                    className="mt-2"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Others:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <select
-                                                            className="form-select form-control"
-                                                            aria-label="Default select example"
-                                                            name="cardtype"
-                                                            value={
-                                                                selectedValue
-                                                            }
-                                                            required
-                                                            onChange={
-                                                                handleSelectChange
-                                                            }>
-                                                            <option value="Home">
-                                                                Home
-                                                            </option>
-                                                            <option value="Business">
-                                                                Business
-                                                            </option>
-                                                            <option value="Others">
-                                                                Others
-                                                            </option>
-                                                        </select>
-
-                                                        <InputError
-                                                            messages={
-                                                                errors.cardType
-                                                            }
-                                                            className="mt-2"
-                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -943,190 +838,14 @@ const UpdateQrPage = ({ qrData }) => {
                                                                     />
                                                                 </div>
                                                             </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        id="mobile3"
-                                                                        name="mobile3"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.mobile3
-                                                                        }
-                                                                        placeholder="Mobile number 01"
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.mobile3
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Mobile number 02"
-                                                                        id="mobile4"
-                                                                        name="mobile4"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.mobile4
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.mobile4
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Phone"
-                                                                        id="phone2"
-                                                                        name="phone2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.phone2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.phone2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Fax"
-                                                                        id="fax2"
-                                                                        name="fax2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.fax2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.fax2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="email"
-                                                                        className="form-control"
-                                                                        placeholder="Email address"
-                                                                        id="email2"
-                                                                        name="email2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.email2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.email2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Address"
-                                                                        id="address2"
-                                                                        name="address2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.address2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.address2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-12">
-                                                                <div className="mb-3">
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        placeholder="Enter web address"
-                                                                        id="webaddress2"
-                                                                        name="webaddress2"
-                                                                        onChange={
-                                                                            inputsHandler
-                                                                        }
-                                                                        value={
-                                                                            inputField.webaddress2
-                                                                        }
-                                                                    />
-                                                                    <InputError
-                                                                        messages={
-                                                                            errors.webaddress2
-                                                                        }
-                                                                        className="mt-2"
-                                                                    />
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group-wrapper mt-3">
-                                        <div className="form-group-title">
-                                            <p>Social media</p>
-                                        </div>
-
-                                        <div className="color-plate">
-                                            <p className="mb-3">
-                                                Click on the icon to add social
-                                                media channel:
-                                            </p>
-
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Facebook:</p>
+                                                        <p>Address:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
@@ -1134,142 +853,126 @@ const UpdateQrPage = ({ qrData }) => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            placeholder="Facebook"
-                                                            id="facebook"
-                                                            name="facebook"
+                                                            placeholder="Address"
+                                                            id="address2"
+                                                            name="address2"
                                                             onChange={
                                                                 inputsHandler
                                                             }
                                                             value={
-                                                                inputField.facebook
+                                                                inputField.address2
                                                             }
                                                         />
                                                         <InputError
                                                             messages={
-                                                                errors.facebook
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Twitter:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Twitter"
-                                                            id="twitter"
-                                                            name="twitter"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.twitter
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.twitter
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Instagram:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Instagram"
-                                                            id="instagram"
-                                                            name="instagram"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.instagram
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.instagram
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>Youtube:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Youtube"
-                                                            id="youtube"
-                                                            name="youtube"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.youtube
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.youtube
-                                                            }
-                                                            className="mt-2"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>GitHub:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="GitHub"
-                                                            id="github"
-                                                            name="github"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.github
-                                                            }
-                                                        />
-                                                        <InputError
-                                                            messages={
-                                                                errors.github
+                                                                errors.address2
                                                             }
                                                             className="mt-2"
                                                         />
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Website:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Enter web address"
+                                                            id="webaddress2"
+                                                            name="webaddress2"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.webaddress2
+                                                            }
+                                                        />
+                                                        <InputError
+                                                            messages={
+                                                                errors.webaddress2
+                                                            }
+                                                            className="mt-2"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Summary:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <textarea
+                                                            cols="30"
+                                                            rows="5"
+                                                            placeholder="summary"
+                                                            className="form-control"
+                                                            id="summary"
+                                                            name="summary"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            required
+                                                            maxLength={250}
+                                                            value={
+                                                                inputField.summary
+                                                            }></textarea>
+                                                        <div className="text-right">
+                                                            <small>
+                                                                {
+                                                                    inputField
+                                                                        .summary
+                                                                        .length
+                                                                }
+                                                                /250 characters
+                                                            </small>
+                                                        </div>
+                                                        <InputError
+                                                            messages={
+                                                                errors.summary
+                                                            }
+                                                            className="mt-2"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                {/* <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <textarea
+                                                            cols="30"
+                                                            rows="5"
+                                                            placeholder="Description in 250 characters."
+                                                            className="form-control"
+                                                            id="summary"
+                                                            name="summary"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.summary
+                                                            }
+                                                            maxLength={250} // Set maximum character length
+                                                        ></textarea>
+
+                                                        {errors.summary && (
+                                                            <div className="text-danger">
+                                                                {errors.summary}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div> */}
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <UpdateSocialMediaItems />
 
                                     <div className="form-group-wrapper mt-3">
                                         <div className="form-group-title">
@@ -1503,7 +1206,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                             </a>
                                                         </div>
                                                     </li>
-                                                    <li className="card-list-li">
+                                                    <li className="card-list-li card-list-social">
                                                         <div className="preview-info-icon">
                                                             <img
                                                                 src="../img/icon/share.svg"

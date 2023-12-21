@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
 function sidebar() {
+      const router = useRouter()
+  const isActive = path => router.pathname.startsWith(path)
     return (
         <div className="sidebar">
             <div className="sidebar-wrapper">
@@ -10,7 +12,10 @@ function sidebar() {
                     <ul className="sidebar-list">
                         <li>
                             <Link href="/dashboard">
-                                <div>
+                                <a
+                                    className={
+                                        isActive('/dashboard') ? 'active' : ''
+                                    }>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -23,12 +28,15 @@ function sidebar() {
                                         />
                                     </svg>
                                     <span> All Cards</span>
-                                </div>
+                                </a>
                             </Link>
                         </li>
                         <li>
                             <Link href="/activecard">
-                                <div>
+                                <a
+                                    className={
+                                        isActive('/activecard') ? 'active' : ''
+                                    }>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -43,12 +51,15 @@ function sidebar() {
                                         />
                                     </svg>
                                     Active Cards
-                                </div>
+                                </a>
                             </Link>
                         </li>
                         <li>
                             <Link href="/pausecard">
-                                <div>
+                                <a
+                                    className={
+                                        isActive('/pausecard') ? 'active' : ''
+                                    }>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -63,7 +74,7 @@ function sidebar() {
                                         />
                                     </svg>
                                     Paused Cards
-                                </div>
+                                </a>
                             </Link>
                         </li>
                     </ul>
