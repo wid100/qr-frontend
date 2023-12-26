@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import SocialMediaItems from '@/components/SocialMediaItems'
+import FeedbackItem from '@/components/FeedbackItem'
 
 function CreateQR() {
     const { user } = useAuth({ middleware: 'auth' })
@@ -1104,7 +1105,7 @@ function CreateQR() {
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
-                                                    <div className="share-check-item">
+                                                    <div className="share-check-item d-flex align-items-center gap-2">
                                                         <input type="checkbox" />
                                                         <span>
                                                             Add a share button
@@ -1113,7 +1114,7 @@ function CreateQR() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="row">
+                                            <div className="row mt-3">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
                                                         <p>Status:</p>
@@ -1121,16 +1122,28 @@ function CreateQR() {
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="share-check-item">
-                                                        <input type="checkbox" />
-                                                        <span>
-                                                            Add a share button
-                                                            to the page.
-                                                        </span>
+                                                        <input
+                                                            type="checkbox"
+                                                            class="checkbox"
+                                                            id="checkbox"
+                                                        />
+                                                        <label
+                                                            for="checkbox"
+                                                            class="checkbox-label">
+                                                            <i class="fas fa-moon"></i>
+                                                            <i class="fas fa-sun"></i>
+                                                            <span class="ball"></span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <FeedbackItem
+                                        inputField={inputField}
+                                        errors={errors}
+                                        inputsHandler={inputsHandler}
+                                    />
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">

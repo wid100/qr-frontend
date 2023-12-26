@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import UpdateSocialMediaItems from '@/components/UpdateSocialMediaItems'
+import FeedbackItem from '@/components/FeedbackItem'
 const UpdateQrPage = ({ qrData }) => {
     const baseuri = process.env.NEXT_PUBLIC_BACKEND_URL
     const [loading, setLoading] = useState(false)
@@ -246,14 +247,27 @@ const UpdateQrPage = ({ qrData }) => {
                                     </div>
 
                                     <div className="form-group-wrapper">
-                                        <div className="form-group-title">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#colorPicker"
+                                            aria-expanded="true"
+                                            aria-controls="colorPicker">
                                             <p>
                                                 Design and customize your Smart
                                                 Card
                                             </p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="color-plate">
+                                        <div
+                                            className="color-plate collapse show"
+                                            id="colorPicker">
                                             <p>
                                                 Personalize your Smart Card by
                                                 selecting colors.
@@ -598,11 +612,24 @@ const UpdateQrPage = ({ qrData }) => {
                                     </div>
 
                                     <div className="form-group-wrapper mt-3">
-                                        <div className="form-group-title">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#information"
+                                            aria-expanded="true"
+                                            aria-controls="information">
                                             <p>Your information</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="information-form">
+                                        <div
+                                            className="information-form collapse show"
+                                            id="information">
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
@@ -975,11 +1002,24 @@ const UpdateQrPage = ({ qrData }) => {
                                     <UpdateSocialMediaItems />
 
                                     <div className="form-group-wrapper mt-3">
-                                        <div className="form-group-title">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#welScreen"
+                                            aria-expanded="true"
+                                            aria-controls="welScreen">
                                             <p>Welcome screen</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="color-plate">
+                                        <div
+                                            className="color-plate collapse show"
+                                            id="welScreen">
                                             <p className="mb-3">
                                                 Display your logo while your
                                                 page is loading:
@@ -1020,6 +1060,71 @@ const UpdateQrPage = ({ qrData }) => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#shareItem"
+                                            aria-expanded="false"
+                                            aria-controls="shareItem">
+                                            <p>Advance Options</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="color-plate collapse"
+                                            id="shareItem">
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Sharing:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="share-check-item d-flex align-items-center gap-2">
+                                                        <input type="checkbox" />
+                                                        <span>
+                                                            Add a share button
+                                                            to the page.
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row mt-3">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Status:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="share-check-item">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="checkbox"
+                                                            id="checkbox"
+                                                        />
+                                                        <label
+                                                            for="checkbox"
+                                                            class="checkbox-label">
+                                                            <i class="fas fa-moon"></i>
+                                                            <i class="fas fa-sun"></i>
+                                                            <span class="ball"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <FeedbackItem
+                                        inputField={inputField}
+                                        errors={errors}
+                                        inputsHandler={inputsHandler}
+                                    />
                                 </div>
                                 <div className="col-md-4">
                                     <div className="preview">

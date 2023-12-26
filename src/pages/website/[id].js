@@ -275,11 +275,24 @@ function UpdateWebiste() {
                                     </div>
 
                                     <div className="form-group-wrapper mt-3">
-                                        <div className="form-group-title">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#website"
+                                            aria-expanded="false"
+                                            aria-controls="website">
                                             <p>Enter your Website </p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="information-form">
+                                        <div
+                                            className="information-form collapse show"
+                                            id="website">
                                             <p>
                                                 Type in the website to link with
                                                 your QR Code

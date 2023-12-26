@@ -9,44 +9,37 @@ import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import SocialMediaItems from '@/components/SocialMediaItems'
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react'
+import FeedbackItem from '@/components/FeedbackItem'
+import OpenDays from '@/components/business-page/OpenDays'
+import OpenDaysPreview from '@/components/business-page/OpenDaysPreview'
+import FeaturesAllItem from '@/components/business-page/FeaturesAllItem'
+import FeaturesAllItemPreview from '@/components/business-page/FeaturesAllItemPreview'
 
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/free-mode'
-import 'swiper/css/pagination'
-import { FreeMode, Pagination } from 'swiper/modules'
-
-function SocialMediaQR() {
-    const [selectedColors, setSelectedColors] = useState('#FF0000')
-
-    const handleColorChange1 = event => {
-        setSelectedColors(event.target.value)
-    }
-    const inputsHandler1 = e => {
-        e.persist()
-        setInputField({
-            ...inputField,
-            [e.target.name]: e.target.value,
-        })
-    }
-
- 
-
-    
-
-
-
-
-
-
-    
-
+function BusinesPageQR() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
+// Features item
+ const featuresData = [
+     '/img/icons/feature-1.svg',
+     '/img/icons/feature-2.svg',
+     '/img/icons/feature-3.svg',
+     '/img/icons/feature-4.svg',
+ ]
+const [selectedItem, setSelectedItem] = useState([])
+
+const handleItemClick = index => {
+    setSelectedItem(prevSelected => {
+        if (prevSelected.includes(index)) {
+            // Deselect the item
+            return prevSelected.filter(item => item !== index)
+        } else {
+            // Select the item
+            return [...prevSelected, index]
+        }
+    })
+}
 
     // Function to handle select box changes
     const handleSelectChange = event => {
@@ -122,19 +115,14 @@ function SocialMediaQR() {
         imageUrl: null,
     })
     // Info: Branding Info
-    const handleImage = e => {
-        // Ensure that the event object and files array are defined
-        if (e && e.target && e.target.files && e.target.files.length > 0) {
-            const selectedImage = e.target.files[0]
 
-            setPicture({
-                image: selectedImage,
-                imageUrl: URL.createObjectURL(selectedImage),
-            })
-        } else {
-            // Handle the case where the event or files are not defined
-            console.error('Invalid event or no files selected.')
-        }
+    const handleImage = e => {
+        const selectedImage = e.target.files[0]
+
+        setPicture({
+            image: selectedImage,
+            imageUrl: URL.createObjectURL(selectedImage),
+        })
     }
 
     const [welcome, setWelcome] = useState({
@@ -654,71 +642,51 @@ function SocialMediaQR() {
                                                 </div>
                                             </div>
 
-                                            <div className="upload-image-wrapper">
-                                                <div className="row ">
-                                                    <div className="col-md-12">
-                                                        <div className="d-flex">
-                                                            {/* Render color pickers dynamically with map */}
-                                                            <input
-                                                                type="color"
-                                                                className=" form-control-color"
-                                                                id="image-color"
-                                                                value={
-                                                                    selectedColors
-                                                                }
-                                                                onChange={e => {
-                                                                    setSelectedColors(
-                                                                        e.target
-                                                                            .value,
-                                                                    )
-                                                                    inputsHandler1(
-                                                                        e,
-                                                                    )
-                                                                }}
-                                                                title="Choose your color"></input>
+                                            <div className="upload-image-wrapper upload-image-border">
+                                                <p>
+                                                    Choose image from templates
+                                                    or upload your own
+                                                </p>
+                                                <div className="row mt-4">
+                                                    <div className="col-md-4">
+                                                        <div className="image-up-label">
+                                                            <p>
+                                                                Upload your
+                                                                image (400*400).
+                                                            </p>
                                                         </div>
-                                                        <Swiper
-                                                            slidesPerView={3}
-                                                            spaceBetween={30}
-                                                            freeMode={true}
-                                                            centeredSlides={
-                                                                true
-                                                            }
-                                                            pagination={{
-                                                                clickable: true,
-                                                            }}
-                                                            modules={[FreeMode]}
-                                                            className="mySwiper">
-                                                            <SwiperSlide>
-                                                                <div className="custom-img-item">
-                                                                    <div
-                                                                        className="custom-img custom-img-1"
-                                                                        style={{
-                                                                            backgroundColor: selectedColors,
-                                                                        }}></div>
+                                                    </div>
+
+                                                    <div className="col-md-8">
+                                                        <div className="upload-image">
+                                                            <div className="view-image business-image">
+                                                                <img
+                                                                    src={
+                                                                        picture.imageUrl
+                                                                    }
+                                                                    width={200}
+                                                                />
+                                                            </div>
+                                                            <div className="upload-input">
+                                                                <div className="file-btn custom-btn">
+                                                                    Upload
+                                                                    <input
+                                                                        type="file"
+                                                                        name="image"
+                                                                        onChange={
+                                                                            handleImage
+                                                                        }
+                                                                        className="file-input"
+                                                                    />
                                                                 </div>
-                                                            </SwiperSlide>
-                                                            <SwiperSlide>
-                                                                <div className="custom-img-item">
-                                                                    <div
-                                                                        className="custom-img custom-img-2"
-                                                                        style={{
-                                                                            backgroundColor: selectedColors,
-                                                                        }}></div>
-                                                                </div>
-                                                            </SwiperSlide>
-                                                            <SwiperSlide>
-                                                                <div className="custom-img-item">
-                                                                    <div
-                                                                        className="custom-img custom-img-3"
-                                                                        style={{
-                                                                            backgroundColor: selectedColors,
-                                                                        }}></div>
-                                                                </div>
-                                                            </SwiperSlide>
-                                                        </Swiper>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <InputError
+                                                    messages={errors.image}
+                                                    className="mt-2"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -743,10 +711,37 @@ function SocialMediaQR() {
                                             className="information-form collapse show"
                                             id="information">
                                             <p>
-                                                Fields marked with a * are
-                                                required information.
+                                                Introduce your business or
+                                                organization in a few words.
+                                                Optionally, add a button to a
+                                                website of your choice. Fields
+                                                marked with a * are mandatory.
                                             </p>
                                             <div className="row mt-4">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Company*:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            id="companyName"
+                                                            type="text"
+                                                            name="companyName"
+                                                            className="form-control"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.companyName
+                                                            }
+                                                            placeholder="Joy's Cafe"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
                                                         <p>Headline*:</p>
@@ -767,13 +762,6 @@ function SocialMediaQR() {
                                                             }
                                                             placeholder="Connect with us on social media"
                                                         />
-
-                                                        <InputError
-                                                            messages={
-                                                                errors.headline
-                                                            }
-                                                            className="mt-2"
-                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -781,7 +769,7 @@ function SocialMediaQR() {
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>About us:</p>
+                                                        <p>Summary:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
@@ -789,7 +777,7 @@ function SocialMediaQR() {
                                                         <textarea
                                                             cols="30"
                                                             rows="5"
-                                                            placeholder="Follow us and get updates delivered to your favorite social media channel."
+                                                            placeholder="Description in 250 characters."
                                                             className="form-control"
                                                             id="summary"
                                                             name="summary"
@@ -816,6 +804,282 @@ function SocialMediaQR() {
                                                                 {errors.summary}
                                                             </div>
                                                         )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <OpenDays />
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#openOffice"
+                                            aria-expanded="true"
+                                            aria-controls="openOffice">
+                                            <p>Address & location</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="information-form collapse show"
+                                            id="openOffice">
+                                            <p>
+                                                Provide your address and
+                                                location information.
+                                            </p>
+                                            <div className="row mt-4">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Address:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <div className="mb-3">
+                                                                <input
+                                                                    id="address"
+                                                                    type="text"
+                                                                    name="address"
+                                                                    className="form-control"
+                                                                    onChange={
+                                                                        inputsHandler
+                                                                    }
+                                                                    value={
+                                                                        inputField.address1
+                                                                    }
+                                                                    placeholder="10252, Mission Street, Road 42"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="mb-3">
+                                                                <input
+                                                                    id="city"
+                                                                    type="text"
+                                                                    name="city"
+                                                                    className="form-control"
+                                                                    onChange={
+                                                                        inputsHandler
+                                                                    }
+                                                                    value={
+                                                                        inputField.city
+                                                                    }
+                                                                    placeholder="city"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="mb-3">
+                                                                <input
+                                                                    id="countryCode"
+                                                                    type="text"
+                                                                    name="countryCode"
+                                                                    className="form-control"
+                                                                    onChange={
+                                                                        inputsHandler
+                                                                    }
+                                                                    value={
+                                                                        inputField.countryCode
+                                                                    }
+                                                                    placeholder="Country code"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="mb-3">
+                                                                <input
+                                                                    id="country"
+                                                                    type="text"
+                                                                    name="country"
+                                                                    className="form-control"
+                                                                    onChange={
+                                                                        inputsHandler
+                                                                    }
+                                                                    value={
+                                                                        inputField.country
+                                                                    }
+                                                                    placeholder="country"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <FeaturesAllItem
+                                                handleItemClick={
+                                                    handleItemClick
+                                                }
+                                                selectedItem={selectedItem}
+                                                featuresData={featuresData}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#openOffice"
+                                            aria-expanded="true"
+                                            aria-controls="openOffice">
+                                            <p>About and Contact Informaion</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="information-form collapse show"
+                                            id="openOffice">
+                                            <p>
+                                                Add more detailed information
+                                                about your business and provide
+                                                contact data.
+                                            </p>
+                                            <div className="row border-bottom mt-4">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>About:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <textarea
+                                                            cols="30"
+                                                            rows="5"
+                                                            placeholder="Description in 250 characters."
+                                                            className="form-control"
+                                                            id="summary"
+                                                            name="summary"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.summary
+                                                            }
+                                                            maxLength={250} // Set maximum character length
+                                                        ></textarea>
+                                                        <div className="text-right">
+                                                            <small>
+                                                                {
+                                                                    inputField
+                                                                        .summary
+                                                                        .length
+                                                                }
+                                                                /250 characters
+                                                            </small>
+                                                        </div>
+                                                        {errors.summary && (
+                                                            <div className="text-danger">
+                                                                {errors.summary}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row mt-4">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Name:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            id="name"
+                                                            type="text"
+                                                            name="name"
+                                                            className="form-control"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.name
+                                                            }
+                                                            placeholder="Name"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Phone:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            id="phone"
+                                                            type="text"
+                                                            name="phone"
+                                                            className="form-control"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.phone
+                                                            }
+                                                            placeholder="Phone Number"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Email:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            id="phone"
+                                                            type="text"
+                                                            name="phone"
+                                                            className="form-control"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.phone
+                                                            }
+                                                            placeholder="Inter your email"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-2">
+                                                    <div className="info-form-label">
+                                                        <p>Website:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-10">
+                                                    <div className="mb-3">
+                                                        <input
+                                                            id="phone"
+                                                            type="text"
+                                                            name="phone"
+                                                            className="form-control"
+                                                            onChange={
+                                                                inputsHandler
+                                                            }
+                                                            value={
+                                                                inputField.phone
+                                                            }
+                                                            placeholder="Inter your website link"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -948,6 +1212,11 @@ function SocialMediaQR() {
                                             </div>
                                         </div>
                                     </div>
+                                    <FeedbackItem
+                                        inputField={inputField}
+                                        errors={errors}
+                                        inputsHandler={inputsHandler}
+                                    />
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
@@ -956,23 +1225,29 @@ function SocialMediaQR() {
                                         </div>
 
                                         <div className="show-preview-right">
-                                            <div className="custom-img-item-right">
-                                                <div
-                                                    className="custom-img custom-img-2"
-                                                    style={{
-                                                        backgroundColor: selectedColors,
-                                                    }}></div>
-                                            </div>
-
                                             <div
-                                                className="soical-media-top-header"
+                                                className="business-preview-top-header mb-4"
                                                 style={divStyle}>
-                                                <div className="soical-media-title">
-                                                    <h2>
-                                                        Connect with us on
-                                                        social media
-                                                    </h2>
-                                                    <p>{inputField.summary}</p>
+                                                <h3 className="company_name">
+                                                    Company Name
+                                                </h3>
+                                                <div className="preview-image business-preview-image">
+                                                    <img
+                                                        src={picture.imageUrl}
+                                                        alt=""
+                                                    />
+                                                </div>
+
+                                                <div className="p-4">
+                                                    <h4 className="mb-2">
+                                                        Eat. Refresh. Go.
+                                                    </h4>
+                                                    <p className="dajignation">
+                                                        {inputField.jobTitle}
+                                                    </p>
+                                                    <button className="view-more-btn">
+                                                        view more
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -1019,6 +1294,32 @@ function SocialMediaQR() {
 
                                             <div className="card-list-right">
                                                 <ul>
+                                                    <li className="opening-preview-date-item">
+                                                        <h4 className="opening-preview-title">
+                                                            Opening Hours
+                                                        </h4>
+                                                        <OpenDaysPreview />
+                                                    </li>
+                                                    <li className="opening-preview-date-item">
+                                                        <h4 className="opening-preview-title">
+                                                            Opening Hours
+                                                        </h4>
+                                                        {Array.isArray(
+                                                            selectedItem,
+                                                        ) &&
+                                                            selectedItem.length >
+                                                                0 && (
+                                                                <FeaturesAllItemPreview
+                                                                    featuresData={
+                                                                        featuresData
+                                                                    }
+                                                                    selectedItem={
+                                                                        selectedItem
+                                                                    }
+                                                                />
+                                                            )}
+                                                    </li>
+
                                                     <li className="card-list-li card-list-social">
                                                         <div className="preview-info-icon">
                                                             <img
@@ -1132,4 +1433,4 @@ function SocialMediaQR() {
     )
 }
 
-export default SocialMediaQR
+export default BusinesPageQR;

@@ -85,11 +85,19 @@ const UpdateSocialMediaItems = ({
     return (
         <>
             <div className="form-group-wrapper mt-3">
-                <div className="form-group-title">
+                <div
+                    className="form-group-title"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#social-media"
+                    aria-expanded="false"
+                    aria-controls="social-media">
                     <p>Social media</p>
+                    <div className="bottom-arrow">
+                        <img src="/img/icons/bottom-arrow.svg" alt="" />
+                    </div>
                 </div>
 
-                <div className="color-plate">
+                <div className="color-plate collapse" id="social-media">
                     <p className="mb-3">
                         Click on the icon to add social media channel:
                     </p>

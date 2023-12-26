@@ -80,6 +80,25 @@ const SelectQr = () => {
                                     </Link>
                                 </div>
                                 <div className="col-lg-6">
+                                    <Link href={'/business-page'}>
+                                        <div className="select-qr-item">
+                                            <div className="select-qr-item-icon">
+                                                <img
+                                                    src="/img/icons/business.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="select-qr-content">
+                                                <h4>Business Page</h4>
+                                                <p>
+                                                    Provide your company
+                                                    information
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="col-lg-6">
                                     <Link href={'/'}>
                                         <div className="select-qr-item">
                                             <div className="select-qr-item-icon">
