@@ -1179,11 +1179,11 @@ const handleItemClick = index => {
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="share-check-item d-flex align-items-center gap-2">
-                                                        <input type="checkbox" />
-                                                        <span>
+                                                        <input type="checkbox" id='check'/>
+                                                        <label htmlFor='check'>
                                                             Add a share button
                                                             to the page.
-                                                        </span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1302,7 +1302,50 @@ const handleItemClick = index => {
                                                     </li>
                                                     <li className="opening-preview-date-item">
                                                         <h4 className="opening-preview-title">
-                                                            Opening Hours
+                                                            Location
+                                                        </h4>
+                                                        <p>
+                                                            Mission Street 526
+                                                        </p>
+                                                        <p>
+                                                            San Francisco, CA
+                                                            94105
+                                                        </p>
+                                                        <p>United States</p>
+                                                    </li>
+                                                    <li className="opening-preview-date-item">
+                                                        <h4 className="opening-preview-title">
+                                                            Contact
+                                                        </h4>
+                                                        <ul className='contact-list-item'>
+                                                            <li>
+                                                                <span>Joy</span>
+                                                                <p> Name</p>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    (415)
+                                                                    000-0000
+                                                                </span>
+                                                                <p> Phone</p>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    hello@joyscafe.com
+                                                                </span>
+                                                                <p> Email</p>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    www.joyscafe.com
+                                                                </span>
+                                                                <p> Website</p>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li className="opening-preview-date-item">
+                                                        <h4 className="opening-preview-title">
+                                                            Facility Features
                                                         </h4>
                                                         {Array.isArray(
                                                             selectedItem,

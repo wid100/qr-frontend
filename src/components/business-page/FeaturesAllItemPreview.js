@@ -5,7 +5,7 @@ const FeaturesAllItemPreview = ({selectedItem,featuresData}) => {
       <>
           {/* Render the preview of the selected item */}
           {selectedItem.length > 0 && (
-              <div className="previews">
+              <div className="previews-features-item all-features-item">
                   {selectedItem.map((selectedIndex, previewIndex) => (
                       <div key={previewIndex} className="preview">
                           <img

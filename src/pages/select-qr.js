@@ -99,7 +99,7 @@ const SelectQr = () => {
                                     </Link>
                                 </div>
                                 <div className="col-lg-6">
-                                    <Link href={'/'}>
+                                    <Link href={'/instagram'}>
                                         <div className="select-qr-item">
                                             <div className="select-qr-item-icon">
                                                 <img
@@ -117,42 +117,7 @@ const SelectQr = () => {
                                         </div>
                                     </Link>
                                 </div>
-                                <div className="col-lg-6">
-                                    <Link href={'/'}>
-                                        <div className="select-qr-item">
-                                            <div className="select-qr-item-icon">
-                                                <img
-                                                    src="/img/icons/coupon.svg"
-                                                    alt=""
-                                                />
-                                            </div>
-                                            <div className="select-qr-content">
-                                                <h4>Coupons</h4>
-                                                <p>
-                                                    Share coupons and discounts
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                                <div className="col-lg-6">
-                                    <Link href={'/'}>
-                                        <div className="select-qr-item">
-                                            <div className="select-qr-item-icon">
-                                                <img
-                                                    src="/img/icons/facebook.svg"
-                                                    alt=""
-                                                />
-                                            </div>
-                                            <div className="select-qr-content">
-                                                <h4>Facebook</h4>
-                                                <p>
-                                                    Get more Likes for your page
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
+                        
                             </div>
                         </div>
                         <div className="col-lg-4">

@@ -51,7 +51,7 @@ a {
 a:hover {
     text-decoration: none !important;
 }
-label{
+label {
     margin-bottom: 0 !important;
 }
 
@@ -460,14 +460,22 @@ p.dajignation {
     width: 100%;
 }
 
-.info-show ul {
+.info-show .social-media-list-items {
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 15px;
     margin-bottom: 0;
 }
+.preview-icon-item {
+    width: 30px;
+    margin: auto;
+}
 
+.preview-icon-item img {
+    width: 100%;
+}
 .info-show ul li {
     display: flex;
     justify-content: center;
@@ -1372,6 +1380,20 @@ button.eye-btn {
 .info-form-label span img {
     width: 30px;
 }
+.swiper-color-choice-item {
+    height: 30px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+}
+.swiper-color-choice-item p {
+    font-size: 18px;
+    color: #323032;
+    font-weight: 600;
+}
 /* ============ Select qr Page ============= */
 .select-qr-wrapper {
     padding: 100px 0 100px 0;
@@ -1562,15 +1584,15 @@ button.eye-btn {
     padding-top: 20px;
 }
 
-.business-image{
+.business-image {
     border-radius: 0;
     width: 250px;
     height: 150px;
 }
-.business-image img{
+.business-image img {
     width: 100%;
 }
-.business-preview-image{
+.business-preview-image {
     height: 200px;
     width: 100%;
     border-radius: 0;
@@ -1585,11 +1607,62 @@ button.eye-btn {
 .business-preview-top-header .company_name {
     padding: 20px 20px;
 }
-.business-preview-top-header .view-more-btn{
-
-background: #fff;
+.business-preview-top-header .view-more-btn {
+    background: #fff;
     padding: 8px 25px;
     color: #616568;
     font-size: 16px;
     margin-top: 15px;
+}
+.opening-preview-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: #323032;
+    padding-bottom: 10px;
+}
+.opening-preview-date-item {
+    margin-top: 20px;
+    font-size: 16px;
+}
+.all-features-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+.opening-preview-date-item .contact-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.opening-preview-date-item .contact-list-item span {
+    color: #323032;
+    font-weight: 400;
+}
+
+.instagram-input-fluid {
+    border: 1px solid #d1d2d3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.instagram-input-fluid input {
+    border: none;
+    outline: none;
+}
+.instagram-input-fluid input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.instagram-input-fluid span {
+    padding: 7px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94px;
+    border-right: 1px solid;
+}
+
+.social-media-list-items {
 }

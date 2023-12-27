@@ -2,25 +2,113 @@ import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import React, { useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
-// import htmlToImage from 'html-to-image'
 import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import SocialMediaItems from '@/components/SocialMediaItems'
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
 import { FreeMode, Pagination } from 'swiper/modules'
+import { DataIcons } from '@/DataIcon/DataIcons'
 
 function SocialMediaQR() {
-    const [selectedColors, setSelectedColors] = useState('#FF0000')
+    // Social Media Item
+    const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
+    const [previewIcons, setPreviewIcons] = useState([])
+    const addInputField = socialPlatform => {
+        if (!selectedSocialPlatforms.includes(socialPlatform)) {
+            setSelectedSocialPlatforms(prevPlatforms => [
+                ...prevPlatforms,
+                socialPlatform,
+            ])
+            setPreviewIcons(prevIcons => [...prevIcons, socialPlatform])
+        }
+    }
 
+    const removeInputField = socialPlatform => {
+        setSelectedSocialPlatforms(prevPlatforms =>
+            prevPlatforms.filter(platform => platform !== socialPlatform),
+        )
+        setPreviewIcons(prevIcons =>
+            prevIcons.filter(icon => icon !== socialPlatform),
+        )
+    }
+
+    const renderPreviewIcons = () => {
+        return previewIcons.map((socialPlatform, index) => (
+            <div key={index} className="preview-icon-item">
+                <img
+                    src={
+                        DataIcons.find(
+                            item => item.name.toLowerCase() === socialPlatform,
+                        )?.img
+                    }
+                    alt={socialPlatform}
+                />
+            </div>
+        ))
+    }
+
+    const renderInputFields = () => {
+        return selectedSocialPlatforms.map((socialPlatform, index) => (
+            <div key={index} className="row d-flex align-items-center mb-2">
+                <div className="col-md-3">
+                    {/* Render label and icon based on selected social platform */}
+                    {DataIcons.map(item =>
+                        item.name.toLowerCase() === socialPlatform ? (
+                            <div className="info-form-label" key={item.id}>
+                                <p>{item.name}</p>
+                                <span>
+                                    <img src={item.img} alt={item.name} />
+                                </span>
+                            </div>
+                        ) : null,
+                    )}
+                </div>
+                <div className="col-md-9">
+                    {/* Your existing code for social media fields and input */}
+                    <div className="social-media-field">
+                        <div className="social-input-fields">
+                            <div className="icon-send">
+                                <span>URL</span>
+                                <span>*</span>
+                            </div>
+                            <div className="social-item">
+                                <input
+                                    type="text"
+                                    placeholder={`${socialPlatform}`}
+                                    id={`${socialPlatform}-${index}`}
+                                    name={`${socialPlatform}-${index}`}
+                                    // onChange={e =>
+                                    //     inputsHandler(
+                                    //         `${socialPlatform}-${index}`,
+                                    //         e.target.value,
+                                    //     )
+                                    // }
+                                />
+                                <span>
+                                    <InputError
+                                        messages={errors[socialPlatform]}
+                                        className="mt-2"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => removeInputField(socialPlatform)}>
+                            <span>&#10006;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+
+    const [selectedColors, setSelectedColors] = useState('#FF0000')
+    const [activeSlide, setActiveSlide] = useState(0)
     const handleColorChange1 = event => {
         setSelectedColors(event.target.value)
     }
@@ -31,17 +119,9 @@ function SocialMediaQR() {
             [e.target.name]: e.target.value,
         })
     }
-
- 
-
-    
-
-
-
-
-
-
-    
+    const handleSlideChange = swiper => {
+        setActiveSlide(swiper.activeIndex)
+    }
 
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
@@ -372,10 +452,10 @@ function SocialMediaQR() {
 
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/1.png" />
+                                                            <img src="/img/color/1.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -396,10 +476,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/2.png" />
+                                                            <img src="/img/color/2.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -420,10 +500,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/3.png" />
+                                                            <img src="/img/color/3.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -444,10 +524,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/4.png" />
+                                                            <img src="/img/color/4.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -468,10 +548,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/5.png" />
+                                                            <img src="/img/color/5.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -492,10 +572,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/6.png" />
+                                                            <img src="/img/color/6.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -516,10 +596,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/7.png" />
+                                                            <img src="/img/color/7.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -540,10 +620,10 @@ function SocialMediaQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/8.png" />
+                                                            <img src="/img/color/8.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -657,26 +737,6 @@ function SocialMediaQR() {
                                             <div className="upload-image-wrapper">
                                                 <div className="row ">
                                                     <div className="col-md-12">
-                                                        <div className="d-flex">
-                                                            {/* Render color pickers dynamically with map */}
-                                                            <input
-                                                                type="color"
-                                                                className=" form-control-color"
-                                                                id="image-color"
-                                                                value={
-                                                                    selectedColors
-                                                                }
-                                                                onChange={e => {
-                                                                    setSelectedColors(
-                                                                        e.target
-                                                                            .value,
-                                                                    )
-                                                                    inputsHandler1(
-                                                                        e,
-                                                                    )
-                                                                }}
-                                                                title="Choose your color"></input>
-                                                        </div>
                                                         <Swiper
                                                             slidesPerView={3}
                                                             spaceBetween={30}
@@ -688,7 +748,12 @@ function SocialMediaQR() {
                                                                 clickable: true,
                                                             }}
                                                             modules={[FreeMode]}
-                                                            className="mySwiper">
+                                                            className="mySwiper"
+                                                            onSlideChange={swiper =>
+                                                                handleSlideChange(
+                                                                    swiper,
+                                                                )
+                                                            }>
                                                             <SwiperSlide>
                                                                 <div className="custom-img-item">
                                                                     <div
@@ -717,6 +782,30 @@ function SocialMediaQR() {
                                                                 </div>
                                                             </SwiperSlide>
                                                         </Swiper>
+                                                        <div className="swiper-color-choice-item mt-4">
+                                                            {/* Render color pickers dynamically with map */}
+                                                            <p>
+                                                                Choose your
+                                                                color
+                                                            </p>
+                                                            <input
+                                                                type="color"
+                                                                className=" form-control-color"
+                                                                id="image-color"
+                                                                value={
+                                                                    selectedColors
+                                                                }
+                                                                onChange={e => {
+                                                                    setSelectedColors(
+                                                                        e.target
+                                                                            .value,
+                                                                    )
+                                                                    inputsHandler1(
+                                                                        e,
+                                                                    )
+                                                                }}
+                                                                title="Choose your color"></input>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -821,12 +910,68 @@ function SocialMediaQR() {
                                             </div>
                                         </div>
                                     </div>
-                                    <SocialMediaItems
-                                        inputsHandler={inputsHandler}
-                                        inputField={inputField}
-                                        InputError={InputError}
-                                        errors={errors}
-                                    />
+                                    {/* ========== Social Media Item ============ */}
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#social-media"
+                                            aria-expanded="false"
+                                            aria-controls="social-media">
+                                            <p>Social media</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="color-plate collapse"
+                                            id="social-media">
+                                            <p className="mb-3">
+                                                Click on the icon to add social
+                                                media channel:
+                                            </p>
+
+                                            <div className="social-list-item">
+                                                {renderInputFields()}
+                                            </div>
+
+                                            <div className="row mt-4 mb-4">
+                                                <div className="col-md-3">
+                                                    <div className="info-form-label">
+                                                        <p>Add more:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9">
+                                                    <div className="social-all-item">
+                                                        {DataIcons.map(item => (
+                                                            <div
+                                                                className="social-icon-item"
+                                                                key={item.id}
+                                                                onClick={() =>
+                                                                    addInputField(
+                                                                        item.name.toLowerCase(),
+                                                                    )
+                                                                }>
+                                                                <img
+                                                                    src={
+                                                                        item.img
+                                                                    }
+                                                                    alt=""
+                                                                />
+                                                                <span>
+                                                                    {item.name}
+                                                                </span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -915,11 +1060,14 @@ function SocialMediaQR() {
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="share-check-item d-flex align-items-center gap-2">
-                                                        <input type="checkbox" />
-                                                        <span>
+                                                        <input
+                                                            type="checkbox"
+                                                            id="check"
+                                                        />
+                                                        <label htmlFor="check">
                                                             Add a share button
                                                             to the page.
-                                                        </span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -958,7 +1106,9 @@ function SocialMediaQR() {
                                         <div className="show-preview-right">
                                             <div className="custom-img-item-right">
                                                 <div
-                                                    className="custom-img custom-img-2"
+                                                    className={`custom-img custom-img-${
+                                                        activeSlide + 1
+                                                    }`}
                                                     style={{
                                                         backgroundColor: selectedColors,
                                                     }}></div>
@@ -1022,68 +1172,19 @@ function SocialMediaQR() {
                                                     <li className="card-list-li card-list-social">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/share.svg"
+                                                                src="/img/icon/share.svg"
                                                                 alt=""
                                                             />
                                                         </div>
                                                         <div className="info-show border-none">
-                                                            <ul>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.facebook
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/fb.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.github
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/github.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.twitter
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/tw.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.instagram
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/ins.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.youtube
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/youtube.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                                            <div className="preview-section">
+                                                                <h2>
+                                                                    Social Media
+                                                                </h2>
+                                                            </div>
+                                                            <div className="social-media-list-items">
+                                                                {renderPreviewIcons()}
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1133,3 +1234,4 @@ function SocialMediaQR() {
 }
 
 export default SocialMediaQR
+

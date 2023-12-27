@@ -8,10 +8,106 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import SocialMediaItems from '@/components/SocialMediaItems'
 import FeedbackItem from '@/components/FeedbackItem'
+import { DataIcons } from '@/DataIcon/DataIcons'
 
 function CreateQR() {
+// Social Media Item
+   const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
+  const [previewIcons, setPreviewIcons] = useState([])
+  const addInputField = socialPlatform => {
+      if (!selectedSocialPlatforms.includes(socialPlatform)) {
+          setSelectedSocialPlatforms(prevPlatforms => [
+              ...prevPlatforms,
+              socialPlatform,
+          ])
+          setPreviewIcons(prevIcons => [...prevIcons, socialPlatform])
+      }
+  }
+
+   const removeInputField = socialPlatform => {
+       setSelectedSocialPlatforms(prevPlatforms =>
+           prevPlatforms.filter(platform => platform !== socialPlatform),
+       )
+       setPreviewIcons(prevIcons =>
+           prevIcons.filter(icon => icon !== socialPlatform),
+       )
+   }
+
+   const renderPreviewIcons = () => {
+       return previewIcons.map((socialPlatform, index) => (
+           <div key={index} className="preview-icon-item">
+               <img
+                   src={
+                       DataIcons.find(
+                           item => item.name.toLowerCase() === socialPlatform,
+                       )?.img
+                   }
+                   alt={socialPlatform}
+               />
+           </div>
+       ))
+   }
+
+   const renderInputFields = () => {
+       return selectedSocialPlatforms.map((socialPlatform, index) => (
+           <div key={index} className="row d-flex align-items-center mb-2">
+               <div className="col-md-3">
+                   {/* Render label and icon based on selected social platform */}
+                   {DataIcons.map(item =>
+                       item.name.toLowerCase() === socialPlatform ? (
+                           <div className="info-form-label" key={item.id}>
+                               <p>{item.name}</p>
+                               <span>
+                                   <img src={item.img} alt={item.name} />
+                               </span>
+                           </div>
+                       ) : null,
+                   )}
+               </div>
+               <div className="col-md-9">
+                   {/* Your existing code for social media fields and input */}
+                   <div className="social-media-field">
+                       <div className="social-input-fields">
+                           <div className="icon-send">
+                               <span>URL</span>
+                               <span>*</span>
+                           </div>
+                           <div className="social-item">
+                               <input
+                                   type="text"
+                                   placeholder={`${socialPlatform}`}
+                                   id={`${socialPlatform}-${index}`}
+                                   name={`${socialPlatform}-${index}`}
+                                   // onChange={e =>
+                                   //     inputsHandler(
+                                   //         `${socialPlatform}-${index}`,
+                                   //         e.target.value,
+                                   //     )
+                                   // }
+                               />
+                               <span>
+                                   <InputError
+                                       messages={errors[socialPlatform]}
+                                       className="mt-2"
+                                   />
+                               </span>
+                           </div>
+                       </div>
+                       <button onClick={() => removeInputField(socialPlatform)}>
+                           <span>&#10006;</span>
+                       </button>
+                   </div>
+               </div>
+           </div>
+       ))
+   }
+
+
+
+
+
+
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
@@ -1012,12 +1108,69 @@ function CreateQR() {
                                             </div>
                                         </div>
                                     </div>
-                                    <SocialMediaItems
-                                        inputsHandler={inputsHandler}
-                                        inputField={inputField}
-                                        InputError={InputError}
-                                        errors={errors}
-                                    />
+                                    {/* ========== Social Media Item ============ */}
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#social-media"
+                                            aria-expanded="false"
+                                            aria-controls="social-media">
+                                            <p>Social media</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="color-plate collapse"
+                                            id="social-media">
+                                            <p className="mb-3">
+                                                Click on the icon to add social
+                                                media channel:
+                                            </p>
+
+                                            <div className="social-list-item">
+                                                {renderInputFields()}
+                                            </div>
+
+                                            <div className="row mt-4 mb-4">
+                                                <div className="col-md-3">
+                                                    <div className="info-form-label">
+                                                        <p>Add more:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9">
+                                                    <div className="social-all-item">
+                                                        {DataIcons.map(item => (
+                                                            <div
+                                                                className="social-icon-item"
+                                                                key={item.id}
+                                                                onClick={() =>
+                                                                    addInputField(
+                                                                        item.name.toLowerCase(),
+                                                                    )
+                                                                }>
+                                                                <img
+                                                                    src={
+                                                                        item.img
+                                                                    }
+                                                                    alt=""
+                                                                />
+                                                                <span>
+                                                                    {item.name}
+                                                                </span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                          
 
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1106,11 +1259,14 @@ function CreateQR() {
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="share-check-item d-flex align-items-center gap-2">
-                                                        <input type="checkbox" />
-                                                        <span>
+                                                        <input
+                                                            type="checkbox"
+                                                            id="check"
+                                                        />
+                                                        <label htmlFor="check">
                                                             Add a share button
                                                             to the page.
-                                                        </span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1334,63 +1490,14 @@ function CreateQR() {
                                                             />
                                                         </div>
                                                         <div className="info-show border-none">
-                                                            <ul>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.facebook
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/fb.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.github
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/github.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.twitter
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/tw.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.instagram
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/ins.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.youtube
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/youtube.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                                            <div className="preview-section">
+                                                                <h2>
+                                                                    Social Media
+                                                                </h2>
+                                                            </div>
+                                                            <div className='social-media-list-items'>
+                                                                {renderPreviewIcons()}
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1439,4 +1546,4 @@ function CreateQR() {
     )
 }
 
-export default CreateQR
+export default CreateQR;
