@@ -1,15 +1,25 @@
-import AppLayout from '@/components/Layouts/AppLayout'
-import Head from 'next/head'
-import React, { useRef, useState } from 'react'
-import QRCode from 'qrcode.react'
+import AppLayout from '@/components/Layouts/AppLayout';
+import Head from 'next/head';
+import React, { useRef, useState } from 'react';
+import QRCode from 'qrcode.react';
 // import htmlToImage from 'html-to-image'
-import InputError from '@/components/InputError'
-import { useAuth } from '@/hooks/auth'
-import axios from 'axios'
-import { useReactToPrint } from 'react-to-print'
-import Link from 'next/link'
+import InputError from '@/components/InputError';
+import { useAuth } from '@/hooks/auth';
+import axios from 'axios';
+import { useReactToPrint } from 'react-to-print';
+import Link from 'next/link';
+import Popup from '@/components/Popup/Popup';
+
 
 function Webiste() {
+// ======== Popup ============
+
+const [activePopup, setActivePopup]=useState(true);
+
+const handlePopup=()=>{
+    setActivePopup(!activePopup)
+}
+
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
@@ -263,7 +273,7 @@ function Webiste() {
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
@@ -405,6 +415,7 @@ function Webiste() {
                                                 </div>
                                             ) : (
                                                 <button
+                                                    onClick={handlePopup}
                                                     className="submit-details-form"
                                                     type="submit">
                                                     Submit
@@ -415,6 +426,12 @@ function Webiste() {
                                 </div>
                             </div>
                         </div>
+                        <Popup
+                            handlePopup={handlePopup}
+                            activePopup={activePopup}
+                            componentRef={componentRef}
+                            uniqueSlug={uniqueSlug}
+                        />
                     </form>
                 </div>
             </section>

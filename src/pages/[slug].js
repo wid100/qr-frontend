@@ -39,7 +39,7 @@ const Information = ({ information }) => {
                                                     <a
                                                         href={`tel:${information.phone1}`}>
                                                         <img
-                                                            src="img/icon/call.svg"
+                                                            src="/img/icon/call.svg"
                                                             alt=""
                                                         />
                                                         <p>Call</p>
@@ -49,7 +49,7 @@ const Information = ({ information }) => {
                                                     <a
                                                         href={`mailto:${information.email1}`}>
                                                         <img
-                                                            src="img/icon/telegram2.svg"
+                                                            src="/img/icon/telegram2.svg"
                                                             alt=""
                                                         />
                                                         <p>Email</p>
@@ -58,7 +58,7 @@ const Information = ({ information }) => {
                                                 {/* <li>
                                                     <a href="location:">
                                                         <img
-                                                            src="img/icon/location.svg"
+                                                            src="/img/icon/location.svg"
                                                             alt=""
                                                         />
                                                         <p>Location</p>
@@ -80,7 +80,7 @@ const Information = ({ information }) => {
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/phone.svg"
+                                                            src="/img/icon/phone.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -102,7 +102,7 @@ const Information = ({ information }) => {
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/email.svg"
+                                                            src="/img/icon/email.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -121,7 +121,7 @@ const Information = ({ information }) => {
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/toffee.svg"
+                                                            src="/img/icon/toffee.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -141,7 +141,7 @@ const Information = ({ information }) => {
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/toffee.svg"
+                                                            src="/img/icon/toffee.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -164,7 +164,7 @@ const Information = ({ information }) => {
                                                 <li className="card-list-li">
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/web.svg"
+                                                            src="/img/icon/web.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -193,7 +193,7 @@ const Information = ({ information }) => {
                                                 information.youtube ? (
                                                     <div className="preview-info-icon">
                                                         <img
-                                                            src="img/icon/share.svg"
+                                                            src="/img/icon/share.svg"
                                                             alt=""
                                                         />
                                                     </div>
@@ -210,7 +210,7 @@ const Information = ({ information }) => {
                                                                         information.facebook
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/fb.svg"
+                                                                        src="/img/icon/fb.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -225,7 +225,7 @@ const Information = ({ information }) => {
                                                                         information.github
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/github.svg"
+                                                                        src="/img/icon/github.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -240,7 +240,7 @@ const Information = ({ information }) => {
                                                                         information.twitter
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/tw.svg"
+                                                                        src="/img/icon/tw.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -255,7 +255,7 @@ const Information = ({ information }) => {
                                                                         information.instagram
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/ins.svg"
+                                                                        src="/img/icon/ins.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>
@@ -270,7 +270,7 @@ const Information = ({ information }) => {
                                                                         information.youtube
                                                                     }>
                                                                     <img
-                                                                        src="img/icon/youtube.svg"
+                                                                        src="/img/icon/youtube.svg"
                                                                         alt=""
                                                                     />
                                                                 </a>

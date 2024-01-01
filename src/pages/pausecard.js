@@ -175,7 +175,7 @@ const pausecard = () => {
                                                                 <div className="compnay-info">
                                                                     <div className="qr-logo">
                                                                         <img
-                                                                            src="img/logo-qr.png"
+                                                                            src="/img/logo-qr.png"
                                                                             alt=""
                                                                         />
                                                                     </div>

@@ -393,12 +393,12 @@ function SocialMediaQR() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 mb-4">
-                                    <div className="mb-3">
+                                    <div className="mb-3 ">
                                         <input
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus

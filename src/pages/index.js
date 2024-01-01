@@ -49,7 +49,7 @@ export default function Home() {
                         <div className="logo">
                             <Link href={'/'}>
                                 <a>
-                                    <img src="img/logo.png" alt="" />
+                                    <img src="/img/logo.png" alt="" />
                                 </a>
                             </Link>
                         </div>

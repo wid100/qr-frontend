@@ -285,7 +285,7 @@ button.submit-form {
 
 .form-group-title {
     color: #fff;
-    padding: 15px 20px;
+    padding: 15px 30px;
     background: #898989;
     display: flex;
     align-items: center;
@@ -308,7 +308,7 @@ button.submit-form {
 }
 
 .color-plate {
-    padding: 15px 20px 25px 20px;
+    padding: 30px 30px 35px 30px;
 }
 
 .color-plate p {
@@ -367,7 +367,7 @@ button.submit-form {
 }
 
 .information-form {
-    padding: 20px;
+    padding: 30px 30px 45px 30px;
 }
 
 .socail-icon {
@@ -384,7 +384,7 @@ button.submit-form {
 
 .preview-bar {
     background: #00b2d9;
-    padding: 6px 10px;
+    padding: 12px 10px;
     border-radius: 4px;
     text-align: center;
     color: #fff;
@@ -465,11 +465,11 @@ p.dajignation {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
-    gap: 15px;
+    gap: 20px 15px;
     margin-bottom: 0;
 }
 .preview-icon-item {
-    width: 30px;
+    width: 35px;
     margin: auto;
 }
 
@@ -712,7 +712,8 @@ ul.social-aciton-right li a img {
     margin: auto auto 7px;
 }
 .card-list-right {
-    padding: 20px 20px 20px 30px !important;
+    padding: 20px 30px 80px 30px !important;
+    position: relative;
 }
 .preview-image {
     height: 100px;
@@ -1618,7 +1619,7 @@ button.eye-btn {
     font-size: 17px;
     font-weight: 500;
     color: #323032;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 .opening-preview-date-item {
     margin-top: 20px;
@@ -1629,6 +1630,10 @@ button.eye-btn {
     align-items: center;
     gap: 15px;
     margin-top: 12px;
+}
+.all-features-item img{
+    width: 25px;
+    cursor: pointer;
 }
 .opening-preview-date-item .contact-list-item {
     display: flex;
@@ -1664,5 +1669,90 @@ button.eye-btn {
     border-right: 1px solid;
 }
 
-.social-media-list-items {
+.preview-info-icon {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    background: #ffb317;
+    padding: 10px;
+    border-radius: 100%;
+    box-shadow: 5px 5px 10px #ddd;
+}
+
+
+/*       ==============  Upload Project Image =============  */
+.dropzone-upload-img{
+ border: 2px dashed #ddd;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.uploaded-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 25px 20px;
+
+}
+
+.image-container {
+  position: relative;
+}
+.image-swiper-container{
+    width: 100%;
+    height:300px;
+}
+.image-container img {
+width: 100%;
+height: 120px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.image-container button {
+    position: absolute;
+    top: -14px;
+    right: -4px;
+    background-color: #ffb317;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 100%;
+    font-size: 12px;
+}
+.upload-product-img-items{
+    position: relative;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px;
+  height: 30px;
+  background-color:  #ffb317;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.swiper-button-next {
+  right: -10px;
+}
+
+.swiper-button-prev {
+  left: -10px;
+}
+.swiper-button-disabled {
+    display: none;
 }

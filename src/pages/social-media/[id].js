@@ -398,7 +398,7 @@ function SocialMediaQRUpdate() {
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus

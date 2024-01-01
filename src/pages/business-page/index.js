@@ -1,6 +1,6 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
 // import htmlToImage from 'html-to-image'
 import InputError from '@/components/InputError'
@@ -8,38 +8,218 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import SocialMediaItems from '@/components/SocialMediaItems'
 import FeedbackItem from '@/components/FeedbackItem'
 import OpenDays from '@/components/business-page/OpenDays'
 import OpenDaysPreview from '@/components/business-page/OpenDaysPreview'
 import FeaturesAllItem from '@/components/business-page/FeaturesAllItem'
 import FeaturesAllItemPreview from '@/components/business-page/FeaturesAllItemPreview'
+import { DataIcons } from '@/DataIcon/DataIcons'
+import { useDropzone } from 'react-dropzone'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+// import 'swiper/css/free-mode'
+import 'swiper/css/pagination'
+import {    Navigation } from 'swiper/modules'
 
-function BusinesPageQR() {
+function BusinesPage() {
+// ================= Opening Days ==================
+  const daysOfWeek = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+  ]
+  const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
+      value: i,
+      label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
+  }))
+
+  const [schedule, setSchedule] = useState(
+      daysOfWeek.reduce((acc, day) => {
+          acc[day] = { startTime: 0, endTime: 0, checked: false }
+          return acc
+      }, {}),
+  )
+
+  const handleCheckboxChangeDate = day => {
+      setSchedule(prevSchedule => ({
+          ...prevSchedule,
+          [day]: {
+              ...prevSchedule[day],
+              checked: !prevSchedule[day].checked,
+          },
+      }))
+  }
+
+  const handleTimeChange = (day, field, value) => {
+      setSchedule(prevSchedule => ({
+          ...prevSchedule,
+          [day]: {
+              ...prevSchedule[day],
+              [field]: value,
+          },
+      }))
+  }
+    // ========= Upload Product Image ========
+const [uploadedFiles, setUploadedFiles] = useState([])
+const [swiperInstance, setSwiperInstance] = useState(null)
+
+const onDrop = acceptedFiles => {
+    const updatedFiles = uploadedFiles.concat(acceptedFiles)
+    setUploadedFiles(updatedFiles)
+}
+
+const removeFile = index => {
+    const updatedFiles = [...uploadedFiles]
+    updatedFiles.splice(index, 1)
+    setUploadedFiles(updatedFiles)
+}
+
+const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/*',
+})
+
+useEffect(() => {
+    // Update Swiper instance when uploadedFiles change
+    if (swiperInstance) {
+        swiperInstance.update()
+    }
+}, [uploadedFiles, swiperInstance])
+
+
+
+    // Social Media Item
+    const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
+    const [previewIcons, setPreviewIcons] = useState([])
+    const addInputField = socialPlatform => {
+        if (!selectedSocialPlatforms.includes(socialPlatform)) {
+            setSelectedSocialPlatforms(prevPlatforms => [
+                ...prevPlatforms,
+                socialPlatform,
+            ])
+            setPreviewIcons(prevIcons => [...prevIcons, socialPlatform])
+        }
+    }
+
+    const removeInputField = socialPlatform => {
+        setSelectedSocialPlatforms(prevPlatforms =>
+            prevPlatforms.filter(platform => platform !== socialPlatform),
+        )
+        setPreviewIcons(prevIcons =>
+            prevIcons.filter(icon => icon !== socialPlatform),
+        )
+    }
+
+    const renderPreviewIcons = () => {
+        return previewIcons.map((socialPlatform, index) => (
+            <div key={index} className="preview-icon-item">
+                <img
+                    src={
+                        DataIcons.find(
+                            item => item.name.toLowerCase() === socialPlatform,
+                        )?.img
+                    }
+                    alt={socialPlatform}
+                />
+            </div>
+        ))
+    }
+
+    const renderInputFields = () => {
+        return selectedSocialPlatforms.map((socialPlatform, index) => (
+            <div key={index} className="row d-flex align-items-center mb-2">
+                <div className="col-md-3">
+                    {/* Render label and icon based on selected social platform */}
+                    {DataIcons.map(item =>
+                        item.name.toLowerCase() === socialPlatform ? (
+                            <div className="info-form-label" key={item.id}>
+                                <p>{item.name}</p>
+                                <span>
+                                    <img src={item.img} alt={item.name} />
+                                </span>
+                            </div>
+                        ) : null,
+                    )}
+                </div>
+                <div className="col-md-9">
+                    {/* Your existing code for social media fields and input */}
+                    <div className="social-media-field">
+                        <div className="social-input-fields">
+                            <div className="icon-send">
+                                <span>URL</span>
+                                <span>*</span>
+                            </div>
+                            <div className="social-item">
+                                <input
+                                    type="text"
+                                    placeholder={`${socialPlatform}`}
+                                    id={`${socialPlatform}-${index}`}
+                                    name={`${socialPlatform}-${index}`}
+                                    // onChange={e =>
+                                    //     inputsHandler(
+                                    //         `${socialPlatform}-${index}`,
+                                    //         e.target.value,
+                                    //     )
+                                    // }
+                                />
+                                <span>
+                                    <InputError
+                                        messages={errors[socialPlatform]}
+                                        className="mt-2"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => removeInputField(socialPlatform)}>
+                            <span>&#10006;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+
+
+
+
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
-// Features item
- const featuresData = [
-     '/img/icons/feature-1.svg',
-     '/img/icons/feature-2.svg',
-     '/img/icons/feature-3.svg',
-     '/img/icons/feature-4.svg',
- ]
-const [selectedItem, setSelectedItem] = useState([])
+    // Features item
+    const featuresData = [
+        '/img/icons/feature-1.svg',
+        '/img/icons/feature-2.svg',
+        '/img/icons/feature-3.svg',
+        '/img/icons/feature-4.svg',
+        '/img/icons/feature-5.svg',
+        '/img/icons/feature-6.svg',
+        '/img/icons/feature-7.svg',
+        '/img/icons/feature-8.svg',
+        '/img/icons/feature-9.svg',
+        '/img/icons/feature-10.svg',
+        '/img/icons/feature-11.svg',
+        '/img/icons/feature-12.svg',
+        '/img/icons/feature-13.svg',
+    ]
+    const [selectedItem, setSelectedItem] = useState([])
 
-const handleItemClick = index => {
-    setSelectedItem(prevSelected => {
-        if (prevSelected.includes(index)) {
-            // Deselect the item
-            return prevSelected.filter(item => item !== index)
-        } else {
-            // Select the item
-            return [...prevSelected, index]
-        }
-    })
-}
+    const handleItemClick = index => {
+        setSelectedItem(prevSelected => {
+            if (prevSelected.includes(index)) {
+                // Deselect the item
+                return prevSelected.filter(item => item !== index)
+            } else {
+                // Select the item
+                return [...prevSelected, index]
+            }
+        })
+    }
 
     // Function to handle select box changes
     const handleSelectChange = event => {
@@ -306,7 +486,7 @@ const handleItemClick = index => {
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
@@ -360,10 +540,10 @@ const handleItemClick = index => {
 
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/1.png" />
+                                                            <img src="/img/color/1.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -384,10 +564,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/2.png" />
+                                                            <img src="/img/color/2.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -408,10 +588,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/3.png" />
+                                                            <img src="/img/color/3.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -432,10 +612,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/4.png" />
+                                                            <img src="/img/color/4.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -456,10 +636,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/5.png" />
+                                                            <img src="/img/color/5.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -480,10 +660,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/6.png" />
+                                                            <img src="/img/color/6.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -504,10 +684,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/7.png" />
+                                                            <img src="/img/color/7.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -528,10 +708,10 @@ const handleItemClick = index => {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/8.png" />
+                                                            <img src="/img/color/8.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -810,14 +990,22 @@ const handleItemClick = index => {
                                         </div>
                                     </div>
 
-                                    <OpenDays />
+                                    <OpenDays
+                                        handleCheckboxChangeDate={
+                                            handleCheckboxChangeDate
+                                        }
+                                        handleTimeChange={handleTimeChange}
+                                        daysOfWeek={daysOfWeek}
+                                        hoursOfDay={hoursOfDay}
+                                        schedule={schedule}
+                                    />
                                     <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#openOffice"
+                                            data-bs-target="#addressLoction"
                                             aria-expanded="true"
-                                            aria-controls="openOffice">
+                                            aria-controls="addressLoction">
                                             <p>Address & location</p>
                                             <div className="bottom-arrow">
                                                 <img
@@ -829,7 +1017,7 @@ const handleItemClick = index => {
 
                                         <div
                                             className="information-form collapse show"
-                                            id="openOffice">
+                                            id="addressLoction">
                                             <p>
                                                 Provide your address and
                                                 location information.
@@ -926,9 +1114,9 @@ const handleItemClick = index => {
                                         <div
                                             className="form-group-title"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#openOffice"
+                                            data-bs-target="#contactInformation"
                                             aria-expanded="true"
-                                            aria-controls="openOffice">
+                                            aria-controls="contactInformation">
                                             <p>About and Contact Informaion</p>
                                             <div className="bottom-arrow">
                                                 <img
@@ -940,7 +1128,7 @@ const handleItemClick = index => {
 
                                         <div
                                             className="information-form collapse show"
-                                            id="openOffice">
+                                            id="contactInformation">
                                             <p>
                                                 Add more detailed information
                                                 about your business and provide
@@ -1085,12 +1273,149 @@ const handleItemClick = index => {
                                             </div>
                                         </div>
                                     </div>
-                                    <SocialMediaItems
-                                        inputsHandler={inputsHandler}
-                                        inputField={inputField}
-                                        InputError={InputError}
-                                        errors={errors}
-                                    />
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#uploadProduct"
+                                            aria-expanded="true"
+                                            aria-controls="uploadProduct">
+                                            <p>Upload Products</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="information-form collapse show"
+                                            id="uploadProduct">
+                                            <p>
+                                                Choose product image from your
+                                                gallery.
+                                            </p>
+                                            <div className="row mt-4">
+                                                <div className="col-md-4">
+                                                    <div
+                                                        {...getRootProps()}
+                                                        className="dropzone-upload-img">
+                                                        <input
+                                                            {...getInputProps()}
+                                                        />
+                                                        <img
+                                                            src="/img/icons/upload.svg"
+                                                            alt=""
+                                                        />
+                                                        <p>
+                                                            Click or drag file
+                                                            to this area to
+                                                            upload
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <div className="uploaded-images">
+                                                        {uploadedFiles.map(
+                                                            (file, index) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="image-container">
+                                                                    <img
+                                                                        src={URL.createObjectURL(
+                                                                            file,
+                                                                        )}
+                                                                        alt={`Uploaded ${file.name}`}
+                                                                    />
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            removeFile(
+                                                                                index,
+                                                                            )
+                                                                        }>
+                                                                        <svg
+                                                                            width="12"
+                                                                            height="12"
+                                                                            viewBox="0 0 18 18"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M1.8 18L0 16.2L7.2 9L0 1.8L1.8 0L9 7.2L16.2 0L18 1.8L10.8 9L18 16.2L16.2 18L9 10.8L1.8 18Z"
+                                                                                fill="white"
+                                                                            />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            ),
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ========== Social Media Item ============ */}
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#social-media"
+                                            aria-expanded="false"
+                                            aria-controls="social-media">
+                                            <p>Social media</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="color-plate collapse"
+                                            id="social-media">
+                                            <p className="mb-3">
+                                                Click on the icon to add social
+                                                media channel:
+                                            </p>
+
+                                            <div className="social-list-item">
+                                                {renderInputFields()}
+                                            </div>
+
+                                            <div className="row mt-4 mb-4">
+                                                <div className="col-md-3">
+                                                    <div className="info-form-label">
+                                                        <p>Add more:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9">
+                                                    <div className="social-all-item">
+                                                        {DataIcons.map(item => (
+                                                            <div
+                                                                className="social-icon-item"
+                                                                key={item.id}
+                                                                onClick={() =>
+                                                                    addInputField(
+                                                                        item.name.toLowerCase(),
+                                                                    )
+                                                                }>
+                                                                <img
+                                                                    src={
+                                                                        item.img
+                                                                    }
+                                                                    alt=""
+                                                                />
+                                                                <span>
+                                                                    {item.name}
+                                                                </span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1179,8 +1504,11 @@ const handleItemClick = index => {
                                                 </div>
                                                 <div className="col-md-10">
                                                     <div className="share-check-item d-flex align-items-center gap-2">
-                                                        <input type="checkbox" id='check'/>
-                                                        <label htmlFor='check'>
+                                                        <input
+                                                            type="checkbox"
+                                                            id="check"
+                                                        />
+                                                        <label htmlFor="check">
                                                             Add a share button
                                                             to the page.
                                                         </label>
@@ -1298,7 +1626,12 @@ const handleItemClick = index => {
                                                         <h4 className="opening-preview-title">
                                                             Opening Hours
                                                         </h4>
-                                                        <OpenDaysPreview />
+                                                        <OpenDaysPreview
+                                                            schedule={schedule}
+                                                            daysOfWeek={
+                                                                daysOfWeek
+                                                            }
+                                                        />
                                                     </li>
                                                     <li className="opening-preview-date-item">
                                                         <h4 className="opening-preview-title">
@@ -1317,7 +1650,7 @@ const handleItemClick = index => {
                                                         <h4 className="opening-preview-title">
                                                             Contact
                                                         </h4>
-                                                        <ul className='contact-list-item'>
+                                                        <ul className="contact-list-item">
                                                             <li>
                                                                 <span>Joy</span>
                                                                 <p> Name</p>
@@ -1345,6 +1678,66 @@ const handleItemClick = index => {
                                                     </li>
                                                     <li className="opening-preview-date-item">
                                                         <h4 className="opening-preview-title">
+                                                            Products
+                                                        </h4>
+                                                        <div className="upload-product-img-items">
+                                                            <Swiper
+                                                                slidesPerView={
+                                                                    1
+                                                                }
+                                                                spaceBetween={
+                                                                    10
+                                                                }
+                                                                pagination={{
+                                                                    clickable: true,
+                                                                }}
+                                                                navigation={{
+                                                                    nextEl:
+                                                                        '.swiper-button-next',
+                                                                    prevEl:
+                                                                        '.swiper-button-prev',
+                                                                }}
+                                                                modules={[
+                                                                    Navigation,
+                                                                ]}
+                                                                className="mySwiper">
+                                                                {uploadedFiles.map(
+                                                                    (
+                                                                        file,
+                                                                        index,
+                                                                    ) => (
+                                                                        <SwiperSlide
+                                                                            key={
+                                                                                index
+                                                                            }>
+                                                                            <div className="image-swiper-container">
+                                                                                <img
+                                                                                    src={URL.createObjectURL(
+                                                                                        file,
+                                                                                    )}
+                                                                                    alt={`Uploaded ${file.name}`}
+                                                                                />
+                                                                            </div>
+                                                                        </SwiperSlide>
+                                                                    ),
+                                                                )}
+                                                            </Swiper>
+                                                            <div className="swiper-button-next">
+                                                                <img
+                                                                    src="/img/icons/right-arrow.svg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                            <div className="swiper-button-prev">
+                                                                <img
+                                                                    src="/img/icons/left.svg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li className="opening-preview-date-item">
+                                                        <h4 className="opening-preview-title">
                                                             Facility Features
                                                         </h4>
                                                         {Array.isArray(
@@ -1366,68 +1759,17 @@ const handleItemClick = index => {
                                                     <li className="card-list-li card-list-social">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/share.svg"
+                                                                src="/img/icon/share.svg"
                                                                 alt=""
                                                             />
                                                         </div>
                                                         <div className="info-show border-none">
-                                                            <ul>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.facebook
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/fb.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.github
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/github.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.twitter
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/tw.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.instagram
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/ins.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a
-                                                                        href={
-                                                                            inputField.youtube
-                                                                        }>
-                                                                        <img
-                                                                            src="img/icon/youtube.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                                            <h4 className="opening-preview-title">
+                                                                Social Media
+                                                            </h4>
+                                                            <div className="social-media-list-items">
+                                                                {renderPreviewIcons()}
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1476,4 +1818,4 @@ const handleItemClick = index => {
     )
 }
 
-export default BusinesPageQR;
+export default BusinesPage;

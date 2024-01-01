@@ -378,7 +378,7 @@ function CreateQR() {
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
@@ -403,7 +403,7 @@ function CreateQR() {
                                             </p>
                                             <div className="bottom-arrow">
                                                 <img
-                                                    src="/img/icons/bottom-arrow.svg"
+                                                    src="/img//icons/bottom-arrow.svg"
                                                     alt=""
                                                 />
                                             </div>
@@ -432,10 +432,10 @@ function CreateQR() {
 
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/1.png" />
+                                                            <img src="/img/color/1.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -456,10 +456,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/2.png" />
+                                                            <img src="/img/color/2.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -480,10 +480,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/3.png" />
+                                                            <img src="/img/color/3.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -504,10 +504,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/4.png" />
+                                                            <img src="/img/color/4.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -528,10 +528,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/5.png" />
+                                                            <img src="/img/color/5.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -552,10 +552,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/6.png" />
+                                                            <img src="/img/color/6.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -576,10 +576,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/7.png" />
+                                                            <img src="/img/color/7.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -600,10 +600,10 @@ function CreateQR() {
                                                     />
                                                     <span className="radio-btn">
                                                         <div className="hobbies-icon">
-                                                            <img src="img/color/8.png" />
+                                                            <img src="/img/color/8.png" />
                                                         </div>
                                                         <img
-                                                            src="img/icon/mark.svg"
+                                                            src="/img/icon/mark.svg"
                                                             className="mark-icon"
                                                             alt=""
                                                         />
@@ -769,7 +769,7 @@ function CreateQR() {
                                             <p>Your information</p>
                                             <div className="bottom-arrow">
                                                 <img
-                                                    src="/img/icons/bottom-arrow.svg"
+                                                    src="/img//icons/bottom-arrow.svg"
                                                     alt=""
                                                 />
                                             </div>
@@ -1119,7 +1119,7 @@ function CreateQR() {
                                             <p>Social media</p>
                                             <div className="bottom-arrow">
                                                 <img
-                                                    src="/img/icons/bottom-arrow.svg"
+                                                    src="/img//icons/bottom-arrow.svg"
                                                     alt=""
                                                 />
                                             </div>
@@ -1182,7 +1182,7 @@ function CreateQR() {
                                             <p>Welcome screen</p>
                                             <div className="bottom-arrow">
                                                 <img
-                                                    src="/img/icons/bottom-arrow.svg"
+                                                    src="/img//icons/bottom-arrow.svg"
                                                     alt=""
                                                 />
                                             </div>
@@ -1242,7 +1242,7 @@ function CreateQR() {
                                             <p>Advance Options</p>
                                             <div className="bottom-arrow">
                                                 <img
-                                                    src="/img/icons/bottom-arrow.svg"
+                                                    src="/img//icons/bottom-arrow.svg"
                                                     alt=""
                                                 />
                                             </div>
@@ -1330,7 +1330,7 @@ function CreateQR() {
                                                         <a
                                                             href={`tel:${inputField.mobile1}`}>
                                                             <img
-                                                                src="img/icon/call.svg"
+                                                                src="/img/icon/call.svg"
                                                                 alt=""
                                                             />
                                                             <p>Call</p>
@@ -1340,7 +1340,7 @@ function CreateQR() {
                                                         <a
                                                             href={`mailto:${inputField.email1}`}>
                                                             <img
-                                                                src="img/icon/telegram2.svg"
+                                                                src="/img/icon/telegram2.svg"
                                                                 alt=""
                                                             />
                                                             <p>Email</p>
@@ -1350,7 +1350,7 @@ function CreateQR() {
                                                         <a
                                                             href={`location:${inputField.address1}`}>
                                                             <img
-                                                                src="img/icon/location.svg"
+                                                                src="/img/icon/location.svg"
                                                                 alt=""
                                                             />
                                                             <p>Location</p>
@@ -1411,7 +1411,7 @@ function CreateQR() {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/phone.svg"
+                                                                src="/img/icon/phone.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1430,7 +1430,7 @@ function CreateQR() {
                                                         {' '}
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/email.svg"
+                                                                src="/img/icon/email.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1447,7 +1447,7 @@ function CreateQR() {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/toffee.svg"
+                                                                src="/img/icon/toffee.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1466,7 +1466,7 @@ function CreateQR() {
                                                     <li className="card-list-li">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/web.svg"
+                                                                src="/img/icon/web.svg"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -1485,7 +1485,7 @@ function CreateQR() {
                                                     <li className="card-list-li card-list-social">
                                                         <div className="preview-info-icon">
                                                             <img
-                                                                src="img/icon/share.svg"
+                                                                src="/img/icon/share.svg"
                                                                 alt=""
                                                             />
                                                         </div>

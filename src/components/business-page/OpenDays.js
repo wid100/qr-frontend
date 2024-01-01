@@ -1,47 +1,55 @@
 import React, { useState } from 'react'
 
-const OpenDays = () => {
-    const daysOfWeek = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-    ]
-    const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
-        value: i,
-        label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
-    }))
+const OpenDays = ({
+    daysOfWeek,
+    handleTimeChange,
+    hoursOfDay,
+    handleCheckboxChangeDate,
+    schedule,
+}) => {
+    // const daysOfWeek = [
+    //     'Monday',
+    //     'Tuesday',
+    //     'Wednesday',
+    //     'Thursday',
+    //     'Friday',
+    //     'Saturday',
+    //     'Sunday',
+    // ]
+    // const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
+    //     value: i,
+    //     label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
+    // }))
 
-    const [schedule, setSchedule] = useState(
-        daysOfWeek.reduce((acc, day) => {
-            acc[day] = { startTime: 0, endTime: 0, checked: false }
-            return acc
-        }, {}),
+    // const [schedule, setSchedule] = useState(
+    //     daysOfWeek.reduce((acc, day) => {
+    //         acc[day] = { startTime: 0, endTime: 0, checked: false }
+    //         return acc
+    //     }, {}),
+    // )
+
+    // const handleCheckboxChange = day => {
+    //     setSchedule(prevSchedule => ({
+    //         ...prevSchedule,
+    //         [day]: {
+    //             ...prevSchedule[day],
+    //             checked: !prevSchedule[day].checked,
+    //         },
+    //     }))
+    // }
+
+    // const handleTimeChange = (day, field, value) => {
+    //     setSchedule(prevSchedule => ({
+    //         ...prevSchedule,
+    //         [day]: {
+    //             ...prevSchedule[day],
+    //             [field]: value,
+    //         },
+    //     }))
+    // }
+    const allCheckboxesChecked = Object.values(schedule).every(
+        day => day.checked,
     )
-
-    const handleCheckboxChange = day => {
-        setSchedule(prevSchedule => ({
-            ...prevSchedule,
-            [day]: {
-                ...prevSchedule[day],
-                checked: !prevSchedule[day].checked,
-            },
-        }))
-    }
-
-    const handleTimeChange = (day, field, value) => {
-        setSchedule(prevSchedule => ({
-            ...prevSchedule,
-            [day]: {
-                ...prevSchedule[day],
-                [field]: value,
-            },
-        }))
-    }
-const allCheckboxesChecked = Object.values(schedule).every(day => day.checked)
     return (
         <>
             <div className="form-group-wrapper mt-3">
@@ -70,7 +78,9 @@ const allCheckboxesChecked = Object.values(schedule).every(day => day.checked)
                                                 id={day.toLowerCase()}
                                                 checked={schedule[day].checked}
                                                 onChange={() =>
-                                                    handleCheckboxChange(day)
+                                                    handleCheckboxChangeDate(
+                                                        day,
+                                                    )
                                                 }
                                             />
                                             <label htmlFor={day.toLowerCase()}>
