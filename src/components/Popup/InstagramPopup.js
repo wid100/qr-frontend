@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
 import { useDropzone } from 'react-dropzone'
 import { toPng } from 'html-to-image'
-const Popup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
+const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
     const [selectedFileIndex, setSelectedFileIndex] = useState(null)
     const [selectedColor, setSelectedColor] = useState('#000000')
     const handleColorChange = event => {
@@ -644,7 +644,7 @@ const Popup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
                                                         className="form-label color-pic-label">
                                                         Frame Text
                                                     </label>
-                                                    <div className='frame-input-text-name'>
+                                                    <div className="frame-input-text-name">
                                                         <input
                                                             type="text"
                                                             className=" form-control-color form-control-color-frame-text"
@@ -784,4 +784,4 @@ const Popup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
     )
 }
 
-export default Popup
+export default InstagramPopup

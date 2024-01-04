@@ -251,7 +251,7 @@ export default function Home() {
                                 <div className="vcard-roadmap-content-item">
                                     <div className="roadmap-img">
                                         <img
-                                            src="/img/home/roadmap-1.png"
+                                            src="/img/home/roadmap-1.svg"
                                             alt=""
                                         />
                                     </div>
@@ -295,7 +295,7 @@ export default function Home() {
                                 <div className="vcard-roadmap-content-item vcard-roadmap-content-item2">
                                     <div className="roadmap-img">
                                         <img
-                                            src="/img/home/roadmap-2.png"
+                                            src="/img/home/roadmap-2.svg"
                                             alt=""
                                         />
                                     </div>
@@ -305,7 +305,7 @@ export default function Home() {
                                 <div className="vcard-roadmap-content-item ">
                                     <div className="roadmap-img">
                                         <img
-                                            src="/img/home/roadmap-3.png"
+                                            src="/img/home/roadmap-3.svg"
                                             alt=""
                                         />
                                     </div>

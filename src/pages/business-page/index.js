@@ -1273,7 +1273,7 @@ useEffect(() => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="form-group-wrapper mt-3">
+                                    {/* <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
                                             data-bs-toggle="collapse"
@@ -1296,6 +1296,11 @@ useEffect(() => {
                                                 Choose product image from your
                                                 gallery.
                                             </p>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    
+                                                </div>
+                                            </div>
                                             <div className="row mt-4">
                                                 <div className="col-md-4">
                                                     <div
@@ -1353,7 +1358,7 @@ useEffect(() => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* ========== Social Media Item ============ */}
                                     <div className="form-group-wrapper mt-3">
                                         <div

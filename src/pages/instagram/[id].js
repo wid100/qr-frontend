@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 
-function UpdateWebiste() {
+function InstagramPageUpdate() {
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
@@ -266,7 +266,7 @@ function UpdateWebiste() {
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
-                                            placeholder="Name your website"
+                                            placeholder="Name your QR Instagram"
                                         />
                                         <InputError
                                             messages={errors.cardname}
@@ -281,7 +281,7 @@ function UpdateWebiste() {
                                             data-bs-target="#website"
                                             aria-expanded="false"
                                             aria-controls="website">
-                                            <p>Enter your Website </p>
+                                            <p>Basic Information</p>
                                             <div className="bottom-arrow">
                                                 <img
                                                     src="/img/icons/bottom-arrow.svg"
@@ -294,17 +294,19 @@ function UpdateWebiste() {
                                             className="information-form collapse show"
                                             id="website">
                                             <p>
-                                                Type in the website to link with
-                                                your QR Code
+                                                Type in the Instagram username
+                                                of your business to link with
+                                                the QR Code.
                                             </p>
                                             <div className="row mt-3">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Name:</p>
+                                                        <p>Username:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
-                                                    <div className="mb-3">
+                                                    <div className="mb-3 instagram-input-fluid">
+                                                        <span>@ *</span>
                                                         <input
                                                             id="mobile1"
                                                             type="text"
@@ -316,7 +318,7 @@ function UpdateWebiste() {
                                                             value={
                                                                 inputField.mobile1
                                                             }
-                                                            placeholder="Mobile number"
+                                                            placeholder="username"
                                                         />
                                                         <InputError
                                                             messages={
@@ -383,7 +385,7 @@ function UpdateWebiste() {
                             </div>
                         </div>
 
-                        <div className="submit-form">
+                        <div className="submit-form footer-submit-from">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-8">
@@ -421,4 +423,4 @@ function UpdateWebiste() {
     )
 }
 
-export default UpdateWebiste
+export default InstagramPageUpdate

@@ -17,10 +17,52 @@ import { DataIcons } from '@/DataIcon/DataIcons'
 import { useDropzone } from 'react-dropzone'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+// import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
 import { Navigation } from 'swiper/modules'
 
 function BusinesPageUpdate() {
+    // ================= Opening Days ==================
+    const daysOfWeek = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+    ]
+    const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
+        value: i,
+        label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
+    }))
+
+    const [schedule, setSchedule] = useState(
+        daysOfWeek.reduce((acc, day) => {
+            acc[day] = { startTime: 0, endTime: 0, checked: false }
+            return acc
+        }, {}),
+    )
+
+    const handleCheckboxChangeDate = day => {
+        setSchedule(prevSchedule => ({
+            ...prevSchedule,
+            [day]: {
+                ...prevSchedule[day],
+                checked: !prevSchedule[day].checked,
+            },
+        }))
+    }
+
+    const handleTimeChange = (day, field, value) => {
+        setSchedule(prevSchedule => ({
+            ...prevSchedule,
+            [day]: {
+                ...prevSchedule[day],
+                [field]: value,
+            },
+        }))
+    }
     // ========= Upload Product Image ========
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [swiperInstance, setSwiperInstance] = useState(null)
@@ -943,7 +985,15 @@ function BusinesPageUpdate() {
                                         </div>
                                     </div>
 
-                                    <OpenDays />
+                                    <OpenDays
+                                        handleCheckboxChangeDate={
+                                            handleCheckboxChangeDate
+                                        }
+                                        handleTimeChange={handleTimeChange}
+                                        daysOfWeek={daysOfWeek}
+                                        hoursOfDay={hoursOfDay}
+                                        schedule={schedule}
+                                    />
                                     <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
@@ -1218,7 +1268,7 @@ function BusinesPageUpdate() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="form-group-wrapper mt-3">
+                                    {/* <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
                                             data-bs-toggle="collapse"
@@ -1241,6 +1291,9 @@ function BusinesPageUpdate() {
                                                 Choose product image from your
                                                 gallery.
                                             </p>
+                                            <div className="row">
+                                                <div className="col-md-12"></div>
+                                            </div>
                                             <div className="row mt-4">
                                                 <div className="col-md-4">
                                                     <div
@@ -1298,7 +1351,7 @@ function BusinesPageUpdate() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* ========== Social Media Item ============ */}
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1571,7 +1624,12 @@ function BusinesPageUpdate() {
                                                         <h4 className="opening-preview-title">
                                                             Opening Hours
                                                         </h4>
-                                                        <OpenDaysPreview />
+                                                        <OpenDaysPreview
+                                                            schedule={schedule}
+                                                            daysOfWeek={
+                                                                daysOfWeek
+                                                            }
+                                                        />
                                                     </li>
                                                     <li className="opening-preview-date-item">
                                                         <h4 className="opening-preview-title">
@@ -1674,24 +1732,6 @@ function BusinesPageUpdate() {
                                                                     alt=""
                                                                 />
                                                             </div>
-
-                                                            {/* {uploadedFiles.length >
-                                                                1 && (
-                                                                <>
-                                                                    <div className="swiper-button-next">
-                                                                        <img
-                                                                            src="/img/icons/right-arrow.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </div>
-                                                                    <div className="swiper-button-prev">
-                                                                        <img
-                                                                            src="/img/icons/left.svg"
-                                                                            alt=""
-                                                                        />
-                                                                    </div>
-                                                                </>
-                                                            )} */}
                                                         </div>
                                                     </li>
                                                     <li className="opening-preview-date-item">

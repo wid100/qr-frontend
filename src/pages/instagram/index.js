@@ -8,8 +8,16 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
+import InstagramPopup from '@/components/Popup/instagramPopup'
 
-function Instagram() {
+function InstagramPage() {
+// Popup 
+const [activePopup, setActivePopup] = useState(true)
+
+const handlePopup = () => {
+    setActivePopup(!activePopup)
+}
+
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
@@ -262,7 +270,7 @@ function Instagram() {
                                             id="cardName"
                                             type="text"
                                             name="cardName"
-                                            className="form-control"
+                                            className="form-control p-4"
                                             onChange={inputsHandler}
                                             value={inputField.cardName}
                                             autoFocus
@@ -327,7 +335,6 @@ function Instagram() {
                                                             className="mt-2"
                                                         />
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -408,6 +415,7 @@ function Instagram() {
                                             ) : (
                                                 <button
                                                     className="submit-details-form"
+                                                    onClick={handlePopup}
                                                     type="submit">
                                                     Submit
                                                 </button>
@@ -417,6 +425,12 @@ function Instagram() {
                                 </div>
                             </div>
                         </div>
+                        <InstagramPopup
+                            handlePopup={handlePopup}
+                            activePopup={activePopup}
+                            componentRef={componentRef}
+                            uniqueSlug={uniqueSlug}
+                        />
                     </form>
                 </div>
             </section>
@@ -424,4 +438,4 @@ function Instagram() {
     )
 }
 
-export default Instagram
+export default InstagramPage
