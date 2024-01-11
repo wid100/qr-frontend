@@ -69,7 +69,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
             <QRCode
                 fgColor={selectedCodeColor}
                 value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                size={233}
+                size={231}
             />
             {selectedFileIndex !== null &&
                 uploadedFiles[selectedFileIndex] !== undefined && (
@@ -108,7 +108,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     : 'popup-frame-list-item-view'
                                             }>
                                             <div
-                                                className="popup-frame-item-first"
+                                                className="popup-frame-item-first popup-frame-item-con"
                                                 style={{
                                                     backgroundColor: selectedColor,
                                                 }}>
@@ -127,7 +127,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-second">
+                                            <div className="popup-frame-item-second popup-frame-item-con">
                                                 <div
                                                     className="qr-item-item"
                                                     style={{
@@ -151,7 +151,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-third">
+                                            <div className="popup-frame-item-third popup-frame-item-con">
                                                 <div
                                                     style={{
                                                         background: selectedColor,
@@ -190,7 +190,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-four">
+                                            <div className="popup-frame-item-four popup-frame-item-con">
                                                 <div
                                                     className="qr-item-item"
                                                     style={{
@@ -228,7 +228,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-five">
+                                            <div className="popup-frame-item-five popup-frame-item-con">
                                                 <div
                                                     className="qr-item-item"
                                                     style={{
@@ -266,7 +266,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     : 'popup-frame-list-item-view'
                                             }>
                                             <div
-                                                className="popup-frame-item-first popup-frame-item-six"
+                                                className="popup-frame-item-first popup-frame-item-six popup-frame-item-con"
                                                 style={{
                                                     backgroundColor: selectedColor,
                                                 }}>
@@ -300,7 +300,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-seven">
+                                            <div className="popup-frame-item-seven popup-frame-item-con">
                                                 <div className="popup-frame-item-seven-head">
                                                     <div className="frame-icon-7">
                                                         <svg
@@ -404,7 +404,7 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     ? 'popup-frame-list-item-view active'
                                                     : 'popup-frame-list-item-view'
                                             }>
-                                            <div className="popup-frame-item-eight">
+                                            <div className="popup-frame-item-eight popup-frame-item-con">
                                                 <div
                                                     className="qr-item-item"
                                                     style={{
@@ -465,6 +465,79 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     </div>
                                                     <div className="scan-me-text scan-me-text-eight">
                                                         <h4>SCAN ME</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                activeFrame === 9
+                                                    ? 'popup-frame-list-item-view active'
+                                                    : 'popup-frame-list-item-view'
+                                            }>
+                                            <div className="popup-frame-item-eight popup-frame-item-con">
+                                                <div className="qr-item-item popup-frame-item-nine-border">
+                                                    {qrCodeView()}
+                                                </div>
+                                                <div className="popup-frame-item-nine-bottom">
+                                                    <h4>FOLLOW US ON</h4>
+                                                    <div className="instagram-icon-item">
+                                                        <img
+                                                            src="/img/icons/instagram1.svg"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                activeFrame === 10
+                                                    ? 'popup-frame-list-item-view active'
+                                                    : 'popup-frame-list-item-view'
+                                            }>
+                                            <div className="popup-frame-item-ten popup-frame-item-con">
+                                                <div className="popup-frame-item-ten-header">
+                                                    <h4>FOLLOW US ON</h4>
+                                                </div>
+                                                <div className="qr-item-item">
+                                                    {qrCodeView()}
+                                                </div>
+                                                <div className="popup-frame-item-ten-bottom">
+                                                    <div className="instagram-icon-item">
+                                                        <img
+                                                            src="/img/icons/heart.svg"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div className="instagram-icon-item">
+                                                        <img
+                                                            src="/img/icons/instagram-text.svg"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                activeFrame === 11
+                                                    ? 'popup-frame-list-item-view active'
+                                                    : 'popup-frame-list-item-view'
+                                            }>
+                                            <div className="popup-frame-item-elevent popup-frame-item-con">
+                                                <div className="popup-frame-item-elevent-header">
+                                                    <h4>FOLLOW US ON</h4>
+                                                </div>
+                                                <div className="qr-item-item">
+                                                    {qrCodeView()}
+                                                </div>
+                                                <div className="popup-frame-item-elevent-bottom">
+                                                    <div className="instagram-icon-item ">
+                                                        <img
+                                                            src="/img/icons/instagram-text-2.svg"
+                                                            alt=""
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -609,6 +682,48 @@ const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) 
                                                     }>
                                                     <img
                                                         src="/img/icons/frame-8.png"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div
+                                                    className={
+                                                        activeFrame === 9
+                                                            ? 'popup-frame-list-item active'
+                                                            : ' popup-frame-list-item'
+                                                    }
+                                                    onClick={() =>
+                                                        toggleFrame(9)
+                                                    }>
+                                                    <img
+                                                        src="/img/icons/frame-9.png"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div
+                                                    className={
+                                                        activeFrame === 10
+                                                            ? 'popup-frame-list-item active'
+                                                            : ' popup-frame-list-item'
+                                                    }
+                                                    onClick={() =>
+                                                        toggleFrame(10)
+                                                    }>
+                                                    <img
+                                                        src="/img/icons/frame-10.png"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div
+                                                    className={
+                                                        activeFrame === 11
+                                                            ? 'popup-frame-list-item active'
+                                                            : ' popup-frame-list-item'
+                                                    }
+                                                    onClick={() =>
+                                                        toggleFrame(11)
+                                                    }>
+                                                    <img
+                                                        src="/img/icons/frame-11.png"
                                                         alt=""
                                                     />
                                                 </div>

@@ -8,15 +8,15 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import InstagramPopup from '@/components/Popup/instagramPopup'
+import InstagramPopup from '@/components/Popup/InstagramPopup'
 
 function InstagramPage() {
-// Popup 
-const [activePopup, setActivePopup] = useState(true)
+    // Popup
+    const [activePopup, setActivePopup] = useState(true)
 
-const handlePopup = () => {
-    setActivePopup(!activePopup)
-}
+    const handlePopup = () => {
+        setActivePopup(!activePopup)
+    }
 
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
