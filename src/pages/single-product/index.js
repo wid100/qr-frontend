@@ -416,21 +416,86 @@ function SingleProductPage() {
                                                 </div>
                                             </div>
 
-                                            <div className="row ">
+                                            <div className="row d-flex align-items-center">
                                                 <div className="col-md-3">
                                                     <div className="info-form-label">
                                                         <p>Price*:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-9">
-                                                    <div className="product-price-item d-flex align-items-center gap-3">
-                                                        <p>Sale Price*:</p>
-                                                        <div className="product-price">
-                                                            <span>BDT</span>
+                                                    <div className="row ">
+                                                        <div className="col-md-6">
+                                                            <div className="product-price-item d-flex align-items-center">
+                                                                <div className="product-price d-flex align-items-center gap-2">
+                                                                    <span>
+                                                                        BDT
+                                                                    </span>
+                                                                    <input
+                                                                        type="number"
+                                                                        placeholder="500 ৳"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className='d-flex align-items-center gap-3'>
+                                                                <p>
+                                                                    Discount*:
+                                                                </p>
+                                                                <div className="product-price-item d-flex align-items-center">
+                                                                    <div className="product-price">
+                                                                        <input
+                                                                            type="number"
+                                                                            placeholder="20%"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col-md-3">
+                                                    <div className="info-form-label">
+                                                        <p>Product Size*:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9">
+                                                    <div className="product-size-items">
+                                                        <div className="product-size-item">
                                                             <input
-                                                                type="number"
-                                                                min="1"
-                                                                max="10"
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder="S"
+                                                            />
+                                                        </div>
+                                                        <div className="product-size-item">
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder="M"
+                                                            />
+                                                        </div>
+                                                        <div className="product-size-item">
+                                                            <input
+                                                                type="text"
+                                                                placeholder="L"
+                                                                className="form-control"
+                                                            />
+                                                        </div>
+                                                        <div className="product-size-item">
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder="XL"
+                                                            />
+                                                        </div>
+                                                        <div className="product-size-item">
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                placeholder="XXL"
                                                             />
                                                         </div>
                                                     </div>
@@ -439,42 +504,17 @@ function SingleProductPage() {
                                             <div className="row ">
                                                 <div className="col-md-3">
                                                     <div className="info-form-label">
-                                                        <p>Product Size*:</p>
+                                                        <p>Quantity*:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-9">
-                                                    <div className="product-size-items d-flex align-items-center gap-3">
-                                                        <div className="product-size-item">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="S"
-                                                            />
-                                                        </div>
-                                                        <div className="product-size-item">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="M"
-                                                            />
-                                                        </div>
-                                                        <div className="product-size-item">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="L"
-                                                            />
-                                                        </div>
-                                                        <div className="product-size-item">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="XL"
-                                                            />
-                                                        </div>
-                                                        <div className="product-size-item">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="XXL"
-                                                            />
-                                                        </div>
-                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        name="cardName"
+                                                        className="form-control"
+                                                        autoFocus
+                                                        placeholder="123"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

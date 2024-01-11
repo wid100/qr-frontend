@@ -256,7 +256,11 @@ button.submit-form {
     right: 0;
     top: 0;
 }
-
+.business-image-con{
+        display: flex;
+    align-items: center;
+gap: 30px;
+}
 .upload-image {
     display: flex;
     align-items: center;
@@ -383,10 +387,21 @@ button.submit-form {
 }
 
 .preview-bar {
-    background: #00b2d9;
     padding: 12px 10px;
     border-radius: 4px;
     text-align: center;
+    color: #000;
+    background: #D9D9D9;
+    width: 100%;
+}
+.preview .preview-btn-con{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.preview .preview-btn-con .preview-bar.active{
+    background: #FFB317;
     color: #fff;
 }
 
@@ -469,8 +484,13 @@ p.dajignation {
     margin-bottom: 0;
 }
 .preview-icon-item {
-    width: 35px;
+    width: 50px;
     margin: auto;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 100%;
+    box-shadow: 4px 4px 4px #ddd;
+    border: 1px solid #ddd;
 }
 
 .preview-icon-item img {
@@ -674,7 +694,11 @@ ul.qe-ul li {
     z-index: 99;
     position: relative;
 }
+.show-preview-right.active{
+    display: block;
+}
 .show-preview-right {
+    display: none;
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
@@ -1595,14 +1619,17 @@ button.eye-btn {
     border-radius: 0;
     width: 250px;
     height: 150px;
+    background: none;
 }
 .business-image img {
     width: 100%;
 }
 .business-preview-image {
-    height: 200px;
     width: 100%;
     border-radius: 0;
+}
+.business-preview-image img{
+    width: 100%;
 }
 .preview-image img {
     width: 100%;
@@ -1621,11 +1648,20 @@ button.eye-btn {
     font-size: 16px;
     margin-top: 15px;
 }
+.show-preview-right p{
+    font-size: 15px;
+}
+
 .opening-preview-title {
     font-size: 17px;
     font-weight: 500;
     color: #323032;
     padding-bottom: 15px;
+}
+.preview-title{
+      font-size: 20px;
+    font-weight: 500;
+    color: #fff;  
 }
 .opening-preview-date-item {
     margin-top: 20px;
@@ -1641,14 +1677,15 @@ button.eye-btn {
     width: 25px;
     cursor: pointer;
 }
-.opening-preview-date-item .contact-list-item {
+ .contact-list-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.opening-preview-date-item .contact-list-item span {
-    color: #323032;
+ .contact-list-item li h5 {
+    color: #000;
     font-weight: 400;
+    margin-bottom: 10px;
 }
 
 .instagram-input-fluid {
@@ -1684,6 +1721,7 @@ button.eye-btn {
     border-radius: 100%;
     box-shadow: 5px 5px 10px #ddd;
 }
+
 
 /*       ==============  Upload Project Image =============  */
 .dropzone-upload-img {
@@ -1761,13 +1799,11 @@ button.eye-btn {
     display: none;
 }
 
-/* =================== Product Item ============== */
-
-.product-size-items .product-size-item {
-    width: 60px;
+.smart-code-preview{
+display: flex;
+margin: auto;
+width: fit-content;
+margin-top: 50px;
+    padding: 20px;
     border: 1px solid #ddd;
-}
-.product-size-items .product-size-item input {
-    border: none;
-    outline: none;
 }

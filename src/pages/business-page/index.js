@@ -8,89 +8,46 @@ import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import FeedbackItem from '@/components/FeedbackItem'
-import OpenDays from '@/components/business-page/OpenDays'
-import OpenDaysPreview from '@/components/business-page/OpenDaysPreview'
-import FeaturesAllItem from '@/components/business-page/FeaturesAllItem'
-import FeaturesAllItemPreview from '@/components/business-page/FeaturesAllItemPreview'
 import { DataIcons } from '@/DataIcon/DataIcons'
 import { useDropzone } from 'react-dropzone'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 // import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
-import {    Navigation } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 
 function BusinesPage() {
-// ================= Opening Days ==================
-  const daysOfWeek = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-  ]
-  const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
-      value: i,
-      label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
-  }))
+const [previewActive, setPreviewActive]=useState(1);
+const handlePreview=(index)=>{
+    setPreviewActive(index)
+}
 
-  const [schedule, setSchedule] = useState(
-      daysOfWeek.reduce((acc, day) => {
-          acc[day] = { startTime: 0, endTime: 0, checked: false }
-          return acc
-      }, {}),
-  )
-
-  const handleCheckboxChangeDate = day => {
-      setSchedule(prevSchedule => ({
-          ...prevSchedule,
-          [day]: {
-              ...prevSchedule[day],
-              checked: !prevSchedule[day].checked,
-          },
-      }))
-  }
-
-  const handleTimeChange = (day, field, value) => {
-      setSchedule(prevSchedule => ({
-          ...prevSchedule,
-          [day]: {
-              ...prevSchedule[day],
-              [field]: value,
-          },
-      }))
-  }
     // ========= Upload Product Image ========
-const [uploadedFiles, setUploadedFiles] = useState([])
-const [swiperInstance, setSwiperInstance] = useState(null)
+    const [uploadedFiles, setUploadedFiles] = useState([])
+    const [swiperInstance, setSwiperInstance] = useState(null)
 
-const onDrop = acceptedFiles => {
-    const updatedFiles = uploadedFiles.concat(acceptedFiles)
-    setUploadedFiles(updatedFiles)
-}
-
-const removeFile = index => {
-    const updatedFiles = [...uploadedFiles]
-    updatedFiles.splice(index, 1)
-    setUploadedFiles(updatedFiles)
-}
-
-const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: 'image/*',
-})
-
-useEffect(() => {
-    // Update Swiper instance when uploadedFiles change
-    if (swiperInstance) {
-        swiperInstance.update()
+    const onDrop = acceptedFiles => {
+        const updatedFiles = uploadedFiles.concat(acceptedFiles)
+        setUploadedFiles(updatedFiles)
     }
-}, [uploadedFiles, swiperInstance])
 
+    const removeFile = index => {
+        const updatedFiles = [...uploadedFiles]
+        updatedFiles.splice(index, 1)
+        setUploadedFiles(updatedFiles)
+    }
 
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop,
+        accept: 'image/*',
+    })
+
+    useEffect(() => {
+        // Update Swiper instance when uploadedFiles change
+        if (swiperInstance) {
+            swiperInstance.update()
+        }
+    }, [uploadedFiles, swiperInstance])
 
     // Social Media Item
     const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
@@ -184,42 +141,10 @@ useEffect(() => {
         ))
     }
 
-
-
-
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
-    // Features item
-    const featuresData = [
-        '/img/icons/feature-1.svg',
-        '/img/icons/feature-2.svg',
-        '/img/icons/feature-3.svg',
-        '/img/icons/feature-4.svg',
-        '/img/icons/feature-5.svg',
-        '/img/icons/feature-6.svg',
-        '/img/icons/feature-7.svg',
-        '/img/icons/feature-8.svg',
-        '/img/icons/feature-9.svg',
-        '/img/icons/feature-10.svg',
-        '/img/icons/feature-11.svg',
-        '/img/icons/feature-12.svg',
-        '/img/icons/feature-13.svg',
-    ]
-    const [selectedItem, setSelectedItem] = useState([])
-
-    const handleItemClick = index => {
-        setSelectedItem(prevSelected => {
-            if (prevSelected.includes(index)) {
-                // Deselect the item
-                return prevSelected.filter(item => item !== index)
-            } else {
-                // Select the item
-                return [...prevSelected, index]
-            }
-        })
-    }
 
     // Function to handle select box changes
     const handleSelectChange = event => {
@@ -230,7 +155,7 @@ useEffect(() => {
         setIsChecked(!isChecked)
     }
     // ==================radio button color change ===============
-    const [selectedColor, setSelectedColor] = useState('#FF0000')
+    const [selectedColor, setSelectedColor] = useState('#FFB317')
 
     const [buttonColor, setButtoncolor] = useState('#555555')
 
@@ -292,7 +217,7 @@ useEffect(() => {
 
     const [picture, setPicture] = useState({
         image: null,
-        imageUrl: null,
+        imageUrl: '/img/product/shop-1.png',
     })
     // Info: Branding Info
 
@@ -846,18 +771,9 @@ useEffect(() => {
                                                     Choose image from templates
                                                     or upload your own
                                                 </p>
-                                                <div className="row mt-4">
-                                                    <div className="col-md-4">
-                                                        <div className="image-up-label">
-                                                            <p>
-                                                                Upload your
-                                                                image (400*400).
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-8">
-                                                        <div className="upload-image">
+                                                <div className="row mt-4 d-flex justify-content-end">
+                                                    <div className="col-md-8 ">
+                                                        <div className=" business-image-con">
                                                             <div className="view-image business-image">
                                                                 <img
                                                                     src={
@@ -943,7 +859,7 @@ useEffect(() => {
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Headline*:</p>
+                                                        <p>Business Type*:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
@@ -1008,16 +924,6 @@ useEffect(() => {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <OpenDays
-                                        handleCheckboxChangeDate={
-                                            handleCheckboxChangeDate
-                                        }
-                                        handleTimeChange={handleTimeChange}
-                                        daysOfWeek={daysOfWeek}
-                                        hoursOfDay={hoursOfDay}
-                                        schedule={schedule}
-                                    />
                                     <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
@@ -1120,13 +1026,6 @@ useEffect(() => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <FeaturesAllItem
-                                                handleItemClick={
-                                                    handleItemClick
-                                                }
-                                                selectedItem={selectedItem}
-                                                featuresData={featuresData}
-                                            />
                                         </div>
                                     </div>
                                     <div className="form-group-wrapper mt-3">
@@ -1153,47 +1052,6 @@ useEffect(() => {
                                                 about your business and provide
                                                 contact data.
                                             </p>
-                                            <div className="row border-bottom mt-4">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>About:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <textarea
-                                                            cols="30"
-                                                            rows="5"
-                                                            placeholder="Description in 250 characters."
-                                                            className="form-control"
-                                                            id="summary"
-                                                            name="summary"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.summary
-                                                            }
-                                                            maxLength={250} // Set maximum character length
-                                                        ></textarea>
-                                                        <div className="text-right">
-                                                            <small>
-                                                                {
-                                                                    inputField
-                                                                        .summary
-                                                                        .length
-                                                                }
-                                                                /250 characters
-                                                            </small>
-                                                        </div>
-                                                        {errors.summary && (
-                                                            <div className="text-danger">
-                                                                {errors.summary}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div className="row mt-4">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
@@ -1479,51 +1337,136 @@ useEffect(() => {
                                             </div>
                                         </div>
                                     </div>
-                                    <FeedbackItem
-                                        inputField={inputField}
-                                        errors={errors}
-                                        inputsHandler={inputsHandler}
-                                    />
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
-                                        </div>
-
-                                        <div className="show-preview-right">
+                                        <div className="preview-btn-con">
                                             <div
-                                                className="business-preview-top-header mb-4"
-                                                style={divStyle}>
-                                                <h3 className="company_name">
-                                                    Company Name
-                                                </h3>
-                                                <div className="preview-image business-preview-image">
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="business-preview-top-header">
+                                                <div className="business-preview-image">
                                                     <img
                                                         src={picture.imageUrl}
                                                         alt=""
                                                     />
                                                 </div>
 
-                                                <div className="p-4">
-                                                    <h4 className="mb-2">
+                                                <div
+                                                    className="p-4"
+                                                    style={divStyle}>
+                                                    <h4 className="mb-2 preview-title">
                                                         Eat. Refresh. Go.
                                                     </h4>
+                                                    <h5 className="mb-2">
+                                                        Food & Catering Business
+                                                    </h5>
                                                     <p className="dajignation">
                                                         {inputField.jobTitle}
+                                                        We aim to provide fresh
+                                                        and healthy snacks for
+                                                        people on the go.
                                                     </p>
-                                                    <button className="view-more-btn">
-                                                        view more
-                                                    </button>
+                                                    <div className="opening-preview-date-item">
+                                                        <h4 className="preview-title opening-preview-title">
+                                                            Location
+                                                        </h4>
+                                                        <p>
+                                                            Mission Street 526
+                                                        </p>
+                                                        <p>
+                                                            San Francisco, CA
+                                                            94105
+                                                        </p>
+                                                        <p>United States</p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div className="card-list-right">
+                                                <ul>
+                                                    <li>
+                                                        <h4 className="opening-preview-title">
+                                                            Contact
+                                                        </h4>
+                                                        <ul className="contact-list-item">
+                                                            <li>
+                                                                <h5>Joy</h5>
+                                                                <p> Name</p>
+                                                            </li>
+                                                            <li>
+                                                                <h5>
+                                                                    (415)
+                                                                    000-0000
+                                                                </h5>
+                                                                <p> Phone</p>
+                                                            </li>
+                                                            <li>
+                                                                <h5>
+                                                                    hello@joyscafe.com
+                                                                </h5>
+                                                                <p> Email</p>
+                                                            </li>
+                                                            <li>
+                                                                <h5>
+                                                                    www.joyscafe.com
+                                                                </h5>
+                                                                <p> Website</p>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
 
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
+                                                    <li className="card-list-li card-list-social">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="/img/icon/share.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show border-none">
+                                                            <h4 className="opening-preview-title">
+                                                                Social Media
+                                                            </h4>
+                                                            <div className="social-media-list-items">
+                                                                {renderPreviewIcons()}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="smart-code-preview">
                                                 <div
                                                     ref={componentRef}
                                                     style={{
@@ -1559,159 +1502,15 @@ useEffect(() => {
                                                 </a>
                                             </div>
 
-                                            <div className="card-list-right">
-                                                <ul>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Opening Hours
-                                                        </h4>
-                                                        <OpenDaysPreview
-                                                            schedule={schedule}
-                                                            daysOfWeek={
-                                                                daysOfWeek
-                                                            }
-                                                        />
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Location
-                                                        </h4>
-                                                        <p>
-                                                            Mission Street 526
-                                                        </p>
-                                                        <p>
-                                                            San Francisco, CA
-                                                            94105
-                                                        </p>
-                                                        <p>United States</p>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Contact
-                                                        </h4>
-                                                        <ul className="contact-list-item">
-                                                            <li>
-                                                                <span>Joy</span>
-                                                                <p> Name</p>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    (415)
-                                                                    000-0000
-                                                                </span>
-                                                                <p> Phone</p>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    hello@joyscafe.com
-                                                                </span>
-                                                                <p> Email</p>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    www.joyscafe.com
-                                                                </span>
-                                                                <p> Website</p>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Products
-                                                        </h4>
-                                                        <div className="upload-product-img-items">
-                                                            <Swiper
-                                                                slidesPerView={
-                                                                    1
-                                                                }
-                                                                spaceBetween={
-                                                                    10
-                                                                }
-                                                                pagination={{
-                                                                    clickable: true,
-                                                                }}
-                                                                navigation={{
-                                                                    nextEl:
-                                                                        '.swiper-button-next',
-                                                                    prevEl:
-                                                                        '.swiper-button-prev',
-                                                                }}
-                                                                modules={[
-                                                                    Navigation,
-                                                                ]}
-                                                                className="mySwiper">
-                                                                {uploadedFiles.map(
-                                                                    (
-                                                                        file,
-                                                                        index,
-                                                                    ) => (
-                                                                        <SwiperSlide
-                                                                            key={
-                                                                                index
-                                                                            }>
-                                                                            <div className="image-swiper-container">
-                                                                                <img
-                                                                                    src={URL.createObjectURL(
-                                                                                        file,
-                                                                                    )}
-                                                                                    alt={`Uploaded ${file.name}`}
-                                                                                />
-                                                                            </div>
-                                                                        </SwiperSlide>
-                                                                    ),
-                                                                )}
-                                                            </Swiper>
-                                                            <div className="swiper-button-next">
-                                                                <img
-                                                                    src="/img/icons/right-arrow.svg"
-                                                                    alt=""
-                                                                />
-                                                            </div>
-                                                            <div className="swiper-button-prev">
-                                                                <img
-                                                                    src="/img/icons/left.svg"
-                                                                    alt=""
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Facility Features
-                                                        </h4>
-                                                        {Array.isArray(
-                                                            selectedItem,
-                                                        ) &&
-                                                            selectedItem.length >
-                                                                0 && (
-                                                                <FeaturesAllItemPreview
-                                                                    featuresData={
-                                                                        featuresData
-                                                                    }
-                                                                    selectedItem={
-                                                                        selectedItem
-                                                                    }
-                                                                />
-                                                            )}
-                                                    </li>
-
-                                                    <li className="card-list-li card-list-social">
-                                                        <div className="preview-info-icon">
-                                                            <img
-                                                                src="/img/icon/share.svg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div className="info-show border-none">
-                                                            <h4 className="opening-preview-title">
-                                                                Social Media
-                                                            </h4>
-                                                            <div className="social-media-list-items">
-                                                                {renderPreviewIcons()}
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                            <div className="card-list-right text-center">
+                                                <h1 className="opening-preview-title">
+                                                    Scan this QR Code to preview
+                                                </h1>
+                                                <p>
+                                                    You can customize the design
+                                                    of your QR Code in the next
+                                                    step.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

@@ -2,7 +2,6 @@ import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
-// import htmlToImage from 'html-to-image'
 import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
@@ -10,7 +9,6 @@ import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import FeedbackItem from '@/components/FeedbackItem'
 import OpenDays from '@/components/business-page/OpenDays'
-import OpenDaysPreview from '@/components/business-page/OpenDaysPreview'
 import FeaturesAllItem from '@/components/business-page/FeaturesAllItem'
 import FeaturesAllItemPreview from '@/components/business-page/FeaturesAllItemPreview'
 import { DataIcons } from '@/DataIcon/DataIcons'
@@ -22,47 +20,6 @@ import 'swiper/css/pagination'
 import { Navigation } from 'swiper/modules'
 
 function BusinesPageUpdate() {
-    // ================= Opening Days ==================
-    const daysOfWeek = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-    ]
-    const hoursOfDay = Array.from({ length: 24 }, (_, i) => ({
-        value: i,
-        label: `${i}:00 ${i < 12 ? 'am' : 'pm'}`,
-    }))
-
-    const [schedule, setSchedule] = useState(
-        daysOfWeek.reduce((acc, day) => {
-            acc[day] = { startTime: 0, endTime: 0, checked: false }
-            return acc
-        }, {}),
-    )
-
-    const handleCheckboxChangeDate = day => {
-        setSchedule(prevSchedule => ({
-            ...prevSchedule,
-            [day]: {
-                ...prevSchedule[day],
-                checked: !prevSchedule[day].checked,
-            },
-        }))
-    }
-
-    const handleTimeChange = (day, field, value) => {
-        setSchedule(prevSchedule => ({
-            ...prevSchedule,
-            [day]: {
-                ...prevSchedule[day],
-                [field]: value,
-            },
-        }))
-    }
     // ========= Upload Product Image ========
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [swiperInstance, setSwiperInstance] = useState(null)
@@ -1268,90 +1225,7 @@ function BusinesPageUpdate() {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="form-group-wrapper mt-3">
-                                        <div
-                                            className="form-group-title"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#uploadProduct"
-                                            aria-expanded="true"
-                                            aria-controls="uploadProduct">
-                                            <p>Upload Products</p>
-                                            <div className="bottom-arrow">
-                                                <img
-                                                    src="/img/icons/bottom-arrow.svg"
-                                                    alt=""
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            className="information-form collapse show"
-                                            id="uploadProduct">
-                                            <p>
-                                                Choose product image from your
-                                                gallery.
-                                            </p>
-                                            <div className="row">
-                                                <div className="col-md-12"></div>
-                                            </div>
-                                            <div className="row mt-4">
-                                                <div className="col-md-4">
-                                                    <div
-                                                        {...getRootProps()}
-                                                        className="dropzone-upload-img">
-                                                        <input
-                                                            {...getInputProps()}
-                                                        />
-                                                        <img
-                                                            src="/img/icons/upload.svg"
-                                                            alt=""
-                                                        />
-                                                        <p>
-                                                            Click or drag file
-                                                            to this area to
-                                                            upload
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-8">
-                                                    <div className="uploaded-images">
-                                                        {uploadedFiles.map(
-                                                            (file, index) => (
-                                                                <div
-                                                                    key={index}
-                                                                    className="image-container">
-                                                                    <img
-                                                                        src={URL.createObjectURL(
-                                                                            file,
-                                                                        )}
-                                                                        alt={`Uploaded ${file.name}`}
-                                                                    />
-                                                                    <button
-                                                                        onClick={() =>
-                                                                            removeFile(
-                                                                                index,
-                                                                            )
-                                                                        }>
-                                                                        <svg
-                                                                            width="12"
-                                                                            height="12"
-                                                                            viewBox="0 0 18 18"
-                                                                            fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M1.8 18L0 16.2L7.2 9L0 1.8L1.8 0L9 7.2L16.2 0L18 1.8L10.8 9L18 16.2L16.2 18L9 10.8L1.8 18Z"
-                                                                                fill="white"
-                                                                            />
-                                                                        </svg>
-                                                                    </button>
-                                                                </div>
-                                                            ),
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
+                            
                                     {/* ========== Social Media Item ============ */}
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1620,17 +1494,6 @@ function BusinesPageUpdate() {
 
                                             <div className="card-list-right">
                                                 <ul>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Opening Hours
-                                                        </h4>
-                                                        <OpenDaysPreview
-                                                            schedule={schedule}
-                                                            daysOfWeek={
-                                                                daysOfWeek
-                                                            }
-                                                        />
-                                                    </li>
                                                     <li className="opening-preview-date-item">
                                                         <h4 className="opening-preview-title">
                                                             Location
