@@ -232,7 +232,7 @@ const handlePreview=(index)=>{
 
     const [welcome, setWelcome] = useState({
         image: null,
-        imageUrl: null,
+        imageUrl:'/img/product/product-logo.png',
     })
 
     const handleWelcome = e => {
@@ -1221,7 +1221,7 @@ const handlePreview=(index)=>{
                                             data-bs-target="#welScreen"
                                             aria-expanded="true"
                                             aria-controls="welScreen">
-                                            <p>Welcome screen</p>
+                                            <p>Upload your logo</p>
                                             <div className="bottom-arrow">
                                                 <img
                                                     src="/img/icons/bottom-arrow.svg"
@@ -1242,7 +1242,7 @@ const handlePreview=(index)=>{
                                             <div className="row d-flex justify-content-center">
                                                 <div className="col-md-5">
                                                     <div className="upload-image">
-                                                        <div className="view-image">
+                                                        <div className="view-image view-image-logo">
                                                             <img
                                                                 src={
                                                                     welcome.imageUrl
@@ -1372,10 +1372,23 @@ const handlePreview=(index)=>{
                                             }>
                                             <div className="business-preview-top-header">
                                                 <div className="business-preview-image">
-                                                    <img
-                                                        src={picture.imageUrl}
-                                                        alt=""
-                                                    />
+                                                    <div className="business-preview-bg-img">
+                                                        <img
+                                                            src={
+                                                                picture.imageUrl
+                                                            }
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div className="business-preview-logo">
+                                                        <img
+                                                            src={
+                                                                welcome.imageUrl
+                                                            }
+                                                            width={100}
+                                                            height={100}
+                                                        />
+                                                    </div>
                                                 </div>
 
                                                 <div
@@ -1478,19 +1491,6 @@ const handlePreview=(index)=>{
                                                     <QRCode
                                                         value={`https://smartcardgenerator.net/${uniqueSlug}`}
                                                         size={250}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
                                                     />
                                                 </div>
                                             </div>
