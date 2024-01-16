@@ -438,7 +438,7 @@ function SingleProductPage() {
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <div className='d-flex align-items-center gap-3'>
+                                                            <div className='d-flex align-items-center gap-3 product-discount-item'>
                                                                 <p>
                                                                     Discount*:
                                                                 </p>

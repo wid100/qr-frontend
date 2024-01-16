@@ -1821,3 +1821,12 @@ margin-top: 50px;
     border-radius: 0;
     background: none;
 }
+
+.instagram-preview-username{
+    padding: 40px;
+}
+.instagram-preview-username h4{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #323032;
+}

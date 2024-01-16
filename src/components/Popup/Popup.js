@@ -644,7 +644,7 @@ const Popup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
                                                         className="form-label color-pic-label">
                                                         Frame Text
                                                     </label>
-                                                    <div className='frame-input-text-name'>
+                                                    <div className="frame-input-text-name">
                                                         <input
                                                             type="text"
                                                             className=" form-control-color form-control-color-frame-text"
@@ -660,23 +660,23 @@ const Popup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
                                         <div className="popup-frame-qr-code-content mt-3">
                                             <h2 className="frame-title">
                                                 QR Code
-                                            </h2>
-
+                                            </h2>                                       
                                             <div className="qr-item-item mt-2">
-                                                <div
-                                                    ref={componentRef}
-                                                    style={{
-                                                        position: 'relative',
+                                               <div
+                                                   ref={componentRef}
+                                                 style={{
+                                                         position: 'relative',
                                                         width: '60px',
-                                                        height: '60px',
+                                                         height: '60px',
                                                     }}
-                                                    className="qr-image-wrapper">
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                                                        size={60}
-                                                    />
-                                                </div>
-                                            </div>
+                                                     className="qr-image-wrapper">
+                                                     <QRCode
+                                                         value={`https://smartcardgenerator.net/${uniqueSlug}`}
+                                                         size={60}
+                                                     />
+                                             </div>
+                                             </div> 
+
                                             <div className="row">
                                                 <div className="col-md-4">
                                                     <label

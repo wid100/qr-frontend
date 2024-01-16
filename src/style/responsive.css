@@ -65,6 +65,15 @@
         border-right: 0;
         margin-bottom: 20px;
     }
+    .upload-image-wrapper .swiper-horizontal{
+        padding:  0 5px;
+    }
+    .dropzone-upload-img{
+        margin-bottom: 20px;
+    }
+    .product-discount-item{
+        margin-top: 20px;
+    }
 }
 @media screen and (max-width: 690px) {
     .my-preview-top {

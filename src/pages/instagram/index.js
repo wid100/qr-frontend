@@ -11,6 +11,12 @@ import Link from 'next/link'
 import InstagramPopup from '@/components/Popup/InstagramPopup'
 
 function InstagramPage() {
+    const [previewActive, setPreviewActive] = useState(1)
+    const handlePreview = index => {
+        setPreviewActive(index)
+    }
+
+
     // Popup
     const [activePopup, setActivePopup] = useState(true)
 
@@ -265,21 +271,48 @@ function InstagramPage() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 mb-4">
-                                    <div className="mb-3">
-                                        <input
-                                            id="cardName"
-                                            type="text"
-                                            name="cardName"
-                                            className="form-control p-4"
-                                            onChange={inputsHandler}
-                                            value={inputField.cardName}
-                                            autoFocus
-                                            placeholder="Name your QR Instagram"
-                                        />
-                                        <InputError
-                                            messages={errors.cardname}
-                                            className="mt-2"
-                                        />
+                                    <div className="mb-3 d-flex align-items-center gap-4">
+                                        <div className="product-icon">
+                                            <svg
+                                                width="38"
+                                                height="38"
+                                                viewBox="0 0 32 32"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M23 30H9C5.14 30 2 26.86 2 23V9C2 5.14 5.14 2 9 2H23C26.86 2 30 5.14 30 9V23C30 26.86 26.86 30 23 30ZM9 3C5.691 3 3 5.691 3 9V23C3 26.309 5.691 29 9 29H23C26.309 29 29 26.309 29 23V9C29 5.691 26.309 3 23 3H9Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M20 26H12C8.691 26 6 23.309 6 20V12C6 8.691 8.691 6 12 6H20C23.309 6 26 8.691 26 12V20C26 23.309 23.309 26 20 26ZM12 8C9.794 8 8 9.794 8 12V20C8 22.206 9.794 24 12 24H20C22.206 24 24 22.206 24 20V12C24 9.794 22.206 8 20 8H12Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M21.5 11.75C20.811 11.75 20.25 11.189 20.25 10.5C20.25 9.811 20.811 9.25 21.5 9.25C22.189 9.25 22.75 9.811 22.75 10.5C22.75 11.189 22.189 11.75 21.5 11.75Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M16 21C13.243 21 11 18.757 11 16C11 13.243 13.243 11 16 11C18.757 11 21 13.243 21 16C21 18.757 18.757 21 16 21ZM16 13C14.346 13 13 14.346 13 16C13 17.654 14.346 19 16 19C17.654 19 19 17.654 19 16C19 14.346 17.654 13 16 13Z"
+                                                    fill="#898989"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="product-input w-100">
+                                            <input
+                                                id="cardName"
+                                                type="text"
+                                                name="cardName"
+                                                className="form-control p-4"
+                                                onChange={inputsHandler}
+                                                value={inputField.cardName}
+                                                autoFocus
+                                                placeholder="Name your QR Instagram"
+                                            />
+                                            <InputError
+                                                messages={errors.cardname}
+                                                className="mt-2"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="form-group-wrapper mt-3">
@@ -328,12 +361,72 @@ function InstagramPage() {
                                                             }
                                                             placeholder="username"
                                                         />
-                                                        <InputError
-                                                            messages={
-                                                                errors.mobile1
-                                                            }
-                                                            className="mt-2"
-                                                        />
+                                                    </div>
+                                                    <InputError
+                                                        messages={
+                                                            errors.mobile1
+                                                        }
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group-wrapper mt-3">
+                                        <div
+                                            className="form-group-title"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#welScreen"
+                                            aria-expanded="true"
+                                            aria-controls="welScreen">
+                                            <p>Upload your logo</p>
+                                            <div className="bottom-arrow">
+                                                <img
+                                                    src="/img/icons/bottom-arrow.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="color-plate collapse show"
+                                            id="welScreen">
+                                            <p className="mb-3">
+                                                Display your logo while your
+                                                page is loading: (Max Image Size
+                                                300*300)
+                                            </p>
+
+                                            <div className="row d-flex justify-content-center">
+                                                <div className="col-md-5">
+                                                    <div className="upload-image">
+                                                        <div className="view-image view-image-logo">
+                                                            <img
+                                                                src={
+                                                                    welcome.imageUrl
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div className="upload-input">
+                                                            <div className="file-btn custom-btn">
+                                                                Upload
+                                                                <input
+                                                                    type="file"
+                                                                    className="file-input"
+                                                                    id="welcome"
+                                                                    name="welcome"
+                                                                    onChange={
+                                                                        handleWelcome
+                                                                    }
+                                                                />
+                                                                <InputError
+                                                                    messages={
+                                                                        errors.welcome
+                                                                    }
+                                                                    className="mt-2"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,17 +435,49 @@ function InstagramPage() {
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
+                                        <div className="preview-btn-con">
+                                            <div
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>QR Code</p>
+                                            </div>
                                         </div>
 
-                                        <div className="show-preview-right">
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="instagram-preview-username">
+                                                <h4>Username</h4>
+                                                <span>joy_sorkar111</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="smart-code-preview">
                                                 <div
                                                     ref={componentRef}
                                                     style={{
@@ -360,7 +485,7 @@ function InstagramPage() {
                                                         width: '250px',
                                                         height: '250px',
                                                     }}
-                                                    className="qr-image-wrapper mt-4">
+                                                    className="qr-image-wrapper">
                                                     <QRCode
                                                         value={`https://smartcardgenerator.net/${uniqueSlug}`}
                                                         size={250}
@@ -380,12 +505,22 @@ function InstagramPage() {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="qr-download mt-3 mb-4">
+                                            {/* <div className="qr-download mt-3 mb-4">
                                                 <a
                                                     className="custom-btn"
                                                     onClick={handlePrint}>
                                                     Download QR Code
                                                 </a>
+                                            </div> */}
+                                            <div className="card-list-right text-center">
+                                                <h1 className="opening-preview-title">
+                                                    Scan this QR Code to preview
+                                                </h1>
+                                                <p>
+                                                    You can customize the design
+                                                    of your QR Code in the next
+                                                    step.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

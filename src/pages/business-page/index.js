@@ -1487,20 +1487,33 @@ const handlePreview=(index)=>{
                                                         width: '250px',
                                                         height: '250px',
                                                     }}
-                                                    className="qr-image-wrapper">
+                                                    className="qr-image-wrapper ">
                                                     <QRCode
                                                         value={`https://smartcardgenerator.net/${uniqueSlug}`}
                                                         size={250}
                                                     />
+                                                    <img
+                                                        src={welcome.imageUrl}
+                                                        width={100}
+                                                        height={100}
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform:
+                                                                'translate(-50%, -50%)',
+                                                        }}
+                                                    />
                                                 </div>
                                             </div>
-                                            <div className="qr-download mt-3">
-                                                <a
-                                                    className="custom-btn"
-                                                    onClick={handlePrint}>
-                                                    Download QR Code
-                                                </a>
-                                            </div>
+                                            {/* <div className="qr-download mt-3">
+                                                    <a
+                                                        className="custom-btn"
+                                                        onClick={handlePrint}>
+                                                        Download QR Code
+                                                    </a>
+                                                </div> */}
 
                                             <div className="card-list-right text-center">
                                                 <h1 className="opening-preview-title">

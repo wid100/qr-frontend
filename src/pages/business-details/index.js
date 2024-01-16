@@ -149,7 +149,10 @@ const BusinessDetailsPage = () => {
                                             <li>
                                                 <div className="pruduct-item-con">
                                                     <div className="product-items">
-                                                        <Link href={'/'}>
+                                                        <Link
+                                                            href={
+                                                                '/product-details'
+                                                            }>
                                                             <div className="product-item">
                                                                 <div className="product-img">
                                                                     <img
@@ -170,7 +173,10 @@ const BusinessDetailsPage = () => {
                                                         </Link>
                                                     </div>
                                                     <div className="product-items">
-                                                        <Link href={'/'}>
+                                                        <Link
+                                                            href={
+                                                                '/product-details'
+                                                            }>
                                                             <div className="product-item">
                                                                 <div className="product-img">
                                                                     <img
@@ -191,7 +197,10 @@ const BusinessDetailsPage = () => {
                                                         </Link>
                                                     </div>
                                                     <div className="product-items">
-                                                        <Link href={'/'}>
+                                                        <Link
+                                                            href={
+                                                                '/product-details'
+                                                            }>
                                                             <div className="product-item">
                                                                 <div className="product-img">
                                                                     <img
@@ -212,7 +221,10 @@ const BusinessDetailsPage = () => {
                                                         </Link>
                                                     </div>
                                                     <div className="product-items">
-                                                        <Link href={'/'}>
+                                                        <Link
+                                                            href={
+                                                                '/product-details'
+                                                            }>
                                                             <div className="product-item">
                                                                 <div className="product-img">
                                                                     <img
@@ -232,27 +244,7 @@ const BusinessDetailsPage = () => {
                                                             </div>
                                                         </Link>
                                                     </div>
-                                                    <div className="product-items">
-                                                        <Link href={'/'}>
-                                                            <div className="product-item">
-                                                                <div className="product-img">
-                                                                    <img
-                                                                        src="/img/product/product-img.png"
-                                                                        alt=""
-                                                                    />
-                                                                </div>
-                                                                <div className="product-details-price">
-                                                                    <h4>
-                                                                        ৳ 150.00
-                                                                    </h4>
-                                                                    <span>
-                                                                        Mixed
-                                                                        Salad
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </Link>
-                                                    </div>
+                                              
                                                 </div>
                                             </li>
                                         </ul>

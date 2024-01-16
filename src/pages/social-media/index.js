@@ -15,6 +15,11 @@ import { FreeMode, Pagination } from 'swiper/modules'
 import { DataIcons } from '@/DataIcon/DataIcons'
 
 function SocialMediaQR() {
+    const [previewActive, setPreviewActive] = useState(1)
+    const handlePreview = index => {
+        setPreviewActive(index)
+    }
+
     // Social Media Item
     const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
     const [previewIcons, setPreviewIcons] = useState([])
@@ -107,7 +112,7 @@ function SocialMediaQR() {
         ))
     }
 
-    const [selectedColors, setSelectedColors] = useState('#FF0000')
+    const [selectedColors, setSelectedColors] = useState('#FFB317')
     const [activeSlide, setActiveSlide] = useState(0)
     const handleColorChange1 = event => {
         setSelectedColors(event.target.value)
@@ -137,7 +142,7 @@ function SocialMediaQR() {
         setIsChecked(!isChecked)
     }
     // ==================radio button color change ===============
-    const [selectedColor, setSelectedColor] = useState('#FF0000')
+    const [selectedColor, setSelectedColor] = useState('#FFB317')
 
     const [buttonColor, setButtoncolor] = useState('#555555')
 
@@ -393,21 +398,29 @@ function SocialMediaQR() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 mb-4">
-                                    <div className="mb-3 ">
-                                        <input
-                                            id="cardName"
-                                            type="text"
-                                            name="cardName"
-                                            className="form-control p-4"
-                                            onChange={inputsHandler}
-                                            value={inputField.cardName}
-                                            autoFocus
-                                            placeholder="Name your Smart Card"
-                                        />
-                                        <InputError
-                                            messages={errors.cardname}
-                                            className="mt-2"
-                                        />
+                                    <div className="mb-3 d-flex align-items-center gap-4">
+                                        <div className="product-icon">
+                                            <img
+                                                src="/img/icons/social.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div className="product-input w-100">
+                                            <input
+                                                id="cardName"
+                                                type="text"
+                                                name="cardName"
+                                                className="form-control p-4"
+                                                onChange={inputsHandler}
+                                                value={inputField.cardName}
+                                                autoFocus
+                                                placeholder="Name your Business Card"
+                                            />
+                                            <InputError
+                                                messages={errors.cardname}
+                                                className="mt-2"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="form-group-wrapper">
@@ -752,15 +765,15 @@ function SocialMediaQR() {
                                                                 320: {
                                                                     slidesPerView: 1,
                                                                 },
-          
+
                                                                 480: {
                                                                     slidesPerView: 1,
                                                                 },
-                                                   
+
                                                                 768: {
                                                                     slidesPerView: 2,
                                                                 },
-                                                     
+
                                                                 1200: {
                                                                     slidesPerView: 3,
                                                                 },
@@ -997,7 +1010,7 @@ function SocialMediaQR() {
                                             data-bs-target="#welScreen"
                                             aria-expanded="true"
                                             aria-controls="welScreen">
-                                            <p>Welcome screen</p>
+                                            <p>Upload your logo</p>
                                             <div className="bottom-arrow">
                                                 <img
                                                     src="/img/icons/bottom-arrow.svg"
@@ -1116,11 +1129,36 @@ function SocialMediaQR() {
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
+                                        <div className="preview-btn-con">
+                                            <div
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
                                         </div>
-
-                                        <div className="show-preview-right">
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
                                             <div className="custom-img-item-right">
                                                 <div
                                                     className={`custom-img custom-img-${
@@ -1143,12 +1181,37 @@ function SocialMediaQR() {
                                                 </div>
                                             </div>
 
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
+                                            <div className="card-list-right">
+                                                <ul>
+                                                    <li className="card-list-li card-list-social">
+                                                        <div className="preview-info-icon">
+                                                            <img
+                                                                src="/img/icon/share.svg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                        <div className="info-show border-none">
+                                                            <div className="preview-section">
+                                                                <h2>
+                                                                    Social Media
+                                                                </h2>
+                                                            </div>
+                                                            <div className="social-media-list-items">
+                                                                {renderPreviewIcons()}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="smart-code-preview">
                                                 <div
                                                     ref={componentRef}
                                                     style={{
@@ -1176,35 +1239,22 @@ function SocialMediaQR() {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="qr-download mt-3">
+                                            {/* <div className="qr-download mt-3">
                                                 <a
                                                     className="custom-btn"
                                                     onClick={handlePrint}>
                                                     Download QR Code
                                                 </a>
-                                            </div>
-
-                                            <div className="card-list-right">
-                                                <ul>
-                                                    <li className="card-list-li card-list-social">
-                                                        <div className="preview-info-icon">
-                                                            <img
-                                                                src="/img/icon/share.svg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div className="info-show border-none">
-                                                            <div className="preview-section">
-                                                                <h2>
-                                                                    Social Media
-                                                                </h2>
-                                                            </div>
-                                                            <div className="social-media-list-items">
-                                                                {renderPreviewIcons()}
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                            </div> */}
+                                            <div className="card-list-right text-center">
+                                                <h1 className="opening-preview-title">
+                                                    Scan this QR Code to preview
+                                                </h1>
+                                                <p>
+                                                    You can customize the design
+                                                    of your QR Code in the next
+                                                    step.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1251,4 +1301,3 @@ function SocialMediaQR() {
 }
 
 export default SocialMediaQR
-

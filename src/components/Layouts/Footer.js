@@ -25,7 +25,7 @@ function Footer() {
                                 </li>
                             </ul>
                         </div>
-                        <p>© 2023 All Rights Reserved</p>
+                        <p>© 2024 All Rights Reserved</p>
                     </div>
                 </div>
             </footer>

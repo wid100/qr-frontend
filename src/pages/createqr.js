@@ -12,6 +12,10 @@ import FeedbackItem from '@/components/FeedbackItem'
 import { DataIcons } from '@/DataIcon/DataIcons'
 
 function CreateQR() {
+        const [previewActive, setPreviewActive] = useState(1)
+        const handlePreview = index => {
+            setPreviewActive(index)
+        }
 // Social Media Item
    const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
   const [previewIcons, setPreviewIcons] = useState([])
@@ -122,7 +126,7 @@ function CreateQR() {
         setIsChecked(!isChecked)
     }
     // ==================radio button color change ===============
-    const [selectedColor, setSelectedColor] = useState('#FF0000')
+    const [selectedColor, setSelectedColor] = useState('#FFB317')
 
     const [buttonColor, setButtoncolor] = useState('#555555')
 
@@ -373,21 +377,68 @@ function CreateQR() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 mb-4">
-                                    <div className="mb-3">
-                                        <input
-                                            id="cardName"
-                                            type="text"
-                                            name="cardName"
-                                            className="form-control p-4"
-                                            onChange={inputsHandler}
-                                            value={inputField.cardName}
-                                            autoFocus
-                                            placeholder="Name your Smart Card"
-                                        />
-                                        <InputError
-                                            messages={errors.cardname}
-                                            className="mt-2"
-                                        />
+                                    <div className="mb-3  d-flex align-items-center gap-4">
+                                        <div className="product-icon">
+                                            <svg
+                                                width="38"
+                                                height="38"
+                                                viewBox="0 0 32 32"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M28.1539 7.21289H4.03373C2.96647 7.21289 2.1001 8.07539 2.1001 9.13789V23.1004C2.1001 24.1629 2.96647 25.0254 4.03373 25.0254H28.1665C29.2337 25.0254 30.1001 24.1629 30.1001 23.1004V9.13789C30.1001 8.07539 29.2212 7.21289 28.1539 7.21289ZM29.1584 23.1004C29.1584 23.6504 28.7064 24.0879 28.1665 24.0879H4.03373C3.48126 24.0879 3.0418 23.6379 3.0418 23.1004V9.13789C3.0418 8.58789 3.49382 8.15039 4.03373 8.15039H28.1665C28.7189 8.15039 29.1584 8.60039 29.1584 9.13789V23.1004Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M9.4956 11.2129C6.74582 11.2129 4.49829 13.4379 4.49829 16.1879C4.49829 18.9379 6.73327 21.1629 9.4956 21.1629C12.2579 21.1629 14.4929 18.9379 14.4929 16.1879C14.4929 13.4379 12.2454 11.2129 9.4956 11.2129ZM8.00143 19.9254V18.5879C8.00143 18.2879 8.23999 18.0504 8.54134 18.0504H10.5252C10.8265 18.0504 11.0651 18.2879 11.0651 18.5879V19.8879C10.5754 20.0879 10.0481 20.2129 9.48304 20.2129C8.96825 20.2129 8.45345 20.1129 8.00143 19.9254ZM12.0194 19.3254V18.5754C12.0194 17.7629 11.3539 17.1004 10.5378 17.1004H8.54134C7.7252 17.1004 7.05973 17.7629 7.05973 18.5754V19.3879C6.08035 18.6504 5.45255 17.4879 5.45255 16.1754C5.45255 13.9504 7.27318 12.1379 9.50816 12.1379C11.7431 12.1379 13.5638 13.9504 13.5638 16.1754C13.5386 17.4504 12.9485 18.5879 12.0194 19.3254Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M9.49565 12.6377C8.32793 12.6377 7.38623 13.5877 7.38623 14.7377C7.38623 15.8877 8.34049 16.8377 9.49565 16.8377C10.6634 16.8377 11.6051 15.8877 11.6051 14.7377C11.6051 13.5877 10.6508 12.6377 9.49565 12.6377ZM9.49565 15.9127C8.85529 15.9127 8.32793 15.3877 8.32793 14.7502C8.32793 14.1127 8.85529 13.5877 9.49565 13.5877C10.136 13.5877 10.6634 14.1127 10.6634 14.7502C10.6634 15.3877 10.136 15.9127 9.49565 15.9127Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M22.8175 13.1377H16.4139C16.1502 13.1377 15.9368 13.3502 15.9368 13.6127C15.9368 13.8752 16.1502 14.0877 16.4139 14.0877H22.8175C23.0812 14.0877 23.2946 13.8752 23.2946 13.6127C23.2946 13.3502 23.0686 13.1377 22.8175 13.1377Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M26.5343 13.1377H24.6634C24.3997 13.1377 24.1863 13.3502 24.1863 13.6127C24.1863 13.8752 24.3997 14.0877 24.6634 14.0877H26.5343C26.7979 14.0877 27.0114 13.8752 27.0114 13.6127C27.0114 13.3502 26.7979 13.1377 26.5343 13.1377Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M22.8175 15.6377H16.4139C16.1502 15.6377 15.9368 15.8502 15.9368 16.1127C15.9368 16.3752 16.1502 16.5877 16.4139 16.5877H22.8175C23.0812 16.5877 23.2946 16.3752 23.2946 16.1127C23.2946 15.8502 23.0686 15.6377 22.8175 15.6377Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M26.5343 15.6377H24.6634C24.3997 15.6377 24.1863 15.8502 24.1863 16.1127C24.1863 16.3752 24.3997 16.5877 24.6634 16.5877H26.5343C26.7979 16.5877 27.0114 16.3752 27.0114 16.1127C27.0114 15.8502 26.7979 15.6377 26.5343 15.6377Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M22.8175 18.1377H16.4139C16.1502 18.1377 15.9368 18.3502 15.9368 18.6127C15.9368 18.8752 16.1502 19.0877 16.4139 19.0877H22.8175C23.0812 19.0877 23.2946 18.8752 23.2946 18.6127C23.2946 18.3502 23.0686 18.1377 22.8175 18.1377Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M26.5343 18.1377H24.6634C24.3997 18.1377 24.1863 18.3502 24.1863 18.6127C24.1863 18.8752 24.3997 19.0877 24.6634 19.0877H26.5343C26.7979 19.0877 27.0114 18.8752 27.0114 18.6127C27.0114 18.3502 26.7979 18.1377 26.5343 18.1377Z"
+                                                    fill="#898989"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="product-input w-100">
+                                            <input
+                                                id="cardName"
+                                                type="text"
+                                                name="cardName"
+                                                className="form-control p-4"
+                                                onChange={inputsHandler}
+                                                value={inputField.cardName}
+                                                autoFocus
+                                                placeholder="Name your Smart Card"
+                                            />
+                                            <InputError
+                                                messages={errors.cardname}
+                                                className="mt-2"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="form-group-wrapper">
@@ -1029,9 +1080,9 @@ function CreateQR() {
                                                             }
                                                             className="mt-2"
                                                         />
-                                                        <button className="btn add-address-btn d-flex justify-content-end float-right">
+                                                        {/* <button className="btn add-address-btn d-flex justify-content-end float-right">
                                                             Add address
-                                                        </button>
+                                                        </button> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1170,7 +1221,6 @@ function CreateQR() {
                                             </div>
                                         </div>
                                     </div>
-                          
 
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1303,11 +1353,36 @@ function CreateQR() {
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
+                                        <div className="preview-btn-con">
+                                            <div
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
                                         </div>
-
-                                        <div className="show-preview-right">
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
                                             <div
                                                 className="my-preview-top-header"
                                                 style={divStyle}>
@@ -1358,48 +1433,6 @@ function CreateQR() {
                                                     </li> */}
                                                 </ul>
                                             </div>
-
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
-                                                <div
-                                                    ref={componentRef}
-                                                    style={{
-                                                        position: 'relative',
-                                                        width: '250px',
-                                                        height: '250px',
-                                                    }}
-                                                    className="qr-image-wrapper">
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                                                        size={250}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="qr-download mt-3">
-                                                <a
-                                                    className="custom-btn"
-                                                    onClick={handlePrint}>
-                                                    Download QR Code
-                                                </a>
-                                            </div>
-
                                             <div className="card-list-right">
                                                 <ul>
                                                     <li className="card-list-li">
@@ -1495,12 +1528,64 @@ function CreateQR() {
                                                                     Social Media
                                                                 </h2>
                                                             </div>
-                                                            <div className='social-media-list-items'>
+                                                            <div className="social-media-list-items">
                                                                 {renderPreviewIcons()}
                                                             </div>
                                                         </div>
                                                     </li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="smart-code-preview">
+                                                <div
+                                                    ref={componentRef}
+                                                    style={{
+                                                        position: 'relative',
+                                                        width: '250px',
+                                                        height: '250px',
+                                                    }}
+                                                    className="qr-image-wrapper">
+                                                    <QRCode
+                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
+                                                        size={250}
+                                                    />
+                                                    <img
+                                                        src={welcome.imageUrl}
+                                                        width={100}
+                                                        height={100}
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform:
+                                                                'translate(-50%, -50%)',
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                                {/* <div className="qr-download mt-3">
+                                                    <a
+                                                        className="custom-btn"
+                                                        onClick={handlePrint}>
+                                                        Download QR Code
+                                                    </a>
+                                                </div> */}
+                                            <div className="card-list-right text-center">
+                                                <h1 className="opening-preview-title">
+                                                    Scan this QR Code to preview
+                                                </h1>
+                                                <p>
+                                                    You can customize the design
+                                                    of your QR Code in the next
+                                                    step.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
