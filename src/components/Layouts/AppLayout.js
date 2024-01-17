@@ -25,7 +25,7 @@ const AppLayout = ({ children }) => {
         }
     }, [])
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen">
             <div className={`${sticky ? 'is-sticky' : ''} menu-nav `}>
                 <header
                     className={`header ${
