@@ -2,15 +2,12 @@ import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
+// import htmlToImage from 'html-to-image'
 import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
 import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
-import FeedbackItem from '@/components/FeedbackItem'
-import OpenDays from '@/components/business-page/OpenDays'
-import FeaturesAllItem from '@/components/business-page/FeaturesAllItem'
-import FeaturesAllItemPreview from '@/components/business-page/FeaturesAllItemPreview'
 import { DataIcons } from '@/DataIcon/DataIcons'
 import { useDropzone } from 'react-dropzone'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -19,7 +16,12 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Navigation } from 'swiper/modules'
 
-function BusinesPageUpdate() {
+function UpdateBusinesPage() {
+    const [previewActive, setPreviewActive] = useState(1)
+    const handlePreview = index => {
+        setPreviewActive(index)
+    }
+
     // ========= Upload Product Image ========
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [swiperInstance, setSwiperInstance] = useState(null)
@@ -143,35 +145,6 @@ function BusinesPageUpdate() {
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
-    // Features item
-    const featuresData = [
-        '/img/icons/feature-1.svg',
-        '/img/icons/feature-2.svg',
-        '/img/icons/feature-3.svg',
-        '/img/icons/feature-4.svg',
-        '/img/icons/feature-5.svg',
-        '/img/icons/feature-6.svg',
-        '/img/icons/feature-7.svg',
-        '/img/icons/feature-8.svg',
-        '/img/icons/feature-9.svg',
-        '/img/icons/feature-10.svg',
-        '/img/icons/feature-11.svg',
-        '/img/icons/feature-12.svg',
-        '/img/icons/feature-13.svg',
-    ]
-    const [selectedItem, setSelectedItem] = useState([])
-
-    const handleItemClick = index => {
-        setSelectedItem(prevSelected => {
-            if (prevSelected.includes(index)) {
-                // Deselect the item
-                return prevSelected.filter(item => item !== index)
-            } else {
-                // Select the item
-                return [...prevSelected, index]
-            }
-        })
-    }
 
     // Function to handle select box changes
     const handleSelectChange = event => {
@@ -182,7 +155,7 @@ function BusinesPageUpdate() {
         setIsChecked(!isChecked)
     }
     // ==================radio button color change ===============
-    const [selectedColor, setSelectedColor] = useState('#FF0000')
+    const [selectedColor, setSelectedColor] = useState('#FFB317')
 
     const [buttonColor, setButtoncolor] = useState('#555555')
 
@@ -244,7 +217,7 @@ function BusinesPageUpdate() {
 
     const [picture, setPicture] = useState({
         image: null,
-        imageUrl: null,
+        imageUrl: '/img/product/shop-1.png',
     })
     // Info: Branding Info
 
@@ -259,7 +232,7 @@ function BusinesPageUpdate() {
 
     const [welcome, setWelcome] = useState({
         image: null,
-        imageUrl: null,
+        imageUrl: '/img/product/product-logo.png',
     })
 
     const handleWelcome = e => {
@@ -433,21 +406,40 @@ function BusinesPageUpdate() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 mb-4">
-                                    <div className="mb-3">
-                                        <input
-                                            id="cardName"
-                                            type="text"
-                                            name="cardName"
-                                            className="form-control p-4"
-                                            onChange={inputsHandler}
-                                            value={inputField.cardName}
-                                            autoFocus
-                                            placeholder="Name your Smart Card"
-                                        />
-                                        <InputError
-                                            messages={errors.cardname}
-                                            className="mt-2"
-                                        />
+                                    <div className="mb-3 d-flex align-items-center gap-4">
+                                        <div className="product-icon">
+                                            <svg
+                                                width="46"
+                                                height="38"
+                                                viewBox="0 0 46 38"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M45.08 9.35178C45.08 9.30378 45.08 9.30379 45.08 9.25578C45.08 9.20779 45.032 9.20778 45.032 9.15979C45.032 9.15979 45.032 9.11178 44.984 9.11178L39.32 2.48779V0.759785C39.32 0.471785 39.128 0.279785 38.84 0.279785H7.16C6.872 0.279785 6.68 0.471785 6.68 0.759785V2.48779L1.016 9.06378C1.016 9.06378 1.016 9.11178 0.967998 9.11178C0.967998 9.15978 0.919998 9.15979 0.919998 9.20779C0.919998 9.25578 0.919998 9.25578 0.919998 9.30378V9.35178V11.7518C0.919998 13.1918 1.976 14.3438 3.32 14.5838V34.8398H2.84C2.552 34.8398 2.36 35.0318 2.36 35.3198V37.2398C2.36 37.5278 2.552 37.7198 2.84 37.7198H43.16C43.448 37.7198 43.64 37.5278 43.64 37.2398V35.3198C43.64 35.0318 43.448 34.8398 43.16 34.8398H42.68V14.6318C44.024 14.3918 45.08 13.2398 45.08 11.7998V9.39979V9.35178ZM7.4 3.15979H9.656L5.96 8.91978H2.456L7.4 3.15979ZM35.24 3.15979L38.936 8.91978H35.288L32.408 3.15979H35.24ZM31.352 3.15979L34.232 8.91978H30.536L28.472 3.15979H31.352ZM27.464 3.15979L29.528 8.91978H25.832L25.016 3.15979H27.464ZM24.008 3.15979L24.824 8.91978H21.128L21.944 3.15979H24.008ZM20.168 8.91978H16.472L18.536 3.15979H20.984L20.168 8.91978ZM15.464 8.91978H11.768L14.648 3.15979H17.528L15.464 8.91978ZM10.712 8.91978H7.064L10.76 3.15979H13.544L10.712 8.91978ZM6.68 9.87978H10.52V11.7998C10.52 12.8558 9.656 13.7198 8.6 13.7198C7.544 13.7198 6.68 12.8558 6.68 11.7998V9.87978ZM11.48 9.87978H15.32V11.7998C15.32 12.8558 14.456 13.7198 13.4 13.7198C12.344 13.7198 11.48 12.8558 11.48 11.7998V9.87978ZM16.28 9.87978H20.12V11.7998C20.12 12.8558 19.256 13.7198 18.2 13.7198C17.144 13.7198 16.28 12.8558 16.28 11.7998V9.87978ZM21.08 9.87978H24.92V11.7998C24.92 12.8558 24.056 13.7198 23 13.7198C21.944 13.7198 21.08 12.8558 21.08 11.7998V9.87978ZM25.88 9.87978H29.72V11.7998C29.72 12.8558 28.856 13.7198 27.8 13.7198C26.744 13.7198 25.88 12.8558 25.88 11.7998V9.87978ZM30.68 9.87978H34.52V11.7998C34.52 12.8558 33.656 13.7198 32.6 13.7198C31.544 13.7198 30.68 12.8558 30.68 11.7998V9.87978ZM35.48 9.87978H39.32V11.7998C39.32 12.8558 38.456 13.7198 37.4 13.7198C36.344 13.7198 35.48 12.8558 35.48 11.7998V9.87978ZM40.04 8.91978L36.344 3.15979H38.6L43.544 8.91978H40.04ZM7.64 1.23979H38.36V2.19979H7.64V1.23979ZM1.88 11.7998V9.87978H5.72V11.7998C5.72 12.8558 4.856 13.7198 3.8 13.7198C2.744 13.7198 1.88 12.8558 1.88 11.7998ZM42.68 36.7598H3.32V35.7998H3.8H6.68H10.52H12.44H19.16H21.08H24.92H42.2H42.68V36.7598ZM19.64 34.8398V25.7198C19.64 25.4318 19.448 25.2398 19.16 25.2398H12.44C12.152 25.2398 11.96 25.4318 11.96 25.7198V34.8398H11V33.3998C11 33.1118 10.808 32.9198 10.52 32.9198H10.04V23.7998H10.52C10.808 23.7998 11 23.6078 11 23.3198V21.8798H20.6V23.3198C20.6 23.6078 20.792 23.7998 21.08 23.7998H21.56V32.9198H21.08C20.792 32.9198 20.6 33.1118 20.6 33.3998V34.8398H19.64ZM18.68 34.8398H12.92V26.1998H18.68V34.8398ZM21.56 33.8798H22.04H23.96H24.44V34.8398H21.56V33.8798ZM23.48 32.9198H22.52V23.7998H23.48V32.9198ZM23.96 22.8398H22.04H21.56V21.8798H24.44V22.8398H23.96ZM24.92 20.9198H21.08H10.52H6.68V19.9598H24.92V20.9198ZM7.208 18.9998L8.792 17.0798H22.76L24.344 18.9998H7.208ZM10.04 21.8798V22.8398H9.56H7.64H7.16V21.8798H10.04ZM8.12 23.7998H9.08V32.9198H8.12V23.7998ZM7.64 33.8798H9.56H10.04V34.8398H7.16V33.8798H7.64ZM25.4 34.8398V33.3998C25.4 33.1118 25.208 32.9198 24.92 32.9198H24.44V23.7998H24.92C25.208 23.7998 25.4 23.6078 25.4 23.3198V21.8798C25.688 21.8798 25.88 21.6878 25.88 21.3998V19.4798C25.88 19.4318 25.88 19.3838 25.832 19.3358C25.832 19.2878 25.784 19.2398 25.736 19.2398L23.336 16.3598C23.288 16.1678 23.144 16.1198 23 16.1198H8.6C8.456 16.1198 8.312 16.1678 8.216 16.3118L5.816 19.1918C5.768 19.2398 5.768 19.2878 5.72 19.2878C5.72 19.3358 5.672 19.3838 5.672 19.4318V21.3518C5.672 21.6398 5.864 21.8318 6.152 21.8318V23.2718C6.152 23.5598 6.344 23.7518 6.632 23.7518H7.112V32.8718H6.632C6.344 32.8718 6.152 33.0638 6.152 33.3518V34.7918H4.232V14.6318C5.048 14.4878 5.72 14.0558 6.152 13.3838C6.68 14.1518 7.544 14.6798 8.552 14.6798C9.56 14.6798 10.424 14.1518 10.952 13.3838C11.48 14.1518 12.344 14.6798 13.352 14.6798C14.36 14.6798 15.224 14.1518 15.752 13.3838C16.28 14.1518 17.144 14.6798 18.152 14.6798C19.16 14.6798 20.024 14.1518 20.552 13.3838C21.08 14.1518 21.944 14.6798 22.952 14.6798C23.96 14.6798 24.824 14.1518 25.352 13.3838C25.88 14.1518 26.744 14.6798 27.752 14.6798C28.76 14.6798 29.624 14.1518 30.152 13.3838C30.68 14.1518 31.544 14.6798 32.552 14.6798C33.56 14.6798 34.424 14.1518 34.952 13.3838C35.48 14.1518 36.344 14.6798 37.352 14.6798C38.36 14.6798 39.224 14.1518 39.752 13.3838C40.184 14.0558 40.856 14.4878 41.672 14.6318V34.8398H25.4ZM44.12 11.7998C44.12 12.8558 43.256 13.7198 42.2 13.7198C41.144 13.7198 40.28 12.8558 40.28 11.7998V9.87978H44.12V11.7998Z"
+                                                    fill="#898989"
+                                                />
+                                                <path
+                                                    d="M38.84 30.0398V23.7998C38.84 23.5118 38.648 23.3198 38.36 23.3198H27.8C27.512 23.3198 27.32 23.5118 27.32 23.7998V30.0398C27.032 30.0398 26.84 30.2318 26.84 30.5198V31.9598C26.84 32.2478 27.032 32.4398 27.32 32.4398H38.84C39.128 32.4398 39.32 32.2478 39.32 31.9598V30.5198C39.32 30.2318 39.128 30.0398 38.84 30.0398ZM37.88 30.0398H33.56V27.6398H37.88V30.0398ZM37.88 26.6798H33.56V24.2798H37.88V26.6798ZM32.6 24.2798V26.6798H28.28V24.2798H32.6ZM28.28 27.6398H32.6V30.0398H28.28V27.6398ZM38.36 31.4798H27.8V30.9998H38.36V31.4798Z"
+                                                    fill="#898989"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="product-input w-100">
+                                            <input
+                                                id="cardName"
+                                                type="text"
+                                                name="cardName"
+                                                className="form-control p-4"
+                                                onChange={inputsHandler}
+                                                value={inputField.cardName}
+                                                autoFocus
+                                                placeholder="Name your Business Card"
+                                            />
+                                            <InputError
+                                                messages={errors.cardname}
+                                                className="mt-2"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="form-group-wrapper">
@@ -779,18 +771,9 @@ function BusinesPageUpdate() {
                                                     Choose image from templates
                                                     or upload your own
                                                 </p>
-                                                <div className="row mt-4">
-                                                    <div className="col-md-4">
-                                                        <div className="image-up-label">
-                                                            <p>
-                                                                Upload your
-                                                                image (400*400).
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-8">
-                                                        <div className="upload-image">
+                                                <div className="row mt-4 d-flex justify-content-end">
+                                                    <div className="col-md-8 ">
+                                                        <div className=" business-image-con">
                                                             <div className="view-image business-image">
                                                                 <img
                                                                     src={
@@ -876,7 +859,7 @@ function BusinesPageUpdate() {
                                             <div className="row">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
-                                                        <p>Headline*:</p>
+                                                        <p>Business Type*:</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-10">
@@ -941,16 +924,6 @@ function BusinesPageUpdate() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <OpenDays
-                                        handleCheckboxChangeDate={
-                                            handleCheckboxChangeDate
-                                        }
-                                        handleTimeChange={handleTimeChange}
-                                        daysOfWeek={daysOfWeek}
-                                        hoursOfDay={hoursOfDay}
-                                        schedule={schedule}
-                                    />
                                     <div className="form-group-wrapper mt-3">
                                         <div
                                             className="form-group-title"
@@ -1053,13 +1026,6 @@ function BusinesPageUpdate() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <FeaturesAllItem
-                                                handleItemClick={
-                                                    handleItemClick
-                                                }
-                                                selectedItem={selectedItem}
-                                                featuresData={featuresData}
-                                            />
                                         </div>
                                     </div>
                                     <div className="form-group-wrapper mt-3">
@@ -1086,47 +1052,6 @@ function BusinesPageUpdate() {
                                                 about your business and provide
                                                 contact data.
                                             </p>
-                                            <div className="row border-bottom mt-4">
-                                                <div className="col-md-2">
-                                                    <div className="info-form-label">
-                                                        <p>About:</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-10">
-                                                    <div className="mb-3">
-                                                        <textarea
-                                                            cols="30"
-                                                            rows="5"
-                                                            placeholder="Description in 250 characters."
-                                                            className="form-control"
-                                                            id="summary"
-                                                            name="summary"
-                                                            onChange={
-                                                                inputsHandler
-                                                            }
-                                                            value={
-                                                                inputField.summary
-                                                            }
-                                                            maxLength={250} // Set maximum character length
-                                                        ></textarea>
-                                                        <div className="text-right">
-                                                            <small>
-                                                                {
-                                                                    inputField
-                                                                        .summary
-                                                                        .length
-                                                                }
-                                                                /250 characters
-                                                            </small>
-                                                        </div>
-                                                        {errors.summary && (
-                                                            <div className="text-danger">
-                                                                {errors.summary}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div className="row mt-4">
                                                 <div className="col-md-2">
                                                     <div className="info-form-label">
@@ -1225,7 +1150,7 @@ function BusinesPageUpdate() {
                                             </div>
                                         </div>
                                     </div>
-                            
+
                                     {/* ========== Social Media Item ============ */}
                                     <div className="form-group-wrapper mt-3">
                                         <div
@@ -1296,7 +1221,7 @@ function BusinesPageUpdate() {
                                             data-bs-target="#welScreen"
                                             aria-expanded="true"
                                             aria-controls="welScreen">
-                                            <p>Welcome screen</p>
+                                            <p>Upload your logo</p>
                                             <div className="bottom-arrow">
                                                 <img
                                                     src="/img/icons/bottom-arrow.svg"
@@ -1317,7 +1242,7 @@ function BusinesPageUpdate() {
                                             <div className="row d-flex justify-content-center">
                                                 <div className="col-md-5">
                                                     <div className="upload-image">
-                                                        <div className="view-image">
+                                                        <div className="view-image view-image-logo">
                                                             <img
                                                                 src={
                                                                     welcome.imageUrl
@@ -1412,90 +1337,77 @@ function BusinesPageUpdate() {
                                             </div>
                                         </div>
                                     </div>
-                                    <FeedbackItem
-                                        inputField={inputField}
-                                        errors={errors}
-                                        inputsHandler={inputsHandler}
-                                    />
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
-                                        </div>
-
-                                        <div className="show-preview-right">
+                                        <div className="preview-btn-con">
                                             <div
-                                                className="business-preview-top-header mb-4"
-                                                style={divStyle}>
-                                                <h3 className="company_name">
-                                                    Company Name
-                                                </h3>
-                                                <div className="preview-image business-preview-image">
-                                                    <img
-                                                        src={picture.imageUrl}
-                                                        alt=""
-                                                    />
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="business-preview-top-header">
+                                                <div className="business-preview-image">
+                                                    <div className="business-preview-bg-img">
+                                                        <img
+                                                            src={
+                                                                picture.imageUrl
+                                                            }
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div className="business-preview-logo">
+                                                        <img
+                                                            src={
+                                                                welcome.imageUrl
+                                                            }
+                                                            width={100}
+                                                            height={100}
+                                                        />
+                                                    </div>
                                                 </div>
 
-                                                <div className="p-4">
-                                                    <h4 className="mb-2">
+                                                <div
+                                                    className="p-4"
+                                                    style={divStyle}>
+                                                    <h4 className="mb-2 preview-title">
                                                         Eat. Refresh. Go.
                                                     </h4>
+                                                    <h5 className="mb-2">
+                                                        Food & Catering Business
+                                                    </h5>
                                                     <p className="dajignation">
                                                         {inputField.jobTitle}
+                                                        We aim to provide fresh
+                                                        and healthy snacks for
+                                                        people on the go.
                                                     </p>
-                                                    <button className="view-more-btn">
-                                                        view more
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}>
-                                                <div
-                                                    ref={componentRef}
-                                                    style={{
-                                                        position: 'relative',
-                                                        width: '250px',
-                                                        height: '250px',
-                                                    }}
-                                                    className="qr-image-wrapper">
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                                                        size={250}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="qr-download mt-3">
-                                                <a
-                                                    className="custom-btn"
-                                                    onClick={handlePrint}>
-                                                    Download QR Code
-                                                </a>
-                                            </div>
-
-                                            <div className="card-list-right">
-                                                <ul>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
+                                                    <div className="opening-preview-date-item">
+                                                        <h4 className="preview-title opening-preview-title">
                                                             Location
                                                         </h4>
                                                         <p>
@@ -1506,115 +1418,40 @@ function BusinesPageUpdate() {
                                                             94105
                                                         </p>
                                                         <p>United States</p>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card-list-right">
+                                                <ul>
+                                                    <li>
                                                         <h4 className="opening-preview-title">
                                                             Contact
                                                         </h4>
                                                         <ul className="contact-list-item">
                                                             <li>
-                                                                <span>Joy</span>
+                                                                <h5>Joy</h5>
                                                                 <p> Name</p>
                                                             </li>
                                                             <li>
-                                                                <span>
+                                                                <h5>
                                                                     (415)
                                                                     000-0000
-                                                                </span>
+                                                                </h5>
                                                                 <p> Phone</p>
                                                             </li>
                                                             <li>
-                                                                <span>
+                                                                <h5>
                                                                     hello@joyscafe.com
-                                                                </span>
+                                                                </h5>
                                                                 <p> Email</p>
                                                             </li>
                                                             <li>
-                                                                <span>
+                                                                <h5>
                                                                     www.joyscafe.com
-                                                                </span>
+                                                                </h5>
                                                                 <p> Website</p>
                                                             </li>
                                                         </ul>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Products
-                                                        </h4>
-                                                        <div className="upload-product-img-items">
-                                                            <Swiper
-                                                                slidesPerView={
-                                                                    1
-                                                                }
-                                                                spaceBetween={
-                                                                    10
-                                                                }
-                                                                pagination={{
-                                                                    clickable: true,
-                                                                }}
-                                                                navigation={{
-                                                                    nextEl:
-                                                                        '.swiper-button-next',
-                                                                    prevEl:
-                                                                        '.swiper-button-prev',
-                                                                }}
-                                                                modules={[
-                                                                    Navigation,
-                                                                ]}
-                                                                className="mySwiper">
-                                                                {uploadedFiles.map(
-                                                                    (
-                                                                        file,
-                                                                        index,
-                                                                    ) => (
-                                                                        <SwiperSlide
-                                                                            key={
-                                                                                index
-                                                                            }>
-                                                                            <div className="image-swiper-container">
-                                                                                <img
-                                                                                    src={URL.createObjectURL(
-                                                                                        file,
-                                                                                    )}
-                                                                                    alt={`Uploaded ${file.name}`}
-                                                                                />
-                                                                            </div>
-                                                                        </SwiperSlide>
-                                                                    ),
-                                                                )}
-                                                            </Swiper>
-                                                            <div className="swiper-button-next">
-                                                                <img
-                                                                    src="/img/icons/right-arrow.svg"
-                                                                    alt=""
-                                                                />
-                                                            </div>
-                                                            <div className="swiper-button-prev">
-                                                                <img
-                                                                    src="/img/icons/left.svg"
-                                                                    alt=""
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li className="opening-preview-date-item">
-                                                        <h4 className="opening-preview-title">
-                                                            Facility Features
-                                                        </h4>
-                                                        {Array.isArray(
-                                                            selectedItem,
-                                                        ) &&
-                                                            selectedItem.length >
-                                                                0 && (
-                                                                <FeaturesAllItemPreview
-                                                                    featuresData={
-                                                                        featuresData
-                                                                    }
-                                                                    selectedItem={
-                                                                        selectedItem
-                                                                    }
-                                                                />
-                                                            )}
                                                     </li>
 
                                                     <li className="card-list-li card-list-social">
@@ -1634,6 +1471,59 @@ function BusinesPageUpdate() {
                                                         </div>
                                                     </li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <div className="smart-code-preview">
+                                                <div
+                                                    ref={componentRef}
+                                                    style={{
+                                                        position: 'relative',
+                                                        width: '250px',
+                                                        height: '250px',
+                                                    }}
+                                                    className="qr-image-wrapper ">
+                                                    <QRCode
+                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
+                                                        size={250}
+                                                    />
+                                                    <img
+                                                        src={welcome.imageUrl}
+                                                        width={100}
+                                                        height={100}
+                                                        style={{
+                                                            position:
+                                                                'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform:
+                                                                'translate(-50%, -50%)',
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                            {/* <div className="qr-download mt-3">
+                                                    <a
+                                                        className="custom-btn"
+                                                        onClick={handlePrint}>
+                                                        Download QR Code
+                                                    </a>
+                                                </div> */}
+
+                                            <div className="card-list-right text-center">
+                                                <h1 className="opening-preview-title">
+                                                    Scan this QR Code to preview
+                                                </h1>
+                                                <p>
+                                                    You can customize the design
+                                                    of your QR Code in the next
+                                                    step.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -1679,4 +1569,4 @@ function BusinesPageUpdate() {
     )
 }
 
-export default BusinesPageUpdate
+export default UpdateBusinesPage

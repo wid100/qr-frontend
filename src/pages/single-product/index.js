@@ -7,7 +7,22 @@ import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 
 import Select from 'react-select'
+
+
+
 function SingleProductPage() {
+     const [price, setPrice] = useState(0)
+     const [discount, setDiscount] = useState(0)
+     const [quantity, setQuantity] = useState(0)
+
+     // Calculate total function
+     const calculateTotal = () => {
+         const subtotal = price * quantity
+         const discountAmount = (subtotal * discount) / 100
+         const total = subtotal - discountAmount
+
+         return total
+     }
     const colourOptions = [
         { value: 'purple', label: 'Purple', color: '#5243AA' },
         { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
@@ -52,16 +67,23 @@ function SingleProductPage() {
         uploadedFiles,
         { getRootProps, getInputProps, isDragActive },
     ) => (
-        <div className="dropzone-upload-img" {...getRootProps()}>
+        <div className="dropzone-upload-imgs" {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
                 <p>Drop the files here...</p>
             ) : (
                 <>
-                    <img src="/img/icons/upload.svg" alt="" />
-                    <p>Upload</p>
+                    <div className="dropzone-upload-img mb-3">
+                        <img src="/img/icons/upload.svg" alt="" />
+                        <p>Upload</p>
+                    </div>
                     {uploadedFiles.length > 0 && (
-                        <span>{uploadedFiles[0].name}</span>
+                        <div className='upload-imgs-items'>
+                            <img
+                                src={URL.createObjectURL(uploadedFiles[0])}
+                                alt="Uploaded"
+                            />
+                        </div>
                     )}
                 </>
             )}
@@ -416,7 +438,69 @@ function SingleProductPage() {
                                                 </div>
                                             </div>
 
-                                            <div className="row d-flex align-items-center">
+                                            {/* Input section */}
+                                            <div className="row d-flex align-items-center mt-4">
+                                                {/* Price */}
+                                                <div className="col-md-3">
+                                                    <div className="info-form-label">
+                                                        <p>Price*:</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-9">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <div className="product-price-item d-flex align-items-center">
+                                                                <div className="product-price d-flex align-items-center gap-2">
+                                                                    <span>
+                                                                        BDT
+                                                                    </span>
+                                                                    <input
+                                                                        type="number"
+                                                                        placeholder="500"
+                                                                        value={
+                                                                            price
+                                                                        }
+                                                                        onChange={e =>
+                                                                            setPrice(
+                                                                                e
+                                                                                    .target
+                                                                                    .value,
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/* Discount */}
+                                                        <div className="col-md-6">
+                                                            <div className="d-flex align-items-center gap-3 product-discount-item">
+                                                                <p>
+                                                                    Discount*:
+                                                                </p>
+                                                                <div className="product-price-item d-flex align-items-center">
+                                                                    <div className="product-price">
+                                                                        <input
+                                                                            type="number"
+                                                                            placeholder="20%"
+                                                                            value={
+                                                                                discount
+                                                                            }
+                                                                            onChange={e =>
+                                                                                setDiscount(
+                                                                                    e
+                                                                                        .target
+                                                                                        .value,
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* <div className="row d-flex align-items-center">
                                                 <div className="col-md-3">
                                                     <div className="info-form-label">
                                                         <p>Price*:</p>
@@ -447,6 +531,7 @@ function SingleProductPage() {
                                                                         <input
                                                                             type="number"
                                                                             placeholder="20%"
+
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -454,7 +539,7 @@ function SingleProductPage() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="row d-flex align-items-center">
                                                 <div className="col-md-3">
                                                     <div className="info-form-label">
@@ -501,7 +586,8 @@ function SingleProductPage() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="row ">
+                                            {/* Quantity */}
+                                            <div className="row mt-4">
                                                 <div className="col-md-3">
                                                     <div className="info-form-label">
                                                         <p>Quantity*:</p>
@@ -509,11 +595,16 @@ function SingleProductPage() {
                                                 </div>
                                                 <div className="col-md-9">
                                                     <input
-                                                        type="text"
-                                                        name="cardName"
+                                                        type="number"
+                                                        name="quantity"
                                                         className="form-control"
-                                                        autoFocus
                                                         placeholder="123"
+                                                        value={quantity}
+                                                        onChange={e =>
+                                                            setQuantity(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                     />
                                                 </div>
                                             </div>

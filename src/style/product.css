@@ -339,7 +339,7 @@
         margin-bottom: 60px;
         overflow: hidden;
         background: #fff;
-        padding: 20px 45px 40px;
+        padding: 20px 45px 40px 45px;
     }
 }
 
@@ -640,4 +640,42 @@ button.custom-btn.pay-now-btn {
     font-size: 19px;
     font-weight: 600;
     color: #5C5E61;
+}
+@media screen and (max-width: 720px) {
+    .business-wrapper {
+        width:100%;
+        margin: 0 auto;
+        box-shadow: 0 -5px 40px 7px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        overflow: hidden;
+        background: #fff;
+        padding: 20px 15px 30px 15px;
+    }
+    .business-select-count{
+        gap: 10px;
+    }
+    .business-cart-item {
+    padding: 15px 15px 30px 15px;
+}
+.business-cart-item-select{
+        padding: 15px 15px 15px 15px;
+}
+.shopping-cart-quntity {
+    flex-direction: revert;
+}
+.shopping-cart-item {
+    flex-direction: column;
+}
+.shopping-cart-item-content {
+flex-direction: column;
+}
+.shopping-cart-img {
+    width: 100%;
+}
+.order-payment-item {
+    width: 120px;
+}
+.order-payment-header {
+overflow-y: auto;
+}
 }

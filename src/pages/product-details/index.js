@@ -185,9 +185,11 @@ const ProductDetailsPage = () => {
                                             </ul>
                                         </div>
                                         <div className="product-buy-now-btn">
-                                            <button className="custom-btn">
-                                                Buy Now
-                                            </button>
+                                            <Link href={'/business-cart'}>
+                                                <button className="custom-btn">
+                                                    Buy Now
+                                                </button>
+                                            </Link>
                                         </div>
                                         <div className="product-size-itemss">
                                             <h4>Description:</h4>

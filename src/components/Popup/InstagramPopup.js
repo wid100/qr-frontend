@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode.react'
 import { useDropzone } from 'react-dropzone'
 import { toPng } from 'html-to-image'
-const InstagramPopup = ({ activePopup, handlePopup, componentRef, uniqueSlug }) => {
+const InstagramPopup = ({
+    activePopup,
+    handlePopup,
+    componentRef,
+    uniqueSlug,
+}) => {
     const [selectedFileIndex, setSelectedFileIndex] = useState(null)
     const [selectedColor, setSelectedColor] = useState('#000000')
     const handleColorChange = event => {

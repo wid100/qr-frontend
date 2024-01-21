@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 function sidebar() {
-      const router = useRouter()
-  const isActive = path => router.pathname.startsWith(path)
+    const router = useRouter()
+    const isActive = path => router.pathname.startsWith(path)
     return (
         <div className="sidebar">
             <div className="sidebar-wrapper">
