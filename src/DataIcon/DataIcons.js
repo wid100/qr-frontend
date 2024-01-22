@@ -9,6 +9,8 @@ export const DataIcons = [
         name: 'Behance',
         img: '/img/icons/behance.svg',
     },
+
+    
     {
         id: 3,
         name: 'Instagram',
