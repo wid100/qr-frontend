@@ -116,55 +116,37 @@ export default function Home() {
                             <div className="qr-input-item-wrapper">
                                 <div className="qr-input-items">
                                     <div className="qr-input-list-items">
-                                        <Link href={'/'}>
-                                            <div className="qr-input-list-item">
-                                                <span>
-                                                    <img
-                                                        src="/img/icon/www.svg"
-                                                        alt=""
-                                                    />
-                                                </span>
-                                                <p>Smart URL</p>
-                                            </div>
-                                        </Link>
-                                        <Link href={'/'}>
-                                            <div className="qr-input-list-item">
-                                                <span>
-                                                    <img
-                                                        src="/img/2.svg"
-                                                        alt=""
-                                                    />
-                                                </span>
-                                                <p>Smart Resume</p>
-                                            </div>
-                                        </Link>
+                                        <div className="qr-input-list-item">
+                                            <span>
+                                                <img
+                                                    src="/img/icon/www.svg"
+                                                    alt=""
+                                                />
+                                            </span>
+                                            <p>Smart URL</p>
+                                        </div>
+                                        <div className="qr-input-list-item">
+                                            <span>
+                                                <img src="/img/2.svg" alt="" />
+                                            </span>
+                                            <p>Smart Resume</p>
+                                        </div>
                                     </div>
                                     <div className="qr-input-list-items">
-                                        <Link href={'/'}>
-                                            <div className="qr-input-list-item">
-                                                <span>
-                                                    <img
-                                                        src="/img/1.svg"
-                                                        alt=""
-                                                    />
-                                                </span>
-                                                <p>Smart Smart Card</p>
-                                            </div>
-                                        </Link>
-                                        <Link href={'/'}>
-                                            <div className="qr-input-list-item">
-                                                <span>
-                                                    <img
-                                                        src="/img/3.svg"
-                                                        alt=""
-                                                    />
-                                                </span>
-                                                <p>Smart Profile Creator</p>
-                                            </div>
-                                        </Link>
+                                        <div className="qr-input-list-item">
+                                            <span>
+                                                <img src="/img/1.svg" alt="" />
+                                            </span>
+                                            <p>Smart Smart Card</p>
+                                        </div>
+                                        <div className="qr-input-list-item">
+                                            <span>
+                                                <img src="/img/3.svg" alt="" />
+                                            </span>
+                                            <p>Smart Profile Creator</p>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div className="mb-3">
                                     <label
                                         htmlFor="basic-url"
@@ -174,7 +156,7 @@ export default function Home() {
                                     <div className="input-group">
                                         <input
                                             type="text"
-                                            id="smarturl"
+                                            id="basic-url"
                                             className="form-control"
                                             name="smarturl"
                                             placeholder="Input Smart URL"

@@ -117,11 +117,28 @@ const SelectQr = () => {
                                         </div>
                                     </Link>
                                 </div>
-                        
+                                <div className="col-md-6">
+                                    <Link href={'/resume'}>
+                                        <div className="select-qr-item">
+                                            <div className="select-qr-item-icon">
+                                                <img
+                                                    src="/img/icons/resume.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="select-qr-content">
+                                                <h4>Create Your Resume</h4>
+                                                <p>
+                                                    Link to your profile 
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="select-qr-img"> 
+                            <div className="select-qr-img">
                                 <img
                                     src="/img/icons/select-qr-img.png"
                                     alt=""

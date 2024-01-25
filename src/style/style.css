@@ -317,7 +317,7 @@ gap: 30px;
 }
 
 .color-plate p {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .color-point {
@@ -349,9 +349,12 @@ gap: 30px;
 .form-control {
     border-color: #ced4da !important;
     border-radius: 4px !important;
+    padding: 10px 20px !important;
+    height: auto;
 }
 .color-pic-label {
-    font-size: 12px;
+    font-size: 16px;
+    padding-bottom: 10px;
 }
 
 .upload-image-wrapper {
@@ -1198,6 +1201,7 @@ li.card-list-li {
 }
 .footer-content-wrapper p {
     font-size: 16px;
+    margin-top: 15px;
 }
 
 .footer-menu ul li a:hover {

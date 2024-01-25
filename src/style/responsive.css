@@ -74,6 +74,20 @@
     .product-discount-item{
         margin-top: 20px;
     }
+    .hero-content h1{
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    .hero-section {
+    padding: 130px 0 70px 0;
+}
+button.hero-btn {
+    margin-top: 30px;
+
+}
+.vCard-roadmap {
+    padding-bottom: 60px;
+}
 }
 @media screen and (max-width: 690px) {
     .my-preview-top {
