@@ -1,3 +1,72 @@
 .react-datepicker-wrapper{
     width: 100%;
 }
+.step-progress-bar {
+  width: 100%;
+  background: #eaeaea;
+  height: 5px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.step-progress-bar-item {
+  background: var(--main-color);
+  height: 100%;
+  border-radius: 4px;
+}
+
+.step-btn-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0;
+  gap: 20px;
+}
+.step-btn-item .custom-btn {
+  width: 150px;
+}
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.upload-btn {
+  border: 1px dashed #e5e7eb;
+  color: var(--second-color);
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  font-weight: bold;
+  height: 60px;
+}
+.upload-btn span {
+  font-size: 25px;
+}
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  height: 100%;
+}
+.user-img-items img {
+  width: 100%;
+  padding: 10px;
+}
+.user-img-items {
+  width: 120px;
+  display: flex;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}

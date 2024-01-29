@@ -1,116 +1,111 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import React, { useRef, useState } from 'react'
-import QRCode from 'qrcode.react'
-// import htmlToImage from 'html-to-image'
 import InputError from '@/components/InputError'
 import { useAuth } from '@/hooks/auth'
 import axios from 'axios'
-import { useReactToPrint } from 'react-to-print'
+
 import Link from 'next/link'
 import FeedbackItem from '@/components/FeedbackItem'
 import { DataIcons } from '@/DataIcon/DataIcons'
+import SmartCodeView from '@/components/Popup/SmartCodeView'
 
 function CreateQR() {
-        const [previewActive, setPreviewActive] = useState(1)
-        const handlePreview = index => {
-            setPreviewActive(index)
+    const [previewActive, setPreviewActive] = useState(1)
+    const handlePreview = index => {
+        setPreviewActive(index)
+    }
+    // Social Media Item
+    const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
+    const [previewIcons, setPreviewIcons] = useState([])
+    const addInputField = socialPlatform => {
+        if (!selectedSocialPlatforms.includes(socialPlatform)) {
+            setSelectedSocialPlatforms(prevPlatforms => [
+                ...prevPlatforms,
+                socialPlatform,
+            ])
+            setPreviewIcons(prevIcons => [...prevIcons, socialPlatform])
         }
-// Social Media Item
-   const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
-  const [previewIcons, setPreviewIcons] = useState([])
-  const addInputField = socialPlatform => {
-      if (!selectedSocialPlatforms.includes(socialPlatform)) {
-          setSelectedSocialPlatforms(prevPlatforms => [
-              ...prevPlatforms,
-              socialPlatform,
-          ])
-          setPreviewIcons(prevIcons => [...prevIcons, socialPlatform])
-      }
-  }
+    }
 
-   const removeInputField = socialPlatform => {
-       setSelectedSocialPlatforms(prevPlatforms =>
-           prevPlatforms.filter(platform => platform !== socialPlatform),
-       )
-       setPreviewIcons(prevIcons =>
-           prevIcons.filter(icon => icon !== socialPlatform),
-       )
-   }
+    const removeInputField = socialPlatform => {
+        setSelectedSocialPlatforms(prevPlatforms =>
+            prevPlatforms.filter(platform => platform !== socialPlatform),
+        )
+        setPreviewIcons(prevIcons =>
+            prevIcons.filter(icon => icon !== socialPlatform),
+        )
+    }
 
-   const renderPreviewIcons = () => {
-       return previewIcons.map((socialPlatform, index) => (
-           <div key={index} className="preview-icon-item">
-               <img
-                   src={
-                       DataIcons.find(
-                           item => item.name.toLowerCase() === socialPlatform,
-                       )?.img
-                   }
-                   alt={socialPlatform}
-               />
-           </div>
-       ))
-   }
+    const renderPreviewIcons = () => {
+        return previewIcons.map((socialPlatform, index) => (
+            <div key={index} className="preview-icon-item">
+                <img
+                    src={
+                        DataIcons.find(
+                            item => item.name.toLowerCase() === socialPlatform,
+                        )?.img
+                    }
+                    alt={socialPlatform}
+                />
+            </div>
+        ))
+    }
 
-   const renderInputFields = () => {
-       return selectedSocialPlatforms.map((socialPlatform, index) => (
-           <div key={index} className="row d-flex align-items-center mb-2">
-               <div className="col-md-3">
-                   {/* Render label and icon based on selected social platform */}
-                   {DataIcons.map(item =>
-                       item.name.toLowerCase() === socialPlatform ? (
-                           <div className="info-form-label" key={item.id}>
-                               <p>{item.name}</p>
-                               <span>
-                                   <img src={item.img} alt={item.name} />
-                               </span>
-                           </div>
-                       ) : null,
-                   )}
-               </div>
-               <div className="col-md-9">
-                   {/* Your existing code for social media fields and input */}
-                   <div className="social-media-field">
-                       <div className="social-input-fields">
-                           <div className="icon-send">
-                               <span>URL</span>
-                               <span>*</span>
-                           </div>
-                           <div className="social-item">
-                               <input
-                                   type="text"
-                                   placeholder={`${socialPlatform}`}
-                                   id={`${socialPlatform}-${index}`}
-                                   name={`${socialPlatform}-${index}`}
-                                   // onChange={e =>
-                                   //     inputsHandler(
-                                   //         `${socialPlatform}-${index}`,
-                                   //         e.target.value,
-                                   //     )
-                                   // }
-                               />
-                               <span>
-                                   <InputError
-                                       messages={errors[socialPlatform]}
-                                       className="mt-2"
-                                   />
-                               </span>
-                           </div>
-                       </div>
-                       <button onClick={() => removeInputField(socialPlatform)}>
-                           <span>&#10006;</span>
-                       </button>
-                   </div>
-               </div>
-           </div>
-       ))
-   }
-
-
-
-
-
+    const renderInputFields = () => {
+        return selectedSocialPlatforms.map((socialPlatform, index) => (
+            <div key={index} className="row d-flex align-items-center mb-2">
+                <div className="col-md-3">
+                    {/* Render label and icon based on selected social platform */}
+                    {DataIcons.map(item =>
+                        item.name.toLowerCase() === socialPlatform ? (
+                            <div className="info-form-label" key={item.id}>
+                                <p>{item.name}</p>
+                                <span>
+                                    <img src={item.img} alt={item.name} />
+                                </span>
+                            </div>
+                        ) : null,
+                    )}
+                </div>
+                <div className="col-md-9">
+                    {/* Your existing code for social media fields and input */}
+                    <div className="social-media-field">
+                        <div className="social-input-fields">
+                            <div className="icon-send">
+                                <span>URL</span>
+                                <span>*</span>
+                            </div>
+                            <div className="social-item">
+                                <input
+                                    type="text"
+                                    placeholder={`${socialPlatform}`}
+                                    id={`${socialPlatform}-${index}`}
+                                    name={`${socialPlatform}-${index}`}
+                                    // onChange={e =>
+                                    //     inputsHandler(
+                                    //         `${socialPlatform}-${index}`,
+                                    //         e.target.value,
+                                    //     )
+                                    // }
+                                />
+                                <span>
+                                    <InputError
+                                        messages={errors[socialPlatform]}
+                                        className="mt-2"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => removeInputField(socialPlatform)}>
+                            <span>&#10006;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        ))
+    }
 
     const { user } = useAuth({ middleware: 'auth' })
     const [loading, setLoading] = useState(false)
@@ -342,10 +337,6 @@ function CreateQR() {
     }
 
     const componentRef = useRef()
-
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    })
 
     // Description Caracter
     const [inputArea, setInputArea] = useState({ summary: '' })
@@ -1330,15 +1321,15 @@ function CreateQR() {
                                                     <div className="share-check-item">
                                                         <input
                                                             type="checkbox"
-                                                            class="checkbox"
+                                                            className="checkbox"
                                                             id="checkbox"
                                                         />
                                                         <label
-                                                            for="checkbox"
-                                                            class="checkbox-label">
-                                                            <i class="fas fa-moon"></i>
-                                                            <i class="fas fa-sun"></i>
-                                                            <span class="ball"></span>
+                                                            htmlFor="checkbox"
+                                                            className="checkbox-label">
+                                                            <i className="fas fa-moon"></i>
+                                                            <i className="fas fa-sun"></i>
+                                                            <span className="ball"></span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -1542,51 +1533,12 @@ function CreateQR() {
                                                     ? 'show-preview-right active'
                                                     : 'show-preview-right'
                                             }>
-                                            <div className="smart-code-preview">
-                                                <div
-                                                    ref={componentRef}
-                                                    style={{
-                                                        position: 'relative',
-                                                        width: '250px',
-                                                        height: '250px',
-                                                    }}
-                                                    className="qr-image-wrapper">
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                                                        size={250}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                                {/* <div className="qr-download mt-3">
-                                                    <a
-                                                        className="custom-btn"
-                                                        onClick={handlePrint}>
-                                                        Download QR Code
-                                                    </a>
-                                                </div> */}
-                                            <div className="card-list-right text-center">
-                                                <h1 className="opening-preview-title">
-                                                    Scan this QR Code to preview
-                                                </h1>
-                                                <p>
-                                                    You can customize the design
-                                                    of your QR Code in the next
-                                                    step.
-                                                </p>
-                                            </div>
+                                            <SmartCodeView
+                                                componentRef={componentRef}
+                                                uniqueSlug={uniqueSlug}
+                       
+                                                welcome={welcome}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -1631,4 +1583,4 @@ function CreateQR() {
     )
 }
 
-export default CreateQR;
+export default CreateQR

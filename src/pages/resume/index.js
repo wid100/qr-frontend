@@ -8,56 +8,16 @@ import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import WorkHistory from '@/components/Resume/WorkHistory'
+import Education from '@/components/Resume/Education'
+import References from '@/components/Resume/References'
+import Others from '@/components/Resume/Others'
+import Heading from '@/components/Resume/Heading'
 function ResumePage() {
-// ======================= Job Added ====================
-    const [jobEntries, setJobEntries] = useState([])
-    const [inputFields, setInputFields] = useState({
-        job_title: '',
-        employer_name: '',
-        location_address: '',
-        startMonth: null,
-        startYear: null,
-        endMonth: null,
-        endYear: null,
-        summary: '',
-        currentlyWorking: false,
-    })
+    // ======================= Job Added ====================
 
-    const handleInputChange = (field, value) => {
-        setInputField({
-            ...inputField,
-            [field]: value,
-        })
-    }
-
-    const handleAddJob = () => {
-        setJobEntries([...jobEntries, inputField])
-        setInputField({
-            job_title: '',
-            employer_name: '',
-            location_address: '',
-            startMonth: null,
-            startYear: null,
-            endMonth: null,
-            endYear: null,
-            summary: '',
-            currentlyWorking: false,
-        })
-    }
-
-    const handleRemoveJob = index => {
-        const updatedJobEntries = [...jobEntries]
-        updatedJobEntries.splice(index, 1)
-        setJobEntries(updatedJobEntries)
-    }
-
-    // ================== Date Picker ===========
-    const [startMonth, setStartMonth] = useState(null)
-    const [startYear, setStartYear] = useState(null)
-    const [endMonth, setEndMonth] = useState(null)
-    const [endYear, setEndYear] = useState(null)
     //  // ===== Step ===========
-    // const totalSteps = 6
+    const totalSteps = 5
     const [currentStep, setCurrentStep] = useState(1)
     const nextStep = () => {
         setCurrentStep(currentStep + 1)
@@ -66,10 +26,11 @@ function ResumePage() {
     const prevStep = () => {
         setCurrentStep(currentStep - 1)
     }
+    
+    const calculateProgress = () => {
+        return ((currentStep - 1) / (totalSteps - 1)) * 100
+    }
 
-    // const calculateProgress = () => {
-    //     return ((currentStep - 1) / (totalSteps - 1)) * 100
-    // }
 
     //  ============= Active preview ================
     const [previewActive, setPreviewActive] = useState(1)
@@ -81,7 +42,7 @@ function ResumePage() {
 
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewImage, setPreviewImage] = useState([
-        '/assets/images/dashboard/profile.jpg',
+        '/img/icon/profile.jpg',
     ])
 
     const handleFileChange = event => {
@@ -251,9 +212,7 @@ function ResumePage() {
 
     const componentRef = useRef()
 
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    })
+
 
     // Description Caracter
     const [inputArea, setInputArea] = useState({ summary: '' })
@@ -283,8 +242,16 @@ function ResumePage() {
                 <div className="account-details">
                     <form>
                         <div className="container">
-                            <div className="row">
+                            <div className="row d-flex align-items-center justify-content-center">
                                 <div className="col-lg-8 mb-4">
+                                    <div className="step-progress-bar">
+                                        <div
+                                            className="step-progress-bar-item"
+                                            style={{
+                                                width: `${calculateProgress()}%`,
+                                            }}></div>
+                                    </div>
+
                                     {currentStep === 1 && (
                                         <>
                                             <div className="mb-3 d-flex align-items-center gap-4">
@@ -597,7 +564,7 @@ function ResumePage() {
                                                         <div className="row mt-4 d-flex">
                                                             <div className="col-md-4 ">
                                                                 <div className="upload-shop-logo-item mb-3 upload-btn-wrapper">
-                                                                    {previewImage && (
+                                                                    {previewImage ? (
                                                                         <div className="user-img-items mb-3">
                                                                             <img
                                                                                 src={
@@ -610,13 +577,14 @@ function ResumePage() {
                                                                                 }}
                                                                             />
                                                                         </div>
-                                                                    )}
+                                                                    ) : null}
                                                                     <button
                                                                         className="upload-btn"
                                                                         onClick={
                                                                             handleUpload
                                                                         }>
                                                                         Upload
+                                                                        profile
                                                                         Image
                                                                     </button>
                                                                     <input
@@ -638,664 +606,63 @@ function ResumePage() {
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div className="form-group-wrapper mt-3">
-                                                <div
-                                                    className="form-group-title"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#information"
-                                                    aria-expanded="true"
-                                                    aria-controls="information">
-                                                    <p>Heading</p>
-                                                    <div className="bottom-arrow">
-                                                        <img
-                                                            src="/img/icons/bottom-arrow.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    className="information-form collapse show"
-                                                    id="information">
-                                                    <p>
-                                                        Introduce your business
-                                                        or organization in a few
-                                                        words. Optionally, add a
-                                                        button to a website of
-                                                        your choice. Fields
-                                                        marked with a * are
-                                                        mandatory.
-                                                    </p>
-                                                    <div className="row d-flex align-items-center justify-content-center">
-                                                        <div className="col-md-10">
-                                                            <div className="row mt-4">
-                                                                <div className="col-md-6">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            First
-                                                                            Name*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="first_name"
-                                                                        type="text"
-                                                                        name="first_name"
-                                                                        className="form-control"
-                                                                        placeholder="First name"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-6">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Last
-                                                                            Name*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="last_name"
-                                                                        type="text"
-                                                                        name="last_name"
-                                                                        className="form-control"
-                                                                        placeholder="Last Name"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Profession*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="profession"
-                                                                        type="text"
-                                                                        name="profession"
-                                                                        className="form-control"
-                                                                        placeholder="Type your profession"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Address*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="address"
-                                                                        type="text"
-                                                                        name="address"
-                                                                        className="form-control"
-                                                                        placeholder="Enter your Address"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="row">
-                                                                        <div className="col-md-6">
-                                                                            <div className="info-form-label mb-2">
-                                                                                <p>
-                                                                                    City*:
-                                                                                </p>
-                                                                            </div>
-                                                                            <input
-                                                                                id="city"
-                                                                                type="text"
-                                                                                name="city"
-                                                                                className="form-control"
-                                                                                placeholder="Enter your City"
-                                                                            />
-                                                                        </div>
-                                                                        <div className="col-md-6">
-                                                                            <div className="info-form-label mb-2">
-                                                                                <p>
-                                                                                    Postal
-                                                                                    Code*:
-                                                                                </p>
-                                                                            </div>
-                                                                            <input
-                                                                                id="postal_code"
-                                                                                type="text"
-                                                                                name="postal_code"
-                                                                                className="form-control"
-                                                                                placeholder="Postal code"
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="row">
-                                                                        <div className="col-md-6">
-                                                                            <div className="info-form-label mb-2">
-                                                                                <p>
-                                                                                    Country*:
-                                                                                </p>
-                                                                            </div>
-                                                                            <select
-                                                                                className="form-select form-control"
-                                                                                aria-label="Default select example">
-                                                                                <option
-                                                                                    selected>
-                                                                                    Select
-                                                                                    Your
-                                                                                    Country
-                                                                                </option>
-                                                                                <option value="1">
-                                                                                    One
-                                                                                </option>
-                                                                                <option value="2">
-                                                                                    Two
-                                                                                </option>
-                                                                                <option value="3">
-                                                                                    Three
-                                                                                </option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            <Heading />
                                         </>
                                     )}
 
                                     {currentStep === 2 && (
                                         <>
-                                            <div className="form-group-wrapper mt-3">
-                                                <div
-                                                    className="form-group-title"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#information"
-                                                    aria-expanded="true"
-                                                    aria-controls="information">
-                                                    <p>Work History</p>
-                                                    <div className="bottom-arrow">
-                                                        <img
-                                                            src="/img/icons/bottom-arrow.svg"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                </div>
+                                            <WorkHistory
+                                                inputField={inputField}
+                                                setInputField={setInputField}
+                                            />
+                                        </>
+                                    )}
 
-                                                <div
-                                                    className="information-form collapse show"
-                                                    id="information">
-                                                    <p>
-                                                        You can include any work
-                                                        experience, internships,
-                                                        scholarships, relevant
-                                                        coursework and academic
-                                                        achievements.
-                                                    </p>
-                                                    <div className="row d-flex align-items-center justify-content-center">
-                                                        <div className="col-md-10">
-                                                            {/* <div className="row mt-4">
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Job
-                                                                            Title*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="job_title"
-                                                                        type="text"
-                                                                        name="job_title"
-                                                                        className="form-control"
-                                                                        placeholder="Type your Job Title"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Employer*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="employer_name"
-                                                                        type="text"
-                                                                        name="employer_name"
-                                                                        className="form-control"
-                                                                        placeholder="Employer name"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Location*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="location_address"
-                                                                        type="text"
-                                                                        name="location_address"
-                                                                        className="form-control"
-                                                                        placeholder="Type your address"
-                                                                    />
-                                                                </div>
-                                                                <div className="col-md-12 mt-3">
-                                                                  
-                                                                    <div className="row d-flex align-items-end">
-                                                                        <div className="col-md-6">
-                                                                            <div className="info-form-label mb-2">
-                                                                                <p>
-                                                                                    Start
-                                                                                    Date*:
-                                                                                </p>
-                                                                            </div>
-                                                                            <DatePicker
-                                                                                selected={
-                                                                                    startMonth
-                                                                                }
-                                                                                onChange={date =>
-                                                                                    setStartMonth(
-                                                                                        date,
-                                                                                    )
-                                                                                }
-                                                                                showMonthYearPicker
-                                                                                dateFormat="MMMM"
-                                                                                className="form-control"
-                                                                            />
-                                                                        </div>
-                                                                        <div className="col-md-6">
-                                                                            <DatePicker
-                                                                                selected={
-                                                                                    startYear
-                                                                                }
-                                                                                onChange={date =>
-                                                                                    setStartYear(
-                                                                                        date,
-                                                                                    )
-                                                                                }
-                                                                                showYearPicker
-                                                                                dateFormat="yyyy"
-                                                                                className="form-control"
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                  
-                                                                    <div className="row d-flex align-items-end mt-3">
-                                                                        <div className="col-md-6">
-                                                                            <div className="info-form-label mb-2">
-                                                                                <p>
-                                                                                    End
-                                                                                    Date*:
-                                                                                </p>
-                                                                            </div>
-                                                                            <DatePicker
-                                                                                selected={
-                                                                                    endMonth
-                                                                                }
-                                                                                onChange={date =>
-                                                                                    setEndMonth(
-                                                                                        date,
-                                                                                    )
-                                                                                }
-                                                                                showMonthYearPicker
-                                                                                dateFormat="MMMM"
-                                                                                className="form-control"
-                                                                            />
-                                                                        </div>
-                                                                        <div className="col-md-6">
-                                                                            <DatePicker
-                                                                                selected={
-                                                                                    endYear
-                                                                                }
-                                                                                onChange={date =>
-                                                                                    setEndYear(
-                                                                                        date,
-                                                                                    )
-                                                                                }
-                                                                                showYearPicker
-                                                                                dateFormat="yyyy"
-                                                                                className="form-control"
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Job
-                                                                            Description*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <div className="mb-3">
-                                                                        <textarea
-                                                                            cols="30"
-                                                                            rows="5"
-                                                                            placeholder="Description in 250 characters."
-                                                                            className="form-control"
-                                                                            id="summary"
-                                                                            name="summary"
-                                                                            onChange={
-                                                                                inputsHandler
-                                                                            }
-                                                                            value={
-                                                                                inputField.summary
-                                                                            }
-                                                                            maxLength={
-                                                                                250
-                                                                            } 
-                                                                        ></textarea>
-                                                                        <div className="text-right">
-                                                                            <small>
-                                                                                {
-                                                                                    inputField
-                                                                                        .summary
-                                                                                        .length
-                                                                                }
-                                                                                /250
-                                                                                characters
-                                                                            </small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="job-checkbox d-flex align-items-center gap-2">
-                                                                    <input type="checkbox" />
-                                                                    <p>
-                                                                        I am
-                                                                        currently
-                                                                        working
-                                                                        here.
-                                                                    </p>
-                                                                </div>
-                                                                <button
-                                                                    className="custom-btn"
-                                                                    onClick={
-                                                                        handleAddJob
-                                                                    }>
-                                                                    Add Job
-                                                                </button>
-                                                            </div> */}
-                                                            <div className="row mt-4">
-                                                                {/* Job Title Input */}
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div className="info-form-label mb-2">
-                                                                        <p>
-                                                                            Job
-                                                                            Title*:
-                                                                        </p>
-                                                                    </div>
-                                                                    <input
-                                                                        id="job_title"
-                                                                        type="text"
-                                                                        name="job_title"
-                                                                        className="form-control"
-                                                                        placeholder="Type your Job Title"
-                                                                       
-                                                                    />
-                                                                </div>
-
-                                                                {/* Add Job button */}
-                                                                <div className="col-md-12 mt-3">
-                                                                    <div
-                                                                        className="custom-btn"
-                                                                        onClick={
-                                                                            handleAddJob
-                                                                        }>
-                                                                        Add Job
-                                                                    </div>
-                                                                </div>
-
-                                                                {/* Display added job entries */}
-                                                                <div className="col-md-12 mt-3">
-                                                                    <h2>
-                                                                        Added
-                                                                        Jobs:
-                                                                    </h2>
-                                                                    {jobEntries.map(
-                                                                        (
-                                                                            entry,
-                                                                            index,
-                                                                        ) => (
-                                                                            <div
-                                                                                key={
-                                                                                    index
-                                                                                }>
-                                                                                <p>
-                                                                                    Job
-                                                                                    Title:{' '}
-                                                                                    {
-                                                                                        entry.job_title
-                                                                                    }
-                                                                                </p>
-                                                                                {/* Display more details as needed */}
-                                                                                <button
-                                                                                    onClick={() =>
-                                                                                        handleRemoveJob(
-                                                                                            index,
-                                                                                        )
-                                                                                    }>
-                                                                                    Remove
-                                                                                    Job
-                                                                                </button>
-                                                                            </div>
-                                                                        ),
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    {currentStep === 3 && (
+                                        <>
+                                            <Education
+                                                inputField={inputField}
+                                            />
+                                        </>
+                                    )}
+                                    {currentStep === 4 && (
+                                        <>
+                                            <Others inputField={inputField} />
+                                        </>
+                                    )}
+                                    {currentStep === 5 && (
+                                        <>
+                                            <References
+                                                inputField={inputField}
+                                            />
                                         </>
                                     )}
                                     <div className="step-btn-item">
                                         {currentStep > 1 && (
-                                            <button
+                                            <div
                                                 onClick={prevStep}
                                                 className="custom-btn">
                                                 <span>Previous</span>
-                                            </button>
+                                            </div>
                                         )}
-                                        {currentStep < 2 ? (
-                                            <button
+                                        {currentStep < 5 ? (
+                                            <div
                                                 onClick={nextStep}
                                                 className="custom-btn">
                                                 <span>
-                                                    {currentStep === 2
+                                                    {currentStep === 5
                                                         ? 'Confirm'
                                                         : 'Next'}
                                                 </span>
-                                            </button>
+                                            </div>
                                         ) : (
-                                            <button
+                                            <div
                                                 className="custom-btn"
                                                 disabled>
                                                 <span>Finish</span>
-                                            </button>
+                                            </div>
                                         )}
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 mb-4">
-                                    <div className="preview">
-                                        <div className="preview-btn-con">
-                                            <div
-                                                className={
-                                                    previewActive === 1
-                                                        ? 'preview-bar active'
-                                                        : 'preview-bar'
-                                                }
-                                                onClick={() => {
-                                                    handlePreview(1)
-                                                }}>
-                                                <p>Preview</p>
-                                            </div>
-                                            <div
-                                                className={
-                                                    previewActive === 2
-                                                        ? 'preview-bar active'
-                                                        : 'preview-bar'
-                                                }
-                                                onClick={() => {
-                                                    handlePreview(2)
-                                                }}>
-                                                <p>Smart Code</p>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={
-                                                previewActive === 1
-                                                    ? 'show-preview-right active'
-                                                    : 'show-preview-right'
-                                            }>
-                                            <div className="business-preview-top-header">
-                                                <div className="business-preview-image">
-                                                    <div className="business-preview-bg-img">
-                                                        <img
-                                                            src={
-                                                                picture.imageUrl
-                                                            }
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                    <div className="business-preview-logo">
-                                                        <img
-                                                            src={
-                                                                welcome.imageUrl
-                                                            }
-                                                            width={100}
-                                                            height={100}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    className="p-4"
-                                                    style={divStyle}>
-                                                    <h4 className="mb-2 preview-title">
-                                                        Eat. Refresh. Go.
-                                                    </h4>
-                                                    <h5 className="mb-2">
-                                                        Food & Catering Business
-                                                    </h5>
-                                                    <p className="dajignation">
-                                                        {inputField.jobTitle}
-                                                        We aim to provide fresh
-                                                        and healthy snacks for
-                                                        people on the go.
-                                                    </p>
-                                                    <div className="opening-preview-date-item">
-                                                        <h4 className="preview-title opening-preview-title">
-                                                            Location
-                                                        </h4>
-                                                        <p>
-                                                            Mission Street 526
-                                                        </p>
-                                                        <p>
-                                                            San Francisco, CA
-                                                            94105
-                                                        </p>
-                                                        <p>United States</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="card-list-right">
-                                                <ul>
-                                                    <li>
-                                                        <h4 className="opening-preview-title">
-                                                            Contact
-                                                        </h4>
-                                                        <ul className="contact-list-item">
-                                                            <li>
-                                                                <h5>Joy</h5>
-                                                                <p> Name</p>
-                                                            </li>
-                                                            <li>
-                                                                <h5>
-                                                                    (415)
-                                                                    000-0000
-                                                                </h5>
-                                                                <p> Phone</p>
-                                                            </li>
-                                                            <li>
-                                                                <h5>
-                                                                    hello@joyscafe.com
-                                                                </h5>
-                                                                <p> Email</p>
-                                                            </li>
-                                                            <li>
-                                                                <h5>
-                                                                    www.joyscafe.com
-                                                                </h5>
-                                                                <p> Website</p>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-
-                                                    <li className="card-list-li card-list-social">
-                                                        <div className="preview-info-icon">
-                                                            <img
-                                                                src="/img/icon/share.svg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div className="info-show border-none">
-                                                            <h4 className="opening-preview-title">
-                                                                Social Media
-                                                            </h4>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={
-                                                previewActive === 2
-                                                    ? 'show-preview-right active'
-                                                    : 'show-preview-right'
-                                            }>
-                                            <div className="smart-code-preview">
-                                                <div
-                                                    ref={componentRef}
-                                                    style={{
-                                                        position: 'relative',
-                                                        width: '250px',
-                                                        height: '250px',
-                                                    }}
-                                                    className="qr-image-wrapper ">
-                                                    <QRCode
-                                                        value={`https://smartcardgenerator.net/${uniqueSlug}`}
-                                                        size={250}
-                                                    />
-                                                    <img
-                                                        src={welcome.imageUrl}
-                                                        width={100}
-                                                        height={100}
-                                                        style={{
-                                                            position:
-                                                                'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform:
-                                                                'translate(-50%, -50%)',
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            {/* <div className="qr-download mt-3">
-                                                    <a
-                                                        className="custom-btn"
-                                                        onClick={handlePrint}>
-                                                        Download QR Code
-                                                    </a>
-                                                </div> */}
-
-                                            <div className="card-list-right text-center">
-                                                <h1 className="opening-preview-title">
-                                                    Scan this QR Code to preview
-                                                </h1>
-                                                <p>
-                                                    You can customize the design
-                                                    of your QR Code in the next
-                                                    step.
-                                                </p>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
