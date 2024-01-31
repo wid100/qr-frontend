@@ -10,7 +10,13 @@ import { useReactToPrint } from 'react-to-print'
 import Link from 'next/link'
 import FeedbackItem from '@/components/FeedbackItem'
 import { DataIcons } from '@/DataIcon/DataIcons'
+import SmartCodeView from '@/components/Popup/SmartCodeView'
+import SmartCodeViewUpdate from '@/components/Popup/SmartCodeViewUpdate'
 const UpdateQrPage = ({ qrData }) => {
+      const [previewActive, setPreviewActive] = useState(1)
+    const handlePreview = index => {
+        setPreviewActive(index)
+    }
     // Social Media Item
     const [selectedSocialPlatforms, setSelectedSocialPlatforms] = useState([])
     const [previewIcons, setPreviewIcons] = useState([])
@@ -1286,11 +1292,37 @@ const UpdateQrPage = ({ qrData }) => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
+                                        <div className="preview-btn-con">
+                                            <div
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
                                         </div>
 
-                                        <div className="show-preview-right">
+                                        <div
+                                            className={
+                                                previewActive === 1
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
                                             <div
                                                 className="my-preview-top-header"
                                                 style={divStyle}>
@@ -1342,7 +1374,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                 </ul>
                                             </div>
 
-                                            <div
+                                            {/* <div
                                                 className="margin:auto"
                                                 style={{
                                                     display: 'flex',
@@ -1386,7 +1418,7 @@ const UpdateQrPage = ({ qrData }) => {
                                                     onClick={handlePrint}>
                                                     Download QR Code
                                                 </a>
-                                            </div>
+                                            </div> */}
                                             <div className="card-list-right">
                                                 <ul>
                                                     <li className="card-list-li">
@@ -1489,6 +1521,18 @@ const UpdateQrPage = ({ qrData }) => {
                                                     </li>
                                                 </ul>
                                             </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                previewActive === 2
+                                                    ? 'show-preview-right active'
+                                                    : 'show-preview-right'
+                                            }>
+                                            <SmartCodeViewUpdate
+                                                componentRef={componentRef}
+                                                uniqueSlug={qrData.slug}
+                                                welcome={welcome}
+                                            />
                                         </div>
                                     </div>
                                 </div>

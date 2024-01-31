@@ -42,7 +42,7 @@ const References = () => {
                                       type="text"
                                       name="last_name"
                                       className="form-control"
-                                      placeholder="First name"
+                                      placeholder="Last name"
                                   />
                               </div>
                               <div className="col-md-12 mt-3">

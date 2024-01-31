@@ -11,6 +11,11 @@ import Link from 'next/link'
 
 function UpdateWebiste() {
     const { user } = useAuth({ middleware: 'auth' })
+// ============== Active preview ==============
+      const [previewActive, setPreviewActive] = useState(1)
+      const handlePreview = index => {
+          setPreviewActive(index)
+      }
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
     const [selectedValue, setSelectedValue] = useState('')
@@ -332,9 +337,31 @@ function UpdateWebiste() {
                                 </div>
                                 <div className="col-lg-4 mb-4">
                                     <div className="preview">
-                                        <div className="preview-bar mb-3">
-                                            <p>Preview</p>
+                                        <div className="preview-btn-con">
+                                            <div
+                                                className={
+                                                    previewActive === 1
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(1)
+                                                }}>
+                                                <p>Preview</p>
+                                            </div>
+                                            <div
+                                                className={
+                                                    previewActive === 2
+                                                        ? 'preview-bar active'
+                                                        : 'preview-bar'
+                                                }
+                                                onClick={() => {
+                                                    handlePreview(2)
+                                                }}>
+                                                <p>Smart Code</p>
+                                            </div>
                                         </div>
+                                 
 
                                         <div className="show-preview-right">
                                             <div

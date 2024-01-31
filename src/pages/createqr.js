@@ -198,7 +198,7 @@ function CreateQR() {
 
     const [welcome, setWelcome] = useState({
         image: null,
-        imageUrl: null,
+        imageUrl: '/img/logo-qr.png',
     })
 
     const handleWelcome = e => {
