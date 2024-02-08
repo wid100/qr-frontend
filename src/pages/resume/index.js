@@ -26,11 +26,10 @@ function ResumePage() {
     const prevStep = () => {
         setCurrentStep(currentStep - 1)
     }
-    
+
     const calculateProgress = () => {
         return ((currentStep - 1) / (totalSteps - 1)) * 100
     }
-
 
     //  ============= Active preview ================
     const [previewActive, setPreviewActive] = useState(1)
@@ -41,9 +40,7 @@ function ResumePage() {
     //  ==================Profiel image upload =================
 
     const [selectedFile, setSelectedFile] = useState(null)
-    const [previewImage, setPreviewImage] = useState([
-        '/img/icon/profile.jpg',
-    ])
+    const [previewImage, setPreviewImage] = useState(['/img/icon/profile.jpg'])
 
     const handleFileChange = event => {
         const file = event.target.files[0]
@@ -211,8 +208,6 @@ function ResumePage() {
     })
 
     const componentRef = useRef()
-
-
 
     // Description Caracter
     const [inputArea, setInputArea] = useState({ summary: '' })
@@ -657,18 +652,20 @@ function ResumePage() {
                                                 </span>
                                             </div>
                                         ) : (
-                                            <div
-                                                className="custom-btn"
-                                                disabled>
-                                                <span>Finish</span>
-                                            </div>
+                                            <Link href={'/choose-template'}>
+                                                <div
+                                                    className="custom-btn"
+                                                    disabled>
+                                                    <span>Finish</span>
+                                                </div>
+                                            </Link>
                                         )}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="submit-form footer-submit-from">
+                        {/* <div className="submit-form footer-submit-from">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-8">
@@ -678,11 +675,7 @@ function ResumePage() {
                                                 className="back">
                                                 {'< Back'}
                                             </Link>
-                                            {/* <button
-                                                className="submit-details-form"
-                                                type="submit">
-                                                Submit
-                                            </button> */}
+                                 
                                             {loading ? (
                                                 <div className="submit-details-form">
                                                     Loading...
@@ -698,7 +691,7 @@ function ResumePage() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </section>

@@ -1,72 +1,347 @@
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
     width: 100%;
 }
 .step-progress-bar {
-  width: 100%;
-  background: #eaeaea;
-  height: 5px;
-  border-radius: 4px;
-  margin-bottom: 20px;
+    width: 100%;
+    background: #eaeaea;
+    height: 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
 }
 .step-progress-bar-item {
-  background: var(--main-color);
-  height: 100%;
-  border-radius: 4px;
+    background: var(--main-color);
+    height: 100%;
+    border-radius: 4px;
 }
 
 .step-btn-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 50px 0;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    gap: 20px;
 }
 .step-btn-item .custom-btn {
-  width: 150px;
+    width: 150px;
 }
 
-
 .upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
 }
 
 .upload-btn {
-  border: 1px dashed #e5e7eb;
-  color: var(--second-color);
-  background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  width: 100%;
-  font-weight: bold;
-  height: 60px;
+    border: 1px dashed #e5e7eb;
+    color: var(--second-color);
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    font-weight: bold;
+    height: 60px;
 }
 .upload-btn span {
-  font-size: 25px;
+    font-size: 25px;
 }
-.upload-btn-wrapper input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  opacity: 0;
-  height: 100%;
+.upload-btn-wrapper input[type='file'] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    height: 100%;
 }
 .user-img-items img {
-  width: 100%;
-  padding: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 .user-img-items {
-  width: 120px;
-  display: flex;
-  height: 120px;
-  border-radius: 50%;
-  border: 1px solid #e5e7eb;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    width: 120px;
+    display: flex;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+/* =============== Choose Template Page  +++++++++++++++++++ */
+.choose-template-wrapper {
+    padding-top: 30px;
+}
+.choose-template-title {
+    font-size: 40px;
+    margin-bottom: 50px;
+    color: #000;
+    font-weight: 700;
+}
+.choose-template-item {
+    width: 100%;
+    box-shadow: 4px 4px 10px 4px #d5e1fa;
+    margin-bottom: 30px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 6px;
+    transition: 0.4s;
+    border: 1px #fff solid;
+}
+.choose-template-item:hover {
+    border: 1px #ffb317 solid;
+    transform: scale(1.02);
+}
+.choose-template-item:hover::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-image: url(../../public/img/template/check.svg);
+    background-repeat: no-repeat;
+}
+.choose-template-item img {
+    width: 100%;
+}
+
+/* ====================== Resume Template 5 ================== */
+
+.outer-box {
+    padding: 30px;
+    margin-top: 100px;
+}
+.resume {
+    width: 900px;
+    height: fit-content;
+    padding: 20px 0px 0px 20px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    display: grid;
+   box-shadow: 4px 4px 10px 4px #98949475;
+    color: #000;
+    border: 1px solid #ddd;
+}
+.resume-top {
+    display: flex;
+    justify-content: space-between;
+}
+.resume-top .resume-left {
+    width: 30%;
+    float: left;
+    background-color: #484848;
+    border: 0px;
+    border-radius: 500px 500px 0 0;
+}
+.resume-img {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.resume-img img {
+    width: 150px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+.resume-left .resume-skill {
+    padding: 0px 20px;
+    font-size: 14px;
+}
+.resume-skill li {
+    list-style: square !important;
+}
+.resume-left .resume-language {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-size: 14px;
+}
+.resume-left .resume-language li {
+    float: left;
+    padding: 0px 10px 0px 0px;
+}
+.resume-left .resume-interest {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-size: 14px;
+}
+/* .resume-left .resume-interest li {
+    float: left;
+    padding: 0px 10px 10px 0px;
+} */
+.resume-left .degree-place {
+    padding-bottom: 10px;
+}
+.resume-interest-item{
+    display: flex;
+}
+.resume-top .resume-right {
+    float: right;
+    padding: 30px 30px 0px 30px;
+    width: 70%;
+}
+.resume-top .resume-right .resume-name {
+    color: #d19855;
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.resume-top .resume-right .resume-position {
+    color: #000000;
+    letter-spacing: 2px;
+    margin: 0;
+    font-size: larger;
+}
+.resume-right p {
+    text-align: justify;
+    font-size: 14px;
+}
+.resume-bottom .resume-left {
+    width: 30%;
+    float: left;
+    background-color: #484848;
+    height: 100%;
+    padding: 0px 20px 20px 20px;
+}
+.resume-left .resume-phone {
+    line-height: 10px;
+    /* padding-bottom: 5px; */
+    font-size: 14px;
+}
+
+.resume-left .resume-email {
+    line-height: 10px;
+    padding-bottom: 1px;
+    font-size: 14px;
+}
+.resume-left .resume-address {
+    line-height: 5px;
+    font-size: 14px;
+}
+.resume-address p {
+    line-height: 20px;
+    color: #fff;
+}
+.resume-left .resume-degree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    line-height: 10px;
+    font-size: 14px;
+}
+.resume-bottom .resume-right {
+    width: 70%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+}
+.resume-content {
+    color: #fff;
+    padding: 0px 0px 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+.resume-content h3 {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.resume-head {
+    color: #d19855;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.resume-right .resume-head {
+    background-color: #484848;
+    padding: 7px 100px 7px 50px;
+    width: fit-content;
+    border-radius: 0px 50px 50px 0px;
+}
+.resume-right .resume-experience {
+    padding: 5px 10px 10px 30px;
+}
+.resume-experience li {
+    padding: 0px 10px 10px 0px;
+    line-height: 5px;
+}
+.resume-experience .job-description {
+    line-height: 140%;
+    text-align: justify;
+}
+.resume-right .job {
+    color: black;
+    font-size: 14px;
+        display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+}
+.resume-reference {
+    display: flex;
+}
+.resume-right .ref {
+    color: black;
+    padding: 0px 0px 0px 30px;
+    font-size: 14px;
+}
+.resume-right .ref span {
+    font-weight: bolder;
+}
+
+.resume-right ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.resume-right li :before {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    background: #47494f2b;
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    height: 106%;
+}
+.resume-right li::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #d19855;
+    top: 0px;
+    left: -4px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.resume-right ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+}
+.resume-right ul li:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--second-color);
+    position: absolute;
+    left: -1px;
+    top: 5px;
+    border-radius: 10px;
 }
